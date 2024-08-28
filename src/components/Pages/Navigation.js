@@ -9,7 +9,12 @@ import { CiSearch } from "react-icons/ci";
 
 function Navigation(){
 
-    const dispatch = useDispatch;
+    const dispatch = useDispatch();
+
+     // Function to handle the button click
+     const handleSignInClick = () => {
+        dispatch(handleOnSignIn());
+    };
 
     return(
 
@@ -36,7 +41,7 @@ function Navigation(){
                 {/* MENU ACCOUNT */}
                 <div className="menu-account">
                     <div><p>Rest Hotel<span>y your home</span></p></div>
-                    <div style={{borderRadius: '50px', border: '1px solid black', padding: '.3em', background: 'white'}}><button onClick={dispatch(handleOnSignIn)}>Sign In</button></div>
+                    <div style={{borderRadius: '50px', border: '1px solid black', padding: '.3em', background: 'white'}}><button onClick={handleSignInClick}>Sign In</button></div>
                 </div>
                 {/* MENU ACCOUNT */}
 

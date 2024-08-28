@@ -1,4 +1,5 @@
 import './App.css';
+import HandleAuthentication from './components/Pages/HandleAuthentication';
 import Navigation from './components/Pages/Navigation';
 
 function App() {
@@ -17,9 +18,14 @@ function App() {
       </main>
       {/* MAIN */}
 
+      {/* FOOTER */}
       <footer>
 
       </footer>
+      {/* FOOTER ENDS */}
+
+      {/* POPUPS */}
+      <HandleAuthentication />
     </div>
   );
 }
