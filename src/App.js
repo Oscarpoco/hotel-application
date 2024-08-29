@@ -1,6 +1,7 @@
 import './App.css';
 import HandleAuthentication from './components/Pages/HandleAuthentication';
 import Navigation from './components/Pages/Navigation';
+import Rooms from './components/Pages/Rooms';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
 
       {/* MAIN */}
       <main>
-
+        <Rooms />
       </main>
       {/* MAIN */}
 

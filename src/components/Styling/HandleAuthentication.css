@@ -17,9 +17,10 @@
 {
     background: white;
     border-radius: 10px;
-    width: 35%; 
+    width: 40%; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
+    box-sizing: border-box;
 }
 
 .handle-authentication label
@@ -29,6 +30,8 @@
     justify-content: center;
     border-bottom: 1px solid black;
     width: 100%;
+    box-sizing: border-box;
+    font-weight: bold;
 }
 
 .handle-authentication label p
@@ -41,31 +44,200 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.close
+{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 10px;
+    right: 25px;
+    color: red;
+    background: inherit;
+    box-shadow: var(--box-shadow);
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 4px solid var(--grey-color);
+    font-size: 2em;
+    transform: rotate(45deg);
+    cursor: pointer;
 }
 
 form
 {
-    padding: 1em .5em;
+    padding: .5em 0;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 2em;
     width: 100%;
+    box-sizing: border-box;
+    /* background: red; */
 }
 
-form input
+/* SIGN IN GROUP */
+
+.signIn-group
 {
-    width: 80%;
-    padding: .7em 1em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    gap: 1.3em;
+    box-sizing: border-box;
+    /* background: yellow; */
 }
 
-form button
+.signIn-group-child
 {
-    width: 70%;
-    padding: 1em;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: .3em;
+    box-sizing: border-box;
+    /* background: green; */
+}
+
+.signIn-group-p-tag
+{
+    /* position: relative; */
+    border-bottom: 3px solid var(--grey-color);
+    box-sizing: border-box;
+    box-shadow: 4px 0 2px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: blue;
+}
+
+.signIn-group p
+{
+    position: absolute;
+    bottom: 10;
+    background: white;
+    z-index: 2;
+    padding: 0 .8em;
+}
+
+.signIn-group label
+{
+    border: none;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    box-sizing: border-box;
+    font-weight: lighter;
+}
+
+.signIn-group input
+{
+    width: 100%;
+    padding: .4em 0;
+    border: 2px solid black;
+    border-bottom: 3px solid var(--grey-color);
+    outline: none;
+    text-align: center;
+}
+
+.signIn-group input:focus
+{
+    border: 2px solid black;
+    border-bottom: 2px solid var(--grey-color);
+
+}
+
+.signIn-group .signIn-form-button
+{
+    width: 75%;
+    padding: .5em 1em;
     border-radius: 50px;
     background: var(--background-color);
     box-shadow: var(--box-shadow);
     cursor: pointer;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+    gap: 6em;
+    box-sizing: border-box;
+}
+/* ENDS */
+
+
+/* FORM BUTTONS */
+form .signIn-form-button
+{
+    width: 70%;
+    padding: .5em 1em;
+    border-radius: 50px;
+    background: var(--background-color);
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+    gap: 6em;
+    box-sizing: border-box;
+}
+
+.form-icons
+{
+    flex-shrink: 0;
+}
+/* ENDS */
+
+
+/* FORM FOOTER */
+.form-footer
+{
+    display: flex;
+    width: 90%;
+    box-sizing: border-box;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-top: 2px solid var(--secondary-color);
+    gap: .1em;
+    /* background: blue; */
+}
+
+.form-footer p
+{
+    color: var(--faint-color);
+    font-size: 11.6px;
+}
+
+.form-footer span
+{
+    color: var(--faint-color);
+    font-size: 11.6px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.footer-rights
+{
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    line-height: 1.5;
+    color: var(--faint-color);
+    font-size: 11.6px;
 }

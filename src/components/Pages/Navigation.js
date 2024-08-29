@@ -26,7 +26,7 @@ function Navigation(){
 
                 {/* MENU LOGO */}
                 <div className="menu-logo">
-                    <div></div>
+                    <div className="logo-abbreviation"><h2>R<span>H</span></h2></div>
                     <div><h3>Rest Hotel<span>y</span></h3></div>
                 </div>
                 {/* MENU LOGO ENDS */}

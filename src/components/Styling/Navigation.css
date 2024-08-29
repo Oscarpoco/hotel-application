@@ -28,8 +28,21 @@ span
 {
     display: flex;
     justify-content: space-between;
-    gap: 1em;
+    gap: .5em;
     align-items: center;
+}
+
+.logo-abbreviation
+{
+    height: 40px;
+    width: 40px;
+    border-radius: var(--circle-radius);
+    background: var(--primary-color);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .3em;
 }
 /* MENU LOGO ENDS */
 

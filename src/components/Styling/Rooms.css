@@ -1,0 +1,92 @@
+.rooms 
+{
+    /* height: 50vh; */
+    background: var(--primary-color);
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: .5em;
+    padding: 16px; 
+    box-sizing: border-box; 
+    position: relative;
+}
+
+.room-details 
+{
+    background: white;
+    border: none;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.room-picture
+{
+    box-shadow: var(--box-shadow);
+    border-radius: var(--box-border-radius);
+    cursor: pointer;
+}
+
+.room-content
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.room-content p 
+{
+    margin: 0;
+    padding: .3em 0;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.room-content p span
+{
+    margin: 0;
+    padding: .3em 0;
+    font-weight: lighter;
+    font-size: 13px;
+}
+
+.room-details img 
+{
+    width: 100%; 
+    height: auto; 
+    border-radius: var(--box-border-radius);
+    cursor: pointer;
+}
+
+/* MAAPS */
+
+.floating-map-button
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-button
+{
+    background: var(--primary-color);
+    border-radius: var(--button-border-radius);
+    padding: .5em 1.3em;
+    border: 1px solid var(--faint-color);
+    font-size: 1.2em;
+    gap: .5em;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -15px;
+    right: 50%;
+    transform: translate(50% ,50%);
+    cursor: pointer;
+}
+
+.maps
+{
+    font-size: 1.5em;
+}
