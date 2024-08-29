@@ -11,7 +11,7 @@ function RoomDetails(){
 
     const dispatch = useDispatch();
 
-    const HandleCloseRoomDetails = ()=>{
+    const HandleCloseRoomDetails = ()=> {
         dispatch(viewRoomDetails())
     }
 
@@ -28,25 +28,22 @@ function RoomDetails(){
                             <button className="room-details-buttons">Share <CiShare2 /></button>
                         </div>
                     </div>
-                    <div className="gallery-grid">
-                        <div className="room-picture">
+                    <div className="gallery-flex">
+                        <div className="room-picture-1">
                             <img src="Room.jpeg" alt="room"></img>
                         </div>
 
-                        <div className="room-picture">
-                            <img src="Room.jpeg" alt="room"></img>
-                        </div>
+                        <div className="right-picture-box">
+                            <div className="room-picture-2">
+                                <img src="Room.jpeg" alt="room"></img>
+                                <img src="Room.jpeg" alt="room"></img>
+                            </div>
 
-                        <div className="room-picture">
-                            <img src="Room.jpeg" alt="room"></img>
-                        </div>
+                            <div className="room-picture-2">
+                                <img src="Room.jpeg" alt="room"></img>
 
-                        <div className="room-picture">
-                            <img src="Room.jpeg" alt="room"></img>
-                        </div>
-
-                        <div className="room-picture">
-                            <img src="Room.jpeg" alt="room"></img>
+                                <img src="Room.jpeg" alt="room"></img>
+                            </div>
                         </div>
                     </div>
                 </div>

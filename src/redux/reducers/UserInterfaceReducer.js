@@ -31,8 +31,8 @@ const userInterfaceReducer = (state = initialState, action) =>{
         case ON_VIEW_ROOM_DETAILS:
             return {
                 ...state,
-                isViewRoomDetailsOpen: !state.isViewRoomDetailsOpen,
-            }
+                isViewRoomDetailsOpen: !state.isViewRoomDetailsOpen
+            };
 
         default:
             return state
