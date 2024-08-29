@@ -39,7 +39,6 @@ body
   justify-content: start;
   align-items: center;
   background: var(--background-color);
-  position: relative;
 }
 /* ENDS */
 
@@ -62,6 +61,17 @@ main
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--grey-color);
+  background: var(--primary-color);
 }
 /* ENDS */
+
+/* FOOTER */
+footer
+{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--grey-color);
+}
+/* FOOTER ENDS */

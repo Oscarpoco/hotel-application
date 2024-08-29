@@ -1,7 +1,7 @@
 // src/redux/actions/authentication.js
 
-import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebase"; // Import auth from firebase.js
+import { signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
 
 const provider = new GoogleAuthProvider();
 

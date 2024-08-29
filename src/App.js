@@ -1,6 +1,8 @@
 import './App.css';
+import Footer from './components/Pages/Footer';
 import HandleAuthentication from './components/Pages/HandleAuthentication';
 import Navigation from './components/Pages/Navigation';
+import RoomDetails from './components/Pages/RoomDetails';
 import Rooms from './components/Pages/Rooms';
 
 function App() {
@@ -21,12 +23,13 @@ function App() {
 
       {/* FOOTER */}
       <footer>
-
+        <Footer />
       </footer>
       {/* FOOTER ENDS */}
 
       {/* POPUPS */}
       <HandleAuthentication />
+      <RoomDetails />
     </div>
   );
 }

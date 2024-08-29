@@ -6,6 +6,7 @@
     align-items: center;
     width: 100%;
     padding: .7em;
+    background: var(--primary-color);
 }
 
 span
@@ -118,8 +119,39 @@ span
 
 .search-icon .search-icon-image
 {
-    color: white;
+    color: var(--primary-color);
     font-size: 1.3em;
     font-weight: bold;
 }
 /* SEARCH ENDS */
+
+/* NAVIGATION BAR */
+
+.navigation-bar
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary-color);
+    gap: .5em;
+    width: 100%;
+    padding: .5em;
+}
+
+.nav-bar
+{
+    width: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary-color);
+    box-sizing: border-box;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+}
+
+.nav-bar:hover
+{
+    background: var(--grey-color);
+    transition: all .7s ease-in-out;
+}

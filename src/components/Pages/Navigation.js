@@ -31,13 +31,6 @@ function Navigation(){
                 </div>
                 {/* MENU LOGO ENDS */}
 
-                {/* MENU NAVIGATION */}
-                <div className="menu-navigation">
-                    <div style={{fontWeight: 'bold'}}>Stay</div>
-                    <div>Experiences / Reviews</div>
-                </div>
-                {/* MENU NAVIGATION ENDS */}
-
                 {/* MENU ACCOUNT */}
                 <div className="menu-account">
                     <div><p>Rest Hotel<span>y your home</span></p></div>
@@ -56,6 +49,37 @@ function Navigation(){
                 </div>
             </div>
             {/* SEARCH ENDS */}
+
+            {/* NAVIGATION BAR */}
+
+            <div className="navigation-bar">
+                <div className="nav-bar">
+                    <p>Home</p>
+                </div>
+          
+
+         
+                <div className="nav-bar">
+                    <p>Home</p>
+                </div>
+        
+
+      
+                <div className="nav-bar">
+                    <p>Home</p>
+                </div>
+     
+
+      
+                <div className="nav-bar">
+                    <p>Home</p>
+                </div>
+
+                <div className="nav-bar">
+                    <p>Home</p>
+                </div>
+            </div>
+            
 
         </div>
         // PARENT COMPONENT ENDS

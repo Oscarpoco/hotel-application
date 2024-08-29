@@ -1,10 +1,11 @@
-import { ON_SIGN_IN, ON_SIGN_UP } from "../actions/UserInterface";
+import { ON_SIGN_IN, ON_SIGN_UP, ON_VIEW_ROOM_DETAILS } from "../actions/UserInterface";
 
 // INTIAL STATE
 
 const initialState = {
     isSignInOpen: false,
     isSignUpOpen: false,
+    isViewRoomDetailsOpen: false,
 }
 
 // INITIAL STATE ENDS
@@ -26,6 +27,12 @@ const userInterfaceReducer = (state = initialState, action) =>{
                 ...state,
                 isSignUpOpen: !state.isSignUpOpen
             };
+        // VIEW ROOM DETAILS
+        case ON_VIEW_ROOM_DETAILS:
+            return {
+                ...state,
+                isViewRoomDetailsOpen: !state.isViewRoomDetailsOpen,
+            }
 
         default:
             return state

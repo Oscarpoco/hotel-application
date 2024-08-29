@@ -5,10 +5,11 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: .5em;
+    gap: .7em;
     padding: 16px; 
     box-sizing: border-box; 
     position: relative;
+    overflow-y: auto;
 }
 
 .room-details 
