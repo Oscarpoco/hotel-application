@@ -49,8 +49,9 @@ nav
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid var(--faint-color);
-  background: var(--grey-color);
+  /* border-bottom: 1px solid var(--faint-color); */
+  background: var(--primary-color);
+  padding: .7em 0;
 }
 /* ENDS */
 

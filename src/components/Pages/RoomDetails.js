@@ -94,8 +94,22 @@ function RoomDetails(){
                             <div className="about-section">
                                 <div className="about-section-content">
                                     <h2><strong>About this place</strong></h2>
-                                    <p></p>
+                                    <p>Double room available in an immaculate 2 bed tenement flat 
+                                        in Dennistoun. Comfy double bed with storage in room.
+
+                                        <br></br>
+                                        <br></br>
+                                        Situated 1.5 miles from the city centre with good transport 
+                                        links into city 5/10 minutes walk to Duke St or Bellgrove 
+                                        train station which take you into queen street in 5 minutes! 
+                                        There are also plenty local buses.
+                                        <br></br>
+                                        <br></br>                                        Great local amenities shops, bars and restaurants also close 
+                                        by on Duke Street and Alexandra Parade. Shared livingroom 
+                                        bathroom and kitchen.</p>
                                 </div>
+                                <h2><strong>What this place offers</strong></h2>
+                                <div className='offers'></div>
                             </div>
                         </div>
                         {/* ENDS */}
