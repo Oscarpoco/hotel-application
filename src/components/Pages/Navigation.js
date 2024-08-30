@@ -5,6 +5,8 @@ import { handleOnSignIn } from "../../redux/actions/UserInterface";
 
 // OTHER IMPORTS INCLUDING ICONS
 import { CiSearch } from "react-icons/ci";
+import { PiWarehouseLight } from "react-icons/pi";
+import { MdOutlineReviews } from "react-icons/md";
 
 
 function Navigation(){
@@ -54,13 +56,13 @@ function Navigation(){
 
             <div className="navigation-bar">
                 <div className="nav-bar">
-                    <p>Home</p>
+                    <p style={{display: 'flex', gap: '.7em',justifyContent: 'center', alignItems: 'center'}}><PiWarehouseLight className="menu-icons"/> Accomodation</p>
                 </div>
           
 
          
                 <div className="nav-bar">
-                    <p>Home</p>
+                    <p style={{display: 'flex', justifyContent: 'center' , gap: '.7em', alignItems: 'center'}}><MdOutlineReviews className="menu-icons"/> Reviews</p>
                 </div>
         
 
@@ -75,9 +77,6 @@ function Navigation(){
                     <p>Home</p>
                 </div>
 
-                <div className="nav-bar">
-                    <p>Home</p>
-                </div>
             </div>
             
 

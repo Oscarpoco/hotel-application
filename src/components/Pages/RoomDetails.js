@@ -71,9 +71,7 @@ function RoomDetails(){
                                     <p>
                                         One of the most loved room
                                         <br></br>
-                                        in Rest Hotely, According to
-                                        <br></br>
-                                        guests
+                                        in Rest Hotely, According to guests
                                     </p>
                                 </div>
                                 <div className="box">
@@ -91,9 +89,99 @@ function RoomDetails(){
                                     <p>1200</p>
                                 </div>
                             </div>
+
+                            {/* ABOUT SECTION */}
+                            <div className="about-section">
+                                <div className="about-section-content">
+                                    <h2><strong>About this place</strong></h2>
+                                    <p></p>
+                                </div>
+                            </div>
                         </div>
                         {/* ENDS */}
-                        <div className="content-right"></div>
+
+                        {/* RIGHT CONTAINER */}
+                        <div className="content-right">
+
+                            {/* ALL CONTENT */}
+                            <div className="reservation">
+                                {/* HEADER TEXTS */}
+                                <p 
+                                style={{textAlign: 'start', width: '100%', fontWeight: 'bold'}}
+                                >R1,402 ZAR <span>night</span></p>
+                                {/* HEADER TEXTS ENDS */}
+
+                                <div className="check">
+                                    {/* TOP */}
+                                    <div className="check-top">
+
+                                        {/* CHECK-IN */}
+                                        <div className="check-in">
+                                            <p>Check in</p>
+                                            <input type="date" placeholder="Add date"></input>
+                                        </div>
+                                        {/* CHECK IN ENDS */}
+
+                                        {/* CHECK OUT */}
+                                        <div className="check-out">
+                                            <p>Check in</p>
+                                            <input type="date" placeholder="Add date"></input>
+                                        </div>
+                                        {/* CHECK OUT ENDS */}
+
+                                    </div>
+                                    {/* ENDS */}
+
+                                    {/* BOTTOM */}
+                                    <div className="check-bottom">
+                                        <p>Guests</p>
+                                    </div>
+                                    {/* BOTTOM ENDS */}
+                                </div>
+
+                                {/* BUTTON */}
+                                <button>Reserve</button>
+                                {/* BUTTON ENDS */}
+
+                                {/* CHECK CONTENT */}
+                                <div className="check-content">
+
+                                    {/* TOP */}
+                                    <div className="check-content-top">
+                                        {/* LEFT */}
+                                        <div className="check-content-top-left">
+                                            <p>R1,402 ZAR * 11 nights</p>
+                                            <p>Weekly stay discout</p>
+                                            <p>Service fee</p>
+                                        </div>
+                                        {/* LEFT ENDS */}
+
+                                        {/* RIGHT */}
+                                        <div className="check-content-top-right">
+                                            <p>R15,421 ZAR</p>
+                                            <p>-R3,084 ZAR</p>
+                                            <p>R2,371 ZAR</p>
+                                        </div>
+                                        {/* RIGHT ENDS */}
+                                    </div>
+                                    {/* TOP ENDS */}
+
+                                    {/* BOTTOM */}
+                                    <div className="check-content-bottom">
+                                        <p>Total</p>
+                                        <p>R14,942 ZAR</p>
+                                    </div>
+                                    {/* BOTTOM ENDS */}
+                                </div>
+                                {/* CHECK CONTENT ENDS */}
+                            </div>
+
+                            {/* RESERVATION LOCATION */}
+                            <div className="reservation-location">
+                                <p>Sandton, Johannesburg, SA</p>
+                            </div>
+                        </div>
+                        {/* RIGHT CONTAINER ENDS */}
                     </div>
 
                 </div>

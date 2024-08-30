@@ -1,7 +1,7 @@
 
 // ACTION TYPES
 
-import { type } from "@testing-library/user-event/dist/type";
+
 
 // sign in and sign out
 export const ON_SIGN_IN = 'ON_SIGN_IN';
