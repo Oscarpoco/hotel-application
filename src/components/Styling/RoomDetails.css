@@ -201,13 +201,48 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 0 1em;
+    padding: 0;
 }
 
 .about-section-content
 {
-
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 1em;
 }
+
+.offers
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: .5em;
+}
+
+.offered-items-left
+{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: .1em;
+    /* background: blue; */
+}
+
+.offered-items-left p
+{
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    font-size: 1.1em;
+}
+
+.offer-icon
+{
+    font-size: 1.1em;
+    color: red;
+}
+
 
 /* ENDS */
 
@@ -288,7 +323,7 @@
     margin: 0;
 }
 
-.reservation button
+.reservation .confirm-button
 {
     width: 100%;
     display: flex;
@@ -382,4 +417,181 @@
     font-size: 1.5em;
     font-weight: bold;
     text-align: center;
+}
+
+/* ROOM RESERVATION */
+.payment-wrapper
+{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    width: 100%;
+}
+
+.payment-header
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.payment-header h2
+{
+    display: flex;
+    align-items: center;
+    gap: .3em;
+}
+
+.left-right-contain-wrapper
+{
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background: blue; */
+}
+
+.room-details-left-container-payment
+{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid var(--faint-color);
+    border-radius: 20px;
+    padding: 1em;
+}
+
+.room-details-left-container-payment p
+{
+    font-size: 1.7em;
+}
+
+.payment-gateway,
+.payment-gateway-card,
+.payment-gateway-zip-code,
+.payment-gateway-country
+{
+    width: 100%;
+    display: flex;
+}
+
+.payment-gateway input,
+.payment-gateway-card input,
+.payment-gateway-zip-code input,
+.payment-gateway-country input
+{
+    width: 100%;
+    display: flex;
+    border: 2px solid var(--faint-color);
+    border-radius: 10px;
+    padding: 1em;
+
+}
+
+.payment-gateway-card
+{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.card-detail
+{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.payment-top
+{
+    height: 50%;
+    display: flex;
+}
+
+.payment-bottom
+{
+    height: 50%;
+    display: flex;
+    gap: 1em;
+}
+
+
+
+.confirm-button-box
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.confirm-button
+{
+    border: 2px solid black;
+    border-radius: 50px;
+    background: greenyellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 1.5em;
+    cursor: pointer;
+}
+
+button:hover
+{
+    color: white;
+    transition: all .3s ease-in-out;
+    background: silver;
+    border-radius: 50px;
+    border: 2px solid silver;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cancel-button
+{
+    background: red;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    padding: 1em;
+    cursor: pointer;
+}
+
+
+/* PAYMENT NOTIFICATION */
+
+.confirmation-notification
+{
+    width: 30%;
+    background: var(--primary-color);
+    padding: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+    border: 2px solid black;
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+    position: fixed;
+    right: 50%;
+    transform: translate(50%, 50%);
+}
+
+.tick
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5em;
+    box-shadow: var(--box-shadow);
+    color: greenyellow;
 }
