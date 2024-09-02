@@ -22,7 +22,7 @@ const initialState = {
     isUpdateOpen: false,
     isReviewOpen: false,
     isMapOpen: false,
-    isGalleryOpen: false
+    isGalleryOpen: false,
 }
 
 // INITIAL STATE ENDS

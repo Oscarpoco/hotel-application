@@ -1,5 +1,6 @@
 import './App.css';
 import { useSelector } from 'react-redux';
+import React, { useRef } from 'react';
 
 // 
 import Footer from './components/Pages/Footer';
@@ -10,19 +11,31 @@ import Rooms from './components/Pages/Rooms';
 import UpdateUserDetails from './components/Pages/UpdateUserDetails';
 import Reviews from './components/Pages/Reviews';
 import Maps from './components/Pages/Maps';
+import Gallery from './components/Pages/Gallery';
 
 function App() {
+
+  const footerRef = useRef(null);
 
   const isViewRoomDetailsOpen = useSelector((state) => state.userInterface.isViewRoomDetailsOpen);
   const isUpdateOpen = useSelector((state) => state.userInterface.isUpdateOpen);
   const isReviewOpen = useSelector((state) => state.userInterface.isReviewOpen);
   const isMapOpen = useSelector((state) => state.userInterface.isMapOpen);
+  const isGalleryOpen = useSelector((state) => state.userInterface.isGalleryOpen);
+
+  // HANDLE SCROLL TO FOOTER
+  const handleScroll = () => {
+    if (footerRef.current) {
+      footerRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="App">
 
       {/* NAVIGATION */}
       <nav>
-        <Navigation />
+        <Navigation handleScroll= {handleScroll}/>
       </nav>
       {/* ENDS */}
 
@@ -33,7 +46,7 @@ function App() {
       {/* MAIN */}
 
       {/* FOOTER */}
-      <footer>
+      <footer ref={footerRef}>
         <Footer />
       </footer>
       {/* FOOTER ENDS */}
@@ -54,6 +67,10 @@ function App() {
 
       {/* MAPS */}
       {isMapOpen && (<Maps />)}
+
+      {/* GALLERY */}
+      {isGalleryOpen && (<Gallery />)}
+
       
     </div>
   );

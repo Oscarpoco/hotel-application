@@ -13,7 +13,7 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { BiSolidContact } from "react-icons/bi";
 
 
-function Navigation(){
+function Navigation( {handleScroll} ){
 
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state)=> state.authentication.isAuthenticated)
@@ -39,8 +39,9 @@ function Navigation(){
     }
 
     // VIEW GALLERY
-    const handleGalleryClick =()=>{
-        dispatch(viewGallery())
+    const handleGalleryClick = () => {
+        dispatch(viewGallery());
+        console.log('clicked')
     }
 
     return(
@@ -62,7 +63,7 @@ function Navigation(){
                 <div className="menu-account">
                     <div><p>Rest Hotel<span>y your home</span></p></div>
 
-                    {!isAuthenticated ? 
+                    {isAuthenticated ? 
                     <div style={{borderRadius: '50px', border: '2px solid black', padding: 0, background: 'white'}}>
                         <button style={{background: 'white', border: 'none', padding: '.2em .4em'}}
                         onClick={handleUpdateClick}
@@ -102,7 +103,7 @@ function Navigation(){
 
             <div className="navigation-bar">
 
-                {/* accomodation */}
+                {/* Gallery */}
                 <div className="nav-bar" onClick={handleGalleryClick}>
                     <p><PiWarehouseLight className="menu-icons"/> Gallery</p>
                 </div>
@@ -118,7 +119,7 @@ function Navigation(){
                 </div>
      
                     {/* contact us */}
-                <div className="nav-bar">
+                <div className="nav-bar" onClick={handleScroll}>
                     <p> <BiSolidContact className="menu-icons"/>Contact Us</p>
                 </div>
 
