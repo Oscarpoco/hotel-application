@@ -22,7 +22,7 @@ function UpdateUserDetails(){
             <div className="update-content">
                 <div className="details-header">
                     <h2><IoIosArrowBack onClick={handleCloseUpdate} className="back-arrow"/>
-                    My profile details</h2>
+                    My Account</h2>
                 </div>
 
                 <div className="user-details">

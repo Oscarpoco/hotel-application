@@ -18,6 +18,16 @@ export const ON_VIEW_ROOM_DETAILS = 'ON_VIEW_ROOM_DETAILS';
 // ON OPEN UPDATE
 export const ON_OPEN_UPDATE = 'ON_OPEN_UPDATE';
 
+// REVIEWS
+export const ON_OPEN_REVIEW = 'ON_OPEN_REVIEW';
+
+// MAPS
+export const ON_MAPS = 'ON_MAPS';
+
+// GALLERY
+export const ON_GALLERY = 'ON_GALLERY';
+
+
 // ACTION TYPES ENDS
 
 
@@ -65,3 +75,24 @@ export const openUpdate = ()=>{
         type: ON_OPEN_UPDATE,
         }
     }
+
+// REVIEWS
+export const viewReviews = ()=>{
+    return {
+        type: ON_OPEN_REVIEW,
+        }
+    }
+
+// MAPS
+export const viewMaps = ()=>{
+    return {
+        type: ON_MAPS,
+    }
+}
+
+// GALLERY
+export const viewGallery = ()=>{
+    return {
+        type: ON_GALLERY,
+    }
+}

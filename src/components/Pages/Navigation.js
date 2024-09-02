@@ -1,7 +1,7 @@
 import React from "react";
 import '../Styling/Navigation.css';
 import { useDispatch, useSelector } from "react-redux";
-import { handleOnSignIn, openUpdate } from "../../redux/actions/UserInterface";
+import { handleOnSignIn, openUpdate, viewReviews, viewMaps, viewGallery } from "../../redux/actions/UserInterface";
 
 // OTHER IMPORTS INCLUDING ICONS
 import { CiSearch } from "react-icons/ci";
@@ -10,6 +10,7 @@ import { MdOutlineReviews } from "react-icons/md";
 import { SiGooglemaps } from "react-icons/si";
 import { ImMenu } from "react-icons/im";
 import { FaRegCircleUser } from "react-icons/fa6";
+import { BiSolidContact } from "react-icons/bi";
 
 
 function Navigation(){
@@ -25,6 +26,21 @@ function Navigation(){
     // HANDLES OPENING UPDATE PAGE
     const handleUpdateClick = () => {
         dispatch(openUpdate());
+    }
+
+    // HANDLES OPENING REVIEW
+    const handleReviewClick = () => {
+        dispatch(viewReviews());
+        }
+
+    // HANDLE VIEWING MAPS
+    const handleOpenMapsClick = () => {
+        dispatch(viewMaps());
+    }
+
+    // VIEW GALLERY
+    const handleGalleryClick =()=>{
+        dispatch(viewGallery())
     }
 
     return(
@@ -85,20 +101,25 @@ function Navigation(){
             {/* NAVIGATION BAR */}
 
             <div className="navigation-bar">
-                <div className="nav-bar">
-                    <p><PiWarehouseLight className="menu-icons"/> Accomodation</p>
+
+                {/* accomodation */}
+                <div className="nav-bar" onClick={handleGalleryClick}>
+                    <p><PiWarehouseLight className="menu-icons"/> Gallery</p>
                 </div>
 
-                <div className="nav-bar">
+                    {/* reviews */}
+                <div className="nav-bar" onClick={handleReviewClick}>
                     <p><MdOutlineReviews className="menu-icons"/> Reviews</p>
                 </div>
-        
-                <div className="nav-bar">
+                    
+                    {/* maps */}
+                <div className="nav-bar" onClick={handleOpenMapsClick}>
                     <p><SiGooglemaps className="menu-icons"/> Maps</p>
                 </div>
      
+                    {/* contact us */}
                 <div className="nav-bar">
-                    <p>Home</p>
+                    <p> <BiSolidContact className="menu-icons"/>Contact Us</p>
                 </div>
 
             </div>

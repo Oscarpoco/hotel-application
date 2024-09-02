@@ -1,4 +1,15 @@
-import { IS_PAID,IS_RESERVED,ON_SIGN_IN, ON_SIGN_UP, ON_VIEW_ROOM_DETAILS, ON_OPEN_UPDATE } from "../actions/UserInterface";
+import { 
+    IS_PAID,
+    IS_RESERVED,
+    ON_SIGN_IN, 
+    ON_SIGN_UP, 
+    ON_VIEW_ROOM_DETAILS, 
+    ON_OPEN_UPDATE, 
+    ON_OPEN_REVIEW,
+    ON_MAPS,
+    ON_GALLERY,
+} 
+    from "../actions/UserInterface";
 
 // INTIAL STATE
 
@@ -8,7 +19,10 @@ const initialState = {
     isViewRoomDetailsOpen: false,
     isReserved: false,
     isPaid: false,
-    isUpdateOpen: false
+    isUpdateOpen: false,
+    isReviewOpen: false,
+    isMapOpen: false,
+    isGalleryOpen: false
 }
 
 // INITIAL STATE ENDS
@@ -59,6 +73,27 @@ const userInterfaceReducer = (state = initialState, action) =>{
                     isUpdateOpen: !state.isUpdateOpen
                     }
             // OPEN UPDATE ENDS
+
+            // OPEN REVIEWS
+            case ON_OPEN_REVIEW:
+                return{
+                    ...state,
+                    isReviewOpen: !state.isReviewOpen
+                }
+
+            // MAPS
+            case ON_MAPS:
+                return{
+                    ...state,
+                    isMapOpen: !state.isMapOpen
+                }
+
+            // GALLERY
+            case ON_GALLERY:
+                return{
+                    ...state,
+                    isGalleryOpen: !state.isGalleryOpen
+                }
 
 
         default:

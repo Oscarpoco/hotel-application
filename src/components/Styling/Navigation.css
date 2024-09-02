@@ -186,9 +186,11 @@ span
 {
     background: var(--grey-color);
     transition: all .7s ease-in-out;
+    border-radius: 50px;
 }
 
 .menu-icons
 {
     font-size: 2em;
+    color: red;
 }
