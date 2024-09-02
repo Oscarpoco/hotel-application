@@ -1,7 +1,8 @@
 import React from "react";
 import '../Styling/UpdateUserDetails.css';
 import { useDispatch} from "react-redux";
-import { openUpdate } from "../../redux/actions/UserInterface";
+import { openUpdate, showLoader } from "../../redux/actions/UserInterface";
+import { handleOnSignOut } from "../../redux/actions/Authentication";
 
 // ICONS
 import { IoIosArrowBack } from "react-icons/io";
@@ -14,8 +15,26 @@ function UpdateUserDetails(){
 
     // HANDLE CLOSE UPDATE
     const handleCloseUpdate = () => {
-        dispatch(openUpdate());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(openUpdate());
+            dispatch(showLoader(false));
+        }, 3000);
+        
         }
+
+    // LOGOUT
+    const logout = ()=>{
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(openUpdate(false));
+            dispatch(handleOnSignOut());
+            dispatch(showLoader(false));
+        }, 3000);
+        
+    }
 
     return(
         <div className="update-overlay">
@@ -23,6 +42,8 @@ function UpdateUserDetails(){
                 <div className="details-header">
                     <h2><IoIosArrowBack onClick={handleCloseUpdate} className="back-arrow"/>
                     My Account</h2>
+
+                    <button className="logout" onClick={logout}>Logout</button>
                 </div>
 
                 <div className="user-details">

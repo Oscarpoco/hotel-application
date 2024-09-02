@@ -1,6 +1,5 @@
 .rooms 
 {
-    /* height: 50vh; */
     background: var(--primary-color);
     width: 100%;
     display: grid;
@@ -8,8 +7,7 @@
     gap: .7em;
     padding: 16px; 
     box-sizing: border-box; 
-    position: relative;
-    overflow-y: auto;
+    /* overflow-y: auto; */
 }
 
 .room-details 
@@ -25,6 +23,12 @@
     box-shadow: var(--box-shadow);
     border-radius: var(--box-border-radius);
     cursor: pointer;
+}
+
+.room-picture:hover
+{
+    box-shadow: unset;
+    border-radius: 0;
 }
 
 .room-content
@@ -57,4 +61,13 @@
     height: auto; 
     border-radius: var(--box-border-radius);
     cursor: pointer;
+}
+
+.room-details img:hover
+{
+    width: 100%; 
+    height: auto; 
+    border-radius: var(--box-border-radius);
+    transition: all .7s ease-in-out;
+    transform: rotateY(45deg);
 }

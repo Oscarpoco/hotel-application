@@ -68,7 +68,7 @@
     cursor: pointer;
 }
 
-form
+.form
 {
     padding: .5em 0;
     display: flex;
@@ -167,17 +167,17 @@ form
     box-shadow: var(--box-shadow);
     cursor: pointer;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 6em;
+    gap: 1em;
     box-sizing: border-box;
 }
 /* ENDS */
 
 
 /* FORM BUTTONS */
-form .signIn-form-button
+.form .signIn-form-button
 {
     width: 70%;
     padding: .5em 1em;
@@ -186,10 +186,10 @@ form .signIn-form-button
     box-shadow: var(--box-shadow);
     cursor: pointer;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 6em;
+    gap: 1em;
     box-sizing: border-box;
 }
 

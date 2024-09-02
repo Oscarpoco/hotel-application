@@ -27,6 +27,9 @@ export const ON_MAPS = 'ON_MAPS';
 // GALLERY
 export const ON_GALLERY = 'ON_GALLERY';
 
+// LOADER
+export const ON_LOADER = 'ON_LOADER';
+
 
 // ACTION TYPES ENDS
 
@@ -96,3 +99,10 @@ export const viewGallery = ()=>{
         type: ON_GALLERY,
     }
 }
+
+// LOADER
+export const showLoader = ()=>{
+    return {
+        type: ON_LOADER,
+        }
+    }

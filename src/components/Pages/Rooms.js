@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { viewRoomDetails } from "../../redux/actions/UserInterface";
+import { viewRoomDetails, showLoader } from "../../redux/actions/UserInterface";
 import '../Styling/Rooms.css';
 
 function Rooms(){
@@ -8,7 +8,13 @@ function Rooms(){
     const dispatch = useDispatch();
 
     const HandleOpenRoomDetails = ()=>{
-        dispatch(viewRoomDetails())
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(viewRoomDetails())
+            dispatch(showLoader(false));
+        }, 3000);
+        
     }
 
     return(

@@ -8,6 +8,7 @@ import {
     ON_OPEN_REVIEW,
     ON_MAPS,
     ON_GALLERY,
+    ON_LOADER,
 } 
     from "../actions/UserInterface";
 
@@ -23,6 +24,7 @@ const initialState = {
     isReviewOpen: false,
     isMapOpen: false,
     isGalleryOpen: false,
+    isLoading: false,
 }
 
 // INITIAL STATE ENDS
@@ -94,6 +96,14 @@ const userInterfaceReducer = (state = initialState, action) =>{
                     ...state,
                     isGalleryOpen: !state.isGalleryOpen
                 }
+
+            // LOADER
+            case ON_LOADER:
+                return{
+                    ...state,
+                    isLoading: !state.isLoading
+                    }
+            // LOADER ENDS
 
 
         default:

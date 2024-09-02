@@ -2,7 +2,7 @@
 import React from "react";
 import '../Styling/Maps.css';
 import { useDispatch } from "react-redux";
-import { viewMaps } from "../../redux/actions/UserInterface";
+import { viewMaps, showLoader } from "../../redux/actions/UserInterface";
 
 // ICONS
 import { IoIosArrowBack } from "react-icons/io";
@@ -12,7 +12,12 @@ function Maps(){
 
     // HANDLES MAPS
     const handleCloseMaps = () => {
-        dispatch(viewMaps());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(viewMaps());
+            dispatch(showLoader(false));
+        }, 3000);
     }
 
     return(

@@ -1,7 +1,7 @@
 import React from "react";
 import '../Styling/Navigation.css';
 import { useDispatch, useSelector } from "react-redux";
-import { handleOnSignIn, openUpdate, viewReviews, viewMaps, viewGallery } from "../../redux/actions/UserInterface";
+import { handleOnSignIn, openUpdate, viewReviews, viewMaps, viewGallery, showLoader } from "../../redux/actions/UserInterface";
 
 // OTHER IMPORTS INCLUDING ICONS
 import { CiSearch } from "react-icons/ci";
@@ -20,28 +20,56 @@ function Navigation( {handleScroll} ){
 
      // Function to handle the button click
      const handleSignInClick = () => {
-        dispatch(handleOnSignIn());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(handleOnSignIn());
+            dispatch(showLoader(false));
+        }, 3000);
+        
     };
 
     // HANDLES OPENING UPDATE PAGE
     const handleUpdateClick = () => {
-        dispatch(openUpdate());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(openUpdate());
+            dispatch(showLoader(false));
+        }, 3000);
+        
     }
 
     // HANDLES OPENING REVIEW
     const handleReviewClick = () => {
-        dispatch(viewReviews());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(viewReviews());
+            dispatch(showLoader(false));
+        }, 3000);
+        
         }
 
     // HANDLE VIEWING MAPS
     const handleOpenMapsClick = () => {
-        dispatch(viewMaps());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(viewMaps());
+            dispatch(showLoader(false));
+        }, 3000);
+        
     }
 
     // VIEW GALLERY
     const handleGalleryClick = () => {
-        dispatch(viewGallery());
-        console.log('clicked')
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(viewGallery());
+            dispatch(showLoader(false));
+        }, 3000);
     }
 
     return(

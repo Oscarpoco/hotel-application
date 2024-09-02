@@ -77,8 +77,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import '../Styling/HandleAuthentication.css';
-import { handleOnSignIn, handleOnSignUp } from "../../redux/actions/UserInterface";
-import { handleSignInWithGoogle, handleSignInWithEmail } from "../../redux/actions/Authentication";
+import { handleOnSignIn, handleOnSignUp, showLoader } from "../../redux/actions/UserInterface";
+import { handleSignInWithGoogle, handleSignInWithEmail, handleSignUpWithEmail  } from "../../redux/actions/Authentication";
 import { TfiEmail } from "react-icons/tfi";
 import { FcGoogle } from "react-icons/fc";
 
@@ -94,24 +94,67 @@ function HandleAuthentication() {
 
     // Handle close
     const handleClose = () => {
-        dispatch(handleOnSignIn());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(handleOnSignIn());
+            dispatch(showLoader(false));
+        }, 3000);
+        
     }
 
     // Handle Google sign-in
     const handleGoogleSignIn = () => {
-        dispatch(handleSignInWithGoogle());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(handleSignInWithGoogle());
+            dispatch(showLoader(false));
+        }, 3000);
+        
     }
 
     // Handle email sign-in
     const handleEmailSignIn = (e) => {
         e.preventDefault();
-        dispatch(handleSignInWithEmail(email, password));
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(handleSignInWithEmail(email, password));
+            dispatch(handleOnSignIn(false));
+            dispatch(showLoader(false));
+        }, 3000);
+        
     }
 
     // handle open sign up
     const handleOpenSignUp = () => {
-        dispatch(handleOnSignUp());
+        dispatch(showLoader(true));
+        setTimeout (()=> {
+            dispatch(handleOnSignUp());
+            dispatch(handleOnSignIn(false));
+            dispatch(showLoader(false));
+        }, 3000);
+        
+    }
+
+
+    // handle sign up with email
+    const handleSignUpWithEmailAndPassword =(e) =>{
+        e.preventDefault();
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!"); 
+            return;
         }
+
+        dispatch(showLoader(true));
+        setTimeout (()=> {
+            dispatch(handleSignUpWithEmail(email, password));
+            dispatch(handleOnSignIn(false));
+            dispatch(showLoader(false));
+            }, 3000);
+    }
 
     return (
         <>
@@ -121,15 +164,16 @@ function HandleAuthentication() {
                         <div className="signup-signin">
                             <label><p>Sign in or create an account</p></label>
                             <button onClick={handleClose} className="close">+</button>
-                            <form>
+                            <div className="form">
                                 {/* SIGN IN GROUP */}
                                 <div className="signIn-group">
 
                                 {/* SIGN UP AND IN FORM */}
-                                   {isSignUpOpen ? 
+                                   {isSignUpOpen ? (
                                    
                                 //    SIGN UP FORM
-                                   <form className="signIn-group-child">
+                                   <form className="signIn-group-child" onSubmit={handleSignUpWithEmailAndPassword}>
+
                                         <label>Email address</label>
                                         <input
                                             type="email"
@@ -156,10 +200,10 @@ function HandleAuthentication() {
 
                                         <button type="submit" className="signIn-form-button">
                                         <TfiEmail className="form-icons"/> Continue with Email
-                                    </button>
+                                        </button>
                                     </form>
                                     // SIGN UP ENDS
-                                     :
+                                   ):(
                                     // SIGN IN FORM
                                      <form className="signIn-group-child" onSubmit={handleEmailSignIn}>
                                         <label>Email address</label>
@@ -178,12 +222,12 @@ function HandleAuthentication() {
                                             placeholder="Enter your password"
                                         />
 
-                                        <button type="submit" className="signIn-form-button">
+                                        <button type="submit" className="signIn-form-button" >
                                         <TfiEmail className="form-icons"/> Continue with Email
                                     </button>
                                     </form>
                                     // ENDS
-                                    }
+                                    )}
                                     
 
                                     
@@ -208,8 +252,8 @@ function HandleAuthentication() {
                                 {/* FORM FOOTER */}
                                 <div className="form-footer">
                                     <p>
-                                        By signing in or creating an account, you agree with our 
-                                        <span>Terms & conditions</span> and <span>Privacy statement</span>
+                                        By creating an account, you agree with our 
+                                        <span>Terms & conditions</span> and <span>Privacy</span>
                                     </p>
 
                                     <div className="footer-rights">
@@ -220,7 +264,7 @@ function HandleAuthentication() {
                                 </div>
                                 {/* ENDS */}
 
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

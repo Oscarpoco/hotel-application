@@ -1,7 +1,7 @@
 
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { viewRoomDetails, isRoomReserved, isRoomPaid } from "../../redux/actions/UserInterface";
+import { viewRoomDetails, isRoomReserved, isRoomPaid, showLoader } from "../../redux/actions/UserInterface";
 import '../Styling/RoomDetails.css';
 
 // ICONS
@@ -25,17 +25,35 @@ function RoomDetails(){
 
     // HANDLES CLOSING THE ROOM DETAILS PAGE
     const HandleCloseRoomDetails = ()=> {
-        dispatch(viewRoomDetails())
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(viewRoomDetails());
+            dispatch(showLoader(false));
+        }, 3000);
+        
     }
 
     // HANDLES RESERVATION AND CANCELLATION OF RESERVATION
     const HandleReservation = ()=> {
-        dispatch(isRoomReserved());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(isRoomReserved());
+            dispatch(showLoader(false));
+        }, 3000);
+        
     }
 
     // HANDLE PAYMENT
     const HandlePayment = ()=> {
-        dispatch(isRoomPaid());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(isRoomPaid());
+            dispatch(showLoader(false));
+        }, 3000);
+        
         }
 
     return(

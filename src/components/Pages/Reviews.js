@@ -1,7 +1,7 @@
 import React from "react";
 import '../Styling/Reviews.css';
 import { useDispatch } from "react-redux";
-import { viewReviews } from "../../redux/actions/UserInterface";
+import { viewReviews, showLoader } from "../../redux/actions/UserInterface";
 
 // ICONS
 import { IoIosArrowBack } from "react-icons/io";
@@ -15,7 +15,12 @@ function Reviews(){
 
     // HANDLES CLOSING REWIEW
     const handleClose = () => {
-        dispatch(viewReviews());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(viewReviews());
+            dispatch(showLoader(false));
+        }, 3000);
         }
 
 

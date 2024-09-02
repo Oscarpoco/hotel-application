@@ -12,6 +12,7 @@ import UpdateUserDetails from './components/Pages/UpdateUserDetails';
 import Reviews from './components/Pages/Reviews';
 import Maps from './components/Pages/Maps';
 import Gallery from './components/Pages/Gallery';
+import Loader from './components/Pages/Loader';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
   const isReviewOpen = useSelector((state) => state.userInterface.isReviewOpen);
   const isMapOpen = useSelector((state) => state.userInterface.isMapOpen);
   const isGalleryOpen = useSelector((state) => state.userInterface.isGalleryOpen);
+  const isLoading = useSelector((state) => state.userInterface.isLoading);
 
   // HANDLE SCROLL TO FOOTER
   const handleScroll = () => {
@@ -70,6 +72,9 @@ function App() {
 
       {/* GALLERY */}
       {isGalleryOpen && (<Gallery />)}
+
+      {/* LOADER */}
+      {isLoading && (<Loader />)}
 
       
     </div>

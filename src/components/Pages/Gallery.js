@@ -2,7 +2,7 @@
 import React from "react";
 import '../Styling/Gallery.css';
 import { useDispatch } from "react-redux";
-import { viewGallery } from "../../redux/actions/UserInterface";
+import { viewGallery, showLoader } from "../../redux/actions/UserInterface";
 
 // ICONS
 import { IoIosArrowBack } from "react-icons/io";
@@ -13,7 +13,13 @@ function Gallery(){
 
     // HANDLE CLOSE GALLERY
     const HandleCloseGallery = ()=> {
-        dispatch(viewGallery());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(viewGallery());
+            dispatch(showLoader(false));
+        }, 3000);
+        
     }
     return(
         <div className="gallery-grid-layout">

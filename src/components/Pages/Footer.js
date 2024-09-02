@@ -1,8 +1,8 @@
 
 import React from "react";
 import '../Styling/Footer.css';
-import { useDispatch, useSelector } from "react-redux";
-import { handleOnSignIn, openUpdate, viewReviews, viewMaps, viewGallery } from "../../redux/actions/UserInterface";
+import { useDispatch } from "react-redux";
+import { viewReviews, viewMaps, viewGallery, showLoader } from "../../redux/actions/UserInterface";
 
 // ICONS
 import { GrFacebookOption } from "react-icons/gr";
@@ -17,18 +17,34 @@ function Footer(){
 
     // HANDLES OPENING REVIEW
     const handleReviewClick = () => {
-        dispatch(viewReviews());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(viewReviews());
+            dispatch(showLoader(false));
+        }, 3000);
+        
         }
 
     // HANDLE VIEWING MAPS
     const handleOpenMapsClick = () => {
-        dispatch(viewMaps());
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(viewMaps());
+            dispatch(showLoader(false));
+        }, 3000);
+        
     }
 
     // VIEW GALLERY
     const handleGalleryClick = () => {
-        dispatch(viewGallery());
-        console.log('clicked')
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(viewGallery());
+            dispatch(showLoader(false));
+        }, 3000);
     }
 
     return(
@@ -92,6 +108,14 @@ function Footer(){
                     <IoLogoWhatsapp className="footer-icons"/>
                     </div>
                 </div>
+            </div>
+
+            <div className="copyright">
+            <p>&copy; 2024 Rest Hotely. All rights reserved.</p>
+            <p>
+                Rest Hotely is committed to protecting your privacy and ensuring a secure and transparent experience on our platform.
+                By using our services, you agree to our .
+             </p>
             </div>
         </div>
     )
