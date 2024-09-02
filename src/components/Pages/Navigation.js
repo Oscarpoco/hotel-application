@@ -1,22 +1,31 @@
 import React from "react";
 import '../Styling/Navigation.css';
-import { useDispatch } from "react-redux";
-import { handleOnSignIn } from "../../redux/actions/UserInterface";
+import { useDispatch, useSelector } from "react-redux";
+import { handleOnSignIn, openUpdate } from "../../redux/actions/UserInterface";
 
 // OTHER IMPORTS INCLUDING ICONS
 import { CiSearch } from "react-icons/ci";
 import { PiWarehouseLight } from "react-icons/pi";
 import { MdOutlineReviews } from "react-icons/md";
+import { SiGooglemaps } from "react-icons/si";
+import { ImMenu } from "react-icons/im";
+import { FaRegCircleUser } from "react-icons/fa6";
 
 
 function Navigation(){
 
     const dispatch = useDispatch();
+    const isAuthenticated = useSelector((state)=> state.authentication.isAuthenticated)
 
      // Function to handle the button click
      const handleSignInClick = () => {
         dispatch(handleOnSignIn());
     };
+
+    // HANDLES OPENING UPDATE PAGE
+    const handleUpdateClick = () => {
+        dispatch(openUpdate());
+    }
 
     return(
 
@@ -36,7 +45,28 @@ function Navigation(){
                 {/* MENU ACCOUNT */}
                 <div className="menu-account">
                     <div><p>Rest Hotel<span>y your home</span></p></div>
-                    <div style={{borderRadius: '50px', border: '1px solid black', padding: '.3em', background: 'white'}}><button onClick={handleSignInClick}>Sign In</button></div>
+
+                    {!isAuthenticated ? 
+                    <div style={{borderRadius: '50px', border: '2px solid black', padding: 0, background: 'white'}}>
+                        <button style={{background: 'white', border: 'none', padding: '.2em .4em'}}
+                        onClick={handleUpdateClick}
+                        >
+                        <ImMenu className="user-icon"/>
+                        <div className="user-radius">
+                            <FaRegCircleUser className="user-icon" style={{color: 'white'}}/>
+                        </div>
+                        </button>
+                    </div>
+
+                    :
+                    
+                    <div style={{borderRadius: '50px', border: '2px solid black', padding: '.3em', background: 'white'}}>
+                        <button onClick={handleSignInClick}>
+                        Sign In
+                        </button>
+                    </div>
+                    }
+
                 </div>
                 {/* MENU ACCOUNT */}
 
@@ -56,23 +86,17 @@ function Navigation(){
 
             <div className="navigation-bar">
                 <div className="nav-bar">
-                    <p style={{display: 'flex', gap: '.7em',justifyContent: 'center', alignItems: 'center'}}><PiWarehouseLight className="menu-icons"/> Accomodation</p>
+                    <p><PiWarehouseLight className="menu-icons"/> Accomodation</p>
                 </div>
-          
 
-         
                 <div className="nav-bar">
-                    <p style={{display: 'flex', justifyContent: 'center' , gap: '.7em', alignItems: 'center'}}><MdOutlineReviews className="menu-icons"/> Reviews</p>
+                    <p><MdOutlineReviews className="menu-icons"/> Reviews</p>
                 </div>
         
-
-      
                 <div className="nav-bar">
-                    <p>Home</p>
+                    <p><SiGooglemaps className="menu-icons"/> Maps</p>
                 </div>
      
-
-      
                 <div className="nav-bar">
                     <p>Home</p>
                 </div>

@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { viewRoomDetails } from "../../redux/actions/UserInterface";
 import '../Styling/Rooms.css';
-import { LiaMapSolid } from "react-icons/lia";
 
 function Rooms(){
 
@@ -126,11 +125,6 @@ function Rooms(){
                 </div>
             </div>
             {/* ENDS */}
-
-            {/* FLOATING MAP BUTTON */}
-            <div className="floating-map-button">
-                <button className="map-button">Show Map <LiaMapSolid className= 'maps'/></button>
-            </div>
 
         </div>
     )

@@ -15,6 +15,9 @@ export const IS_PAID = 'IS_PAID';
 // ROOM DETAIL
 export const ON_VIEW_ROOM_DETAILS = 'ON_VIEW_ROOM_DETAILS';
 
+// ON OPEN UPDATE
+export const ON_OPEN_UPDATE = 'ON_OPEN_UPDATE';
+
 // ACTION TYPES ENDS
 
 
@@ -55,3 +58,10 @@ export const isRoomPaid = ()=>
         type: IS_PAID,
     }
 }
+
+// OPEN UPDATE
+export const openUpdate = ()=>{
+    return {
+        type: ON_OPEN_UPDATE,
+        }
+    }

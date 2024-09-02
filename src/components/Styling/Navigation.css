@@ -75,8 +75,30 @@ span
     border-radius: var(--box-border-radius);
     padding: .5em .8em;
     color: var(--primary-color);
-    border: none;
+    border: 2px solid black;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.user-icon
+{
+    font-size: 1.7em;
+    color: black;
+}
+
+.user-radius
+{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .1em;
 }
 /* MENU ACCOUNT */
 
@@ -150,6 +172,14 @@ span
     box-sizing: border-box;
     box-shadow: var(--box-shadow);
     cursor: pointer;
+}
+
+.nav-bar p
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .7em;
 }
 
 .nav-bar:hover

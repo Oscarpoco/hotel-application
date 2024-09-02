@@ -58,37 +58,3 @@
     border-radius: var(--box-border-radius);
     cursor: pointer;
 }
-
-/* MAAPS */
-
-.floating-map-button
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.map-button
-{
-    background: var(--primary-color);
-    border-radius: var(--button-border-radius);
-    padding: .5em 1.3em;
-    border: 1px solid var(--faint-color);
-    font-size: 1.2em;
-    gap: .5em;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: -15px;
-    right: 50%;
-    transform: translate(50% ,50%);
-    cursor: pointer;
-    z-index: 1001;
-}
-
-.maps
-{
-    font-size: 1.5em;
-}

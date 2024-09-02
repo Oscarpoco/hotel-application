@@ -382,10 +382,12 @@ function RoomDetails(){
 
             {/* CONFIRMATION NOTIFICATION */}
             {isPaid && (
-                <div className="confirmation-notification">
-                    <p>Payment successful!</p>
-                    <div><GiCheckMark className= "tick"/></div>
-                    <button className="confirm-button" onClick={HandlePayment}>Complete</button>
+                <div className="confirmation-notification-layout">
+                    <div className="confirmation-notification">
+                        <p>Payment successful!</p>
+                        <div><GiCheckMark className= "tick"/></div>
+                        <button className="confirm-button" onClick={HandlePayment}>Complete</button>
+                    </div>
                 </div>
             )}
 

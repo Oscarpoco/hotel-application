@@ -1,4 +1,4 @@
-import { IS_PAID,IS_RESERVED,ON_SIGN_IN, ON_SIGN_UP, ON_VIEW_ROOM_DETAILS } from "../actions/UserInterface";
+import { IS_PAID,IS_RESERVED,ON_SIGN_IN, ON_SIGN_UP, ON_VIEW_ROOM_DETAILS, ON_OPEN_UPDATE } from "../actions/UserInterface";
 
 // INTIAL STATE
 
@@ -8,6 +8,7 @@ const initialState = {
     isViewRoomDetailsOpen: false,
     isReserved: false,
     isPaid: false,
+    isUpdateOpen: false
 }
 
 // INITIAL STATE ENDS
@@ -50,6 +51,14 @@ const userInterfaceReducer = (state = initialState, action) =>{
                     isPaid: !state.isPaid
                     }
             // IS RESERVED & IS PAID ENDS
+
+            // OPEN UPDATE
+            case ON_OPEN_UPDATE:
+                return {
+                    ...state,
+                    isUpdateOpen: !state.isUpdateOpen
+                    }
+            // OPEN UPDATE ENDS
 
 
         default:
