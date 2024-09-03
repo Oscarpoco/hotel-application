@@ -7,8 +7,9 @@ import { handleOnSignOut } from "../../redux/actions/Authentication";
 // ICONS
 import { IoIosArrowBack } from "react-icons/io";
 import { ImCancelCircle } from "react-icons/im";
-// import { FaRegEdit } from "react-icons/fa";
-//<FaRegEdit />
+import { FaRegEdit } from "react-icons/fa";
+import { BiSave } from "react-icons/bi";
+
 
 function UpdateUserDetails(){
     const dispatch = useDispatch();
@@ -51,12 +52,39 @@ function UpdateUserDetails(){
                         <p>Personal details</p>
                     </div>
                     <div className="user-details-data">
-                        <input type="text" placeholder="user details"></input>
-                        <input type="text" placeholder="user details"></input>
+                        {/* INPUTS */}
+                        <div className="input-wrapper">
+                            <label>First name:</label>
+                            <div className="input-box">
+                                <input type="text" placeholder="user details"></input>
+                                <button><BiSave className="edit-icon"/></button>
+                            </div>
+                        </div>
+                        <div className="input-wrapper">
+                            <label>Phone</label>
+                            <div className="input-box">
+                                <input type="text" placeholder="user details"></input>
+                                <button><BiSave className="edit-icon"/></button>
+                            </div>
+                        </div>
                     </div>
+
                     <div className="user-details-data">
-                        <input type="text" placeholder="user details"></input>
-                        <input type="text" placeholder="user details"></input>
+                        <div className="input-wrapper">
+                            <label>Username:</label>
+
+                            <div className="input-box">
+                                <input type="text" placeholder="user details"></input>
+                                <button><BiSave className="edit-icon"/></button>
+                            </div>
+                        </div>
+                        <div className="input-wrapper">
+                            <label>Password:</label>
+                            <div className="input-box">
+                                <input type="text" placeholder="user details"></input>
+                                <button><BiSave className="edit-icon"/></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -67,22 +67,22 @@ function Footer(){
                     <div className="footer-navigation-bar">
 
                         {/* Gallery */}
-                        <div className="nav-bar" onClick={handleGalleryClick}>
+                        <div className="nav-bar-footer" onClick={handleGalleryClick}>
                             <p>Gallery</p>
                         </div>
 
                             {/* reviews */}
-                        <div className="nav-bar" onClick={handleReviewClick}>
+                        <div className="nav-bar-footer" onClick={handleReviewClick}>
                             <p> Reviews</p>
                         </div>
                             
                             {/* maps */}
-                        <div className="nav-bar" onClick={handleOpenMapsClick}>
+                        <div className="nav-bar-footer" onClick={handleOpenMapsClick}>
                             <p> Maps</p>
                         </div>
 
                             {/* contact us */}
-                        <div className="nav-bar">
+                        <div className="nav-bar-footer">
                             <p> Contact Us</p>
                         </div>
 
@@ -92,20 +92,27 @@ function Footer(){
                     {/* SOCIAL MEDIA */}
 
                 <div className="footer-social">
+
                     <div className="footer-social-media">
-                    <GrFacebookOption className="footer-icons"/>
+                        <span className="tooltip" style={{background: "#1877F2"}}>Facebook</span>
+                        <GrFacebookOption className="footer-icons" style={{color: "#1877F2"}}/>
+                    </div>
+
+                    <div className="footer-social-media">
+                        <span className="tooltip" style={{background: "#1DA1F2"}}>Twitter</span>
+                        <FaTwitter className="footer-icons" style={{color: "#1DA1F2"}}/>
                     </div>
                     <div className="footer-social-media">
-                    <FaTwitter className="footer-icons"/>
+                        <span className="tooltip" style={{background: "#0077B5"}}>LinkedIn</span>
+                        <BiLogoLinkedin className="footer-icons" style={{color: "#0077B5"}}/>
                     </div>
                     <div className="footer-social-media">
-                    <BiLogoLinkedin className="footer-icons"/>
+                        <span className="tooltip" style={{background: "#DD2A7B"}}>Instagram</span>
+                        <RiInstagramFill className="footer-icons" style={{color: "#DD2A7B"}}/>
                     </div>
                     <div className="footer-social-media">
-                    <RiInstagramFill className="footer-icons"/>
-                    </div>
-                    <div className="footer-social-media">
-                    <IoLogoWhatsapp className="footer-icons"/>
+                        <span className="tooltip" style={{background: "#25D366"}}>WhatsApp</span>
+                        <IoLogoWhatsapp className="footer-icons" style={{color: "#25D366"}}/>
                     </div>
                 </div>
             </div>

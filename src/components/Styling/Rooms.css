@@ -4,8 +4,9 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: .7em;
+    gap: 2em;
     padding: 16px; 
+    padding-bottom: 3em;
     box-sizing: border-box; 
     /* overflow-y: auto; */
 }
@@ -67,7 +68,7 @@
 {
     width: 100%; 
     height: auto; 
-    border-radius: var(--box-border-radius);
+    border-radius: 50%;
     transition: all .7s ease-in-out;
-    transform: rotateY(45deg);
+    /* transform: rotateY(45deg); */
 }

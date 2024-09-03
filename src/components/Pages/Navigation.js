@@ -91,7 +91,7 @@ function Navigation( {handleScroll} ){
                 <div className="menu-account">
                     <div><p>Rest Hotel<span>y your home</span></p></div>
 
-                    {isAuthenticated ? 
+                    {!isAuthenticated ? 
                     <div style={{borderRadius: '50px', border: '2px solid black', padding: 0, background: 'white'}}>
                         <button style={{background: 'white', border: 'none', padding: '.2em .4em'}}
                         onClick={handleUpdateClick}

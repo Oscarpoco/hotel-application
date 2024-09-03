@@ -2,16 +2,14 @@
 {
     width: 100%;
     box-sizing: border-box;
-    background: var(--secondary-color);
+    background: rgba(0, 0, 0, .5);
     display: flex;
     flex-direction: column;
     gap: .5em;
     justify-content: center;
     align-items: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    border: 1px solid var(--faint-color);
-    border-left: none;
-    border-right: none;
+    padding: 1em 0;
 }
 
 .Footer-content
@@ -38,14 +36,19 @@
 
 .footer-logo-abbreviation
 {
-    height: 60px;
-    width: 60px;
+    height: 40px;
+    width: 40px;
     background: var(--primary-color);
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     box-shadow: var(--box-shadow);
+}
+
+.footer-logo-abbreviation h1
+{
+    font-size: 1.3em;
 }
 
 .footer-navigation-bar
@@ -55,6 +58,27 @@
     align-items: center;
     gap: .5em;
     width: 40%;
+}
+
+.nav-bar-footer
+{
+    width: 20%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary-color);
+    box-sizing: border-box;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.nav-bar-footer:hover
+{
+    background: var(--grey-color);
+    transition: all .7s ease-in-out;
+    border-radius: 50px;
 }
 
 .footer-social
@@ -68,8 +92,8 @@
 
 .footer-social-media
 {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     background: var(--primary-color);
     display: flex;
     justify-content: center;
@@ -77,12 +101,12 @@
     border-radius: 50%;
     box-shadow: var(--box-shadow);
     cursor: pointer;
+    transition: all .5s .2s ease;
+    position: relative;
 }
 
 .footer-social-media:hover
 {
-    height: 50px;
-    width: 50px;
     background: silver;
     transition: all .5s ease-in-out;
 }
@@ -91,6 +115,29 @@
 {
     font-size: 1.5em;
     color: red;
+}
+
+.tooltip
+{
+    position: absolute;
+    top: 0;
+    padding: 5px 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .3s ease;
+    color: white;
+    padding: .5em .8em;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    font-family: 'Helvetica Neue ';
+}
+
+.footer-social-media:hover .tooltip
+{
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .copyright

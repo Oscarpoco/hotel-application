@@ -90,15 +90,68 @@
     gap: 1em;
 }
 
+.input-wrapper
+{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: .5em;
+}
+
+.input-box
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5em;
+    width: 100%;
+}
+
+.input-box button
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-radius: 10px; */
+    /* background: silver; */
+    border: 2px solid silver;
+    cursor: pointer;
+}
+
+.input-box button:hover
+{
+    border-radius: 0;
+    background: silver;
+    border: 2px solid silver;
+    transition: all .5s ease-in-out;
+}
+
+.edit-icon
+{
+    font-size: 1.6em;
+    padding: .4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .user-details-data input
 {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    padding: 1em;
+    width: 100%;
+    padding: 1em 0;
     border: 2px solid var(--faint-color);
-    border-radius: 10px;
+    /* border-radius: 10px; */
+    outline: none;
+}
+
+.user-details-data input:focus
+{
+    border-bottom: 2px solid red;
 }
 
 .bookings-details

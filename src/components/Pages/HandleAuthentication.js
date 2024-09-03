@@ -109,6 +109,7 @@ function HandleAuthentication() {
 
         setTimeout (()=> {
             dispatch(handleSignInWithGoogle());
+            dispatch(handleOnSignIn(false));
             dispatch(showLoader(false));
         }, 3000);
         
@@ -132,7 +133,6 @@ function HandleAuthentication() {
         dispatch(showLoader(true));
         setTimeout (()=> {
             dispatch(handleOnSignUp());
-            dispatch(handleOnSignIn(false));
             dispatch(showLoader(false));
         }, 3000);
         
