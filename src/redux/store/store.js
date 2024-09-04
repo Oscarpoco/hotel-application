@@ -15,7 +15,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer, applyMiddlew
 
 // CREATING STORE FOR MY APPLICATION
 const store = createStore(persistedReducer);
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);
 
 // EXPORTING MY STORE SO THAT IT IS AVAILABLE FOR USE
 export default store;
