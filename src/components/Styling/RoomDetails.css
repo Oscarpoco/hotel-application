@@ -126,11 +126,12 @@
     box-shadow: var(--box-shadow);
     border-radius: var(--box-border-radius);
     cursor: pointer;
+    height: 400px;
 }
 .room-gallery-details img 
 {
     width: 100%; 
-    height: auto; 
+    height: 400px;
     border-radius: var(--box-border-radius);
     cursor: pointer;
 }

@@ -30,6 +30,7 @@
 {
     box-shadow: unset;
     border-radius: 0;
+    transition: all .7s ease-in-out;
 }
 
 .room-content

@@ -7,7 +7,6 @@ import { handleOnSignOut } from "../../redux/actions/Authentication";
 // ICONS
 import { IoIosArrowBack } from "react-icons/io";
 import { ImCancelCircle } from "react-icons/im";
-import { FaRegEdit } from "react-icons/fa";
 import { BiSave } from "react-icons/bi";
 
 

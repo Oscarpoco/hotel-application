@@ -46,13 +46,16 @@
 .gallery-grid
 {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1em;
 }
 
 .gallery-card
 {
     box-shadow: var(--box-shadow);
+    height: 400px;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .gallery-card img

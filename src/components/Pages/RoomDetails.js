@@ -1,8 +1,12 @@
 
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { viewRoomDetails, isRoomReserved, isRoomPaid, showLoader } from "../../redux/actions/UserInterface";
 import '../Styling/RoomDetails.css';
+
+// FIRESTORE
+import {  getFirestore,collection, getDocs} from "firebase/firestore";
 
 // ICONS
 import { CiSaveDown2 } from "react-icons/ci";
@@ -21,6 +25,30 @@ function RoomDetails(){
     const dispatch = useDispatch();
     const isReserved = useSelector((state)=> state.userInterface.isReserved)
     const isPaid = useSelector((state)=> state.userInterface.isPaid)
+
+    const [accommodations, setAccommodations] = useState([]);
+
+    const db = getFirestore();
+
+    // FETCH ACCOMODATION
+    useEffect(() => {
+        fetchAccommodations();
+    }, []);
+
+    // Fetch data from Firestore
+    const fetchAccommodations = async () => {
+        try {
+            const accommodationsCollection = collection(db, "accommodations");
+            const accommodationsSnapshot = await getDocs(accommodationsCollection);
+            const accommodationsList = accommodationsSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setAccommodations(accommodationsList);
+        } catch (error) {
+            console.error("Error fetching accommodations:", error);
+        }
+    };
 
 
     // HANDLES CLOSING THE ROOM DETAILS PAGE
@@ -65,7 +93,9 @@ function RoomDetails(){
             {!isReserved ? 
 
             <div className="room-details-content">
-                <div className="Gallery">
+
+                {accommodations.map((accommodation) => (
+                <div className="Gallery" key={accommodation.id}>
                     
                     <div className="gallery-header">
                         <h2><IoIosArrowBack onClick={HandleCloseRoomDetails} className="return-icon" />Nice small bedroom in a Nice small house</h2>
@@ -79,19 +109,19 @@ function RoomDetails(){
                     <div className="room-gallery">
                         <div className="room-gallery-details">
                             <div className="room-pictures">
-                                <img src="Room.jpeg" alt="room"></img>
+                                <img src={accommodation.images[2]} alt="room"></img>
                             </div>
                         </div>
 
                         <div className="room-gallery-details">
                             <div className="room-pictures">
-                                <img src="Room.jpeg" alt="room"></img>
+                                <img src={accommodation.images[1]} alt="room"></img>
                             </div>
                         </div>
 
                         <div className="room-gallery-details">
                             <div className="room-pictures">
-                                <img src="Room.jpeg" alt="room"></img>
+                                <img src={accommodation.images[0]} alt="room"></img>
                             </div>
                         </div>
                     </div>
@@ -99,8 +129,8 @@ function RoomDetails(){
 
                     {/* Location */}
                     <div className="room-location">
-                        <h3>Sandton, Johannesburg, South Africa</h3>
-                        <p>1 small double bed , shared bathroom</p>
+                        <h3>{accommodation.location}</h3>
+                        <p>{accommodation.numberOfRooms}</p>
                     </div>
                     {/* ENDS */}
 
@@ -112,9 +142,7 @@ function RoomDetails(){
                             <div className="rating-box">
                                 <div className="box">
                                     <p>
-                                        One of the most loved room
-                                        <br></br>
-                                        in Rest Hotely, According to guests
+                                        Ratings
                                     </p>
                                 </div>
                                 <div className="box">
@@ -137,28 +165,18 @@ function RoomDetails(){
                             <div className="about-section">
                                 <div className="about-section-content">
                                     <h2><strong>About this place</strong></h2>
-                                    <p>Double room available in an immaculate 2 bed tenement flat 
-                                        in Dennistoun. Comfy double bed with storage in room.
-
-                                        <br></br>
-                                        <br></br>
-                                        Situated 1.5 miles from the city centre with good transport 
-                                        links into city 5/10 minutes walk to Duke St or Bellgrove 
-                                        train station which take you into queen street in 5 minutes! 
-                                        There are also plenty local buses.
-                                        <br></br>
-                                        <br></br>                                        Great local amenities shops, bars and restaurants also close 
-                                        by on Duke Street and Alexandra Parade. Shared livingroom 
-                                        bathroom and kitchen.</p>
+                                    <p>
+                                        {accommodation.description}
+                                    </p>
                                 </div>
                                 <h2><strong>What this place offers</strong></h2>
                                 <div className='offers'>
                                     <div className="offered-items-left">
-                                        <p ><FaKitchenSet className="offer-icon"/> kitchen</p>
-                                        <p> <PiOfficeChairLight className="offer-icon"/> Dedicated work workspace</p>
-                                        <p><IoTvSharp className="offer-icon"/> TV with standard cable</p>
-                                        <p><RiFridgeFill className="offer-icon"/> Refrigirator</p>
-                                        <p><MdOutlineNightsStay className="offer-icon"/> Long term stays allowed</p>
+                                        <p ><FaKitchenSet className="offer-icon"/> {accommodation.amenties}</p>
+                                        <p> <PiOfficeChairLight className="offer-icon"/> {accommodation.amenties}</p>
+                                        <p><IoTvSharp className="offer-icon"/> {accommodation.amenties}</p>
+                                        <p><RiFridgeFill className="offer-icon"/> {accommodation.amenties}</p>
+                                        <p><MdOutlineNightsStay className="offer-icon"/> {accommodation.amenties}</p>
                                     </div>
                                     <div className="offered-items-left">
                                         <p ><FaKitchenSet className="offer-icon"/> kitchen</p>
@@ -248,15 +266,13 @@ function RoomDetails(){
                                 {/* CHECK CONTENT ENDS */}
                             </div>
 
-                            {/* RESERVATION LOCATION */}
-                            <div className="reservation-location">
-                                <p>Sandton, Johannesburg, SA</p>
-                            </div>
                         </div>
                         {/* RIGHT CONTAINER ENDS */}
                     </div>
 
                 </div>
+                ))}
+
             </div>
             : 
             
