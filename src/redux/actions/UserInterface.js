@@ -30,6 +30,9 @@ export const ON_GALLERY = 'ON_GALLERY';
 // LOADER
 export const ON_LOADER = 'ON_LOADER';
 
+// SELECTED ROOM
+export const SET_SELECTED_ROOM = 'SET_SELECTED_ROOM';
+
 
 // ACTION TYPES ENDS
 
@@ -106,3 +109,9 @@ export const showLoader = ()=>{
         type: ON_LOADER,
         }
     }
+
+// SELECTED ROOM
+export const setSelectedRoom = (roomId) => ({
+    type: SET_SELECTED_ROOM,
+    payload: roomId,
+  });

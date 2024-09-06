@@ -9,6 +9,7 @@ import {
     ON_MAPS,
     ON_GALLERY,
     ON_LOADER,
+    SET_SELECTED_ROOM,
 } 
     from "../actions/UserInterface";
 
@@ -25,6 +26,7 @@ const initialState = {
     isMapOpen: false,
     isGalleryOpen: false,
     isLoading: false,
+    selectedRoom: null,
 }
 
 // INITIAL STATE ENDS
@@ -104,6 +106,13 @@ const userInterfaceReducer = (state = initialState, action) =>{
                     isLoading: !state.isLoading
                     }
             // LOADER ENDS
+
+            // SELECTED ROOM
+            case SET_SELECTED_ROOM:
+                return {
+                ...state,
+                selectedRoom: action.payload,
+                    }
 
 
         default:

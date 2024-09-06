@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { viewRoomDetails, showLoader } from "../../redux/actions/UserInterface";
+import { viewRoomDetails, showLoader, setSelectedRoom  } from "../../redux/actions/UserInterface";
 
 // FIRESTORE
 import {  getFirestore,collection, getDocs} from "firebase/firestore"; // Firestore imports
@@ -20,37 +20,36 @@ function Rooms(){
         fetchAccommodations();
     }, []);
 
-    // Fetch data from Firestore
     const fetchAccommodations = async () => {
         try {
-            const accommodationsCollection = collection(db, "accommodations");
-            const accommodationsSnapshot = await getDocs(accommodationsCollection);
-            const accommodationsList = accommodationsSnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-            setAccommodations(accommodationsList);
+          const accommodationsCollection = collection(db, "accommodations");
+          const accommodationsSnapshot = await getDocs(accommodationsCollection);
+          const accommodationsList = accommodationsSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setAccommodations(accommodationsList);
         } catch (error) {
-            console.error("Error fetching accommodations:", error);
+          console.error("Error fetching accommodations:", error);
         }
-    };
-
-    const HandleOpenRoomDetails = ()=>{
+      };
+    
+      const handleOpenRoomDetails = (roomId) => {
         dispatch(showLoader(true));
-
-        setTimeout (()=> {
-            dispatch(viewRoomDetails())
-            dispatch(showLoader(false));
+        dispatch(setSelectedRoom(roomId));
+        setTimeout(() => {
+          dispatch(viewRoomDetails());
+          dispatch(showLoader(false));
         }, 3000);
-        
-    }
+      };
+    
 
     return(
         <div className="rooms">
 
             {/* ROOM DETAILS*/}
             {accommodations.map((accommodation) => (
-            <div className="room-details" onClick={HandleOpenRoomDetails} key={accommodation.id}>
+            <div className="room-details" onClick={() => handleOpenRoomDetails(accommodation.id)} key={accommodation.id}>
                 
                 <div className="room-picture">
                     <img src={accommodation.images[2]} alt="room"></img>

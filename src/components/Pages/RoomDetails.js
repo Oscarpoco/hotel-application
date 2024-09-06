@@ -25,14 +25,14 @@ function RoomDetails(){
     const dispatch = useDispatch();
     const isReserved = useSelector((state)=> state.userInterface.isReserved)
     const isPaid = useSelector((state)=> state.userInterface.isPaid)
+    // const selectedRoomId = useSelector((state) => state.userInterface.selectedRoom);
 
     const [accommodations, setAccommodations] = useState([]);
 
     const db = getFirestore();
 
-    // FETCH ACCOMODATION
     useEffect(() => {
-        fetchAccommodations();
+        fetchAccommodations(); // Fetch accommodations when component mounts
     }, []);
 
     // Fetch data from Firestore
@@ -172,11 +172,11 @@ function RoomDetails(){
                                 <h2><strong>What this place offers</strong></h2>
                                 <div className='offers'>
                                     <div className="offered-items-left">
-                                        <p ><FaKitchenSet className="offer-icon"/> {accommodation.amenties}</p>
-                                        <p> <PiOfficeChairLight className="offer-icon"/> {accommodation.amenties}</p>
-                                        <p><IoTvSharp className="offer-icon"/> {accommodation.amenties}</p>
-                                        <p><RiFridgeFill className="offer-icon"/> {accommodation.amenties}</p>
-                                        <p><MdOutlineNightsStay className="offer-icon"/> {accommodation.amenties}</p>
+                                        <p ><FaKitchenSet className="offer-icon"/> {accommodation.amenities[0]}</p>
+                                        <p> <PiOfficeChairLight className="offer-icon"/> {accommodation.amenities[1]}</p>
+                                        <p><IoTvSharp className="offer-icon"/> {accommodation.amenities[2]}</p>
+                                        <p><RiFridgeFill className="offer-icon"/> {accommodation.amenities[3]}</p>
+                                        <p><MdOutlineNightsStay className="offer-icon"/> {accommodation.amenities[4]}</p>
                                     </div>
                                     <div className="offered-items-left">
                                         <p ><FaKitchenSet className="offer-icon"/> kitchen</p>
@@ -198,7 +198,7 @@ function RoomDetails(){
                                 {/* HEADER TEXTS */}
                                 <p 
                                 style={{textAlign: 'start', width: '100%', fontWeight: 'bold'}}
-                                >R1,402 ZAR <span>night</span></p>
+                                >{accommodation.price} ZAR <span>night</span></p>
                                 {/* HEADER TEXTS ENDS */}
 
                                 <div className="check">
@@ -240,7 +240,7 @@ function RoomDetails(){
                                     <div className="check-content-top">
                                         {/* LEFT */}
                                         <div className="check-content-top-left">
-                                            <p>R1,402 ZAR * 11 nights</p>
+                                            <p>{accommodation.price} ZAR * 11 nights</p>
                                             <p>Weekly stay discout</p>
                                             <p>Service fee</p>
                                         </div>
@@ -248,8 +248,14 @@ function RoomDetails(){
 
                                         {/* RIGHT */}
                                         <div className="check-content-top-right">
-                                            <p>R15,421 ZAR</p>
-                                            <p>-R3,084 ZAR</p>
+
+                                            {/* I WILL CHANGE THIS PRICE */}
+                                            <p>{accommodation.price} ZAR</p> 
+
+                                            {/* MINUS 10% FROM TOP PRICE */}
+                                            <p>{accommodation.price} ZAR</p>
+
+                                            {/* PLUS SERVICE FEE */}
                                             <p>R2,371 ZAR</p>
                                         </div>
                                         {/* RIGHT ENDS */}
@@ -259,7 +265,9 @@ function RoomDetails(){
                                     {/* BOTTOM */}
                                     <div className="check-content-bottom">
                                         <p>Total</p>
-                                        <p>R14,942 ZAR</p>
+
+                                        {/* TOTAL PRICE */}
+                                        <p>{accommodation.price} ZAR</p>
                                     </div>
                                     {/* BOTTOM ENDS */}
                                 </div>
