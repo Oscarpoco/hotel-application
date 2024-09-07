@@ -218,8 +218,9 @@
 .offers
 {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
     width: 100%;
     gap: .5em;
 }
@@ -344,7 +345,8 @@
 {
     display: flex;
     justify-content: start;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     border: 2px solid var(--faint-color);
     width: 100%;
     border-bottom-left-radius: 10px;
@@ -353,7 +355,19 @@
 
 .check-bottom p
 {
+    
+    width: 100%;
     padding-left: 1em;
+}
+
+.check-bottom input
+{
+    
+    width:91%;
+    padding: 0.5em;
+    margin: 0 0 .5em 1em;
+    outline: none;
+
 }
 /* ENDS */
 
@@ -428,7 +442,6 @@
 {
     display: flex;
     flex-direction: column;
-    gap: .5em;
     width: 100%;
 }
 
@@ -453,7 +466,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* background: blue; */
 }
 
 .room-details-left-container-payment
@@ -466,7 +478,7 @@
     align-items: center;
     border: 2px solid var(--faint-color);
     border-radius: 20px;
-    padding: 1em;
+    padding: 0 1em 1em 1em;
 }
 
 .room-details-left-container-payment p

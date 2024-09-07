@@ -1,12 +1,20 @@
 // src/redux/reducers/authenticationReducer.js
 
-import { SIGN_IN_SUCCESS, SIGN_IN_ERROR, SIGN_OUT, IS_SIGN_IN, SIGN_UP_SUCCESS, SIGN_UP_ERROR } from '../actions/Authentication';
+import { SET_RESERVATION, SIGN_IN_SUCCESS, SIGN_IN_ERROR, SIGN_OUT, IS_SIGN_IN, SIGN_UP_SUCCESS, SIGN_UP_ERROR } from '../actions/Authentication';
 
 const initialState = {
     isSignInOpen: false,
     isAuthenticated: false,
     user: null,
-    error: null
+    error: null,
+
+    reservation: {
+        checkIn: '',
+        checkOut: '',
+        guests: '',
+        nights: 0,
+        totalPrice: 0,
+      },
 };
 
 const authenticationReducer = (state = initialState, action) => {
@@ -47,6 +55,13 @@ const authenticationReducer = (state = initialState, action) => {
                 user: null,
                 error: null
             };
+
+        // RESERVATION
+        case SET_RESERVATION:
+            return {
+            ...state,
+            reservation: action.payload,
+        }
 
             // DEFAULT
         default:

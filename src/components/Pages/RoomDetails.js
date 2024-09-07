@@ -20,6 +20,7 @@ import { RiFridgeFill } from "react-icons/ri";
 import { MdOutlineNightsStay } from "react-icons/md";
 import { GiCheckMark } from "react-icons/gi";
 import Reserved from "./Reserved";
+import ReservationDetails from "./ReservationDetails";
 
 function RoomDetails(){
 
@@ -235,91 +236,14 @@ function RoomDetails(){
                         {/* ENDS */}
 
                         {/* RIGHT CONTAINER */}
+
                         <div className="content-right">
-
-                            {/* ALL CONTENT */}
-                            <div className="reservation">
-                                {/* HEADER TEXTS */}
-                                <p 
-                                style={{textAlign: 'start', width: '100%', fontWeight: 'bold'}}
-                                >{accommodation.price} ZAR <span>night</span></p>
-                                {/* HEADER TEXTS ENDS */}
-
-                                <div className="check">
-                                    {/* TOP */}
-                                    <div className="check-top">
-
-                                        {/* CHECK-IN */}
-                                        <div className="check-in">
-                                            <p>Check in</p>
-                                            <input type="date" placeholder="Add date"></input>
-                                        </div>
-                                        {/* CHECK IN ENDS */}
-
-                                        {/* CHECK OUT */}
-                                        <div className="check-out">
-                                            <p>Check in</p>
-                                            <input type="date" placeholder="Add date"></input>
-                                        </div>
-                                        {/* CHECK OUT ENDS */}
-
-                                    </div>
-                                    {/* ENDS */}
-
-                                    {/* BOTTOM */}
-                                    <div className="check-bottom">
-                                        <p>Guests</p>
-                                    </div>
-                                    {/* BOTTOM ENDS */}
-                                </div>
-
-                                {/* BUTTON */}
-                                <button type="submit" onClick={HandleReservation} className="confirm-button"><strong>Reserve</strong></button>
-                                {/* BUTTON ENDS */}
-
-                                {/* CHECK CONTENT */}
-                                <div className="check-content">
-
-                                    {/* TOP */}
-                                    <div className="check-content-top">
-                                        {/* LEFT */}
-                                        <div className="check-content-top-left">
-                                            <p>{accommodation.price} ZAR * 11 nights</p>
-                                            <p>Weekly stay discout</p>
-                                            <p>Service fee</p>
-                                        </div>
-                                        {/* LEFT ENDS */}
-
-                                        {/* RIGHT */}
-                                        <div className="check-content-top-right">
-
-                                            {/* I WILL CHANGE THIS PRICE */}
-                                            <p>{accommodation.price} ZAR</p> 
-
-                                            {/* MINUS 10% FROM TOP PRICE */}
-                                            <p>{accommodation.price} ZAR</p>
-
-                                            {/* PLUS SERVICE FEE */}
-                                            <p>R2,371 ZAR</p>
-                                        </div>
-                                        {/* RIGHT ENDS */}
-                                    </div>
-                                    {/* TOP ENDS */}
-
-                                    {/* BOTTOM */}
-                                    <div className="check-content-bottom">
-                                        <p>Total</p>
-
-                                        {/* TOTAL PRICE */}
-                                        <p>{accommodation.price} ZAR</p>
-                                    </div>
-                                    {/* BOTTOM ENDS */}
-                                </div>
-                                {/* CHECK CONTENT ENDS */}
-                            </div>
-
+                        <ReservationDetails 
+                                HandleReservation={HandleReservation}
+                                accommodation={accommodation}
+                        />
                         </div>
-                        {/* RIGHT CONTAINER ENDS */}
+                        {/* ENDS */}
                     </div>
 
                 </div>
@@ -333,10 +257,13 @@ function RoomDetails(){
             
             // IF ROOM IS RESERVED SHOW THIS
             
-            <Reserved 
-            HandlePayment={HandlePayment}
-            HandleReservation={HandleReservation}
-            />
+            <div className="room-details-content">
+                <Reserved 
+                HandlePayment={HandlePayment}
+                HandleReservation={HandleReservation}
+                accommodation={accommodation}
+                />
+            </div>
             
             }
             {/* ENDS */}
@@ -359,3 +286,4 @@ function RoomDetails(){
 }
 
 export default RoomDetails;
+

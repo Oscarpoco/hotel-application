@@ -2,7 +2,6 @@
 
 import { signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
-
 const provider = new GoogleAuthProvider();
 
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
@@ -10,7 +9,13 @@ export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 export const SIGN_OUT = 'SIGN_OUT';
 export const IS_SIGN_IN = 'IS_SIGN_IN';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';  
-export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';      
+export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';  
+
+// RESERVATION DATA
+export const SET_RESERVATION = 'SET_RESERVATION';
+
+
+// ACTIONS CREATOR
 
 // Google Sign-In
 export const handleSignInWithGoogle = () => async (dispatch) => {
@@ -50,4 +55,13 @@ export const handleOnSignIn = () => ({
 // logout
 export const handleOnSignOut = () => ({
     type: SIGN_OUT,
+});
+
+
+// RESERVATION DATA
+
+
+export const setReservation = (reservationData) => ({
+  type: SET_RESERVATION,
+  payload: reservationData,
 });

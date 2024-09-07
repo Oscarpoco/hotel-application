@@ -145,6 +145,10 @@ function Navigation( {handleScroll} ){
                 <div className="nav-bar" onClick={handleOpenMapsClick}>
                     <p><SiGooglemaps className="menu-icons"/> Maps</p>
                 </div>
+                {/* favorite */}
+                <div className="nav-bar" onClick={handleOpenMapsClick}>
+                    <p><SiGooglemaps className="menu-icons"/> Favorite</p>
+                </div>
      
                     {/* contact us */}
                 <div className="nav-bar" onClick={handleScroll}>
