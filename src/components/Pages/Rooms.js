@@ -40,7 +40,7 @@ function Rooms(){
         setTimeout(() => {
           dispatch(viewRoomDetails());
           dispatch(showLoader(false));
-        }, 3000);
+        }, 2020);
       };
     
 

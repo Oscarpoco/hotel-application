@@ -8,7 +8,7 @@
     padding: 16px; 
     padding-bottom: 3em;
     box-sizing: border-box; 
-    /* overflow-y: auto; */
+    overflow-y: auto;
 }
 
 .room-details 
@@ -17,6 +17,10 @@
     border: none;
     box-sizing: border-box;
     cursor: pointer;
+    gap: .7em;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .room-picture
@@ -24,21 +28,29 @@
     box-shadow: var(--box-shadow);
     border-radius: var(--box-border-radius);
     cursor: pointer;
-    height: 300px;
+    max-height: 300px;
+    max-width: 300px;
+    overflow: hidden;
+    transition: all .7s ease-in;
+    transition: all .7s ease-out;
 }
 
 .room-picture:hover
 {
     box-shadow: unset;
     border-radius: 0;
-    transition: all .7s ease-in-out;
+    transition: all .7s ease-in;
+    transition: all .7s ease-out;
+    max-width: 300px;
+    max-height: 300px;
+    overflow: hidden;
 }
 
 .room-content
 {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: start;
 }
 
@@ -47,7 +59,7 @@
     margin: 0;
     padding: .3em 0;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 1.1em;
 }
 
 .room-content p span
@@ -55,7 +67,7 @@
     margin: 0;
     padding: .3em 0;
     font-weight: lighter;
-    font-size: 13px;
+    font-size: 1.1em;
 }
 
 .room-details img 
@@ -65,13 +77,16 @@
     object-fit: cover;
     border-radius: var(--box-border-radius);
     cursor: pointer;
+    transition: all .7s ease-in;
+    transition: all .7s ease-out;
 }
 
 .room-details img:hover
 {
     width: 100%; 
-    height: auto; 
+    height: 100%; 
     border-radius: 50%;
-    transition: all .7s ease-in-out;
+    transition: all .7s ease-in;
+    transition: all .7s ease-out;
     /* transform: rotateY(45deg); */
 }
