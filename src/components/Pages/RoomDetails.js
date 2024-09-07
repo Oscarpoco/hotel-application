@@ -91,6 +91,26 @@ function RoomDetails(){
             dispatch(showLoader(false));
         }
     };
+
+    // HANDLE SHARING
+    const handleShare = (accommodation) => {
+        const shareData = {
+            title: `Check out this accommodation: ${accommodation.location}`,
+            text: `Take a look at this accommodation in ${accommodation.location} for ${accommodation.price} ZAR/night.`,
+            url: window.location.href + `accommodation/${accommodation.id}`,  // Example share link
+        };
+
+        if (navigator.share) {
+            navigator.share(shareData)
+                .then(() => console.log('Successful share'))
+                .catch((error) => console.error('Error sharing:', error));
+        } else {
+            // Fallback for browsers that do not support navigator.share
+            navigator.clipboard.writeText(shareData.url)
+                .then(() => alert('Link copied to clipboard!'))
+                .catch((error) => console.error('Failed to copy:', error));
+        }
+    };
     
       
 
@@ -149,7 +169,7 @@ function RoomDetails(){
                         <h2><IoIosArrowBack onClick={HandleCloseRoomDetails} className="return-icon" />{accommodation.title}</h2>
                         <div className="room-details-buttons-box">
                             <button className="room-details-buttons" onClick={handleSaveRoomToFavorites}>Save <CiSaveDown2 /></button>
-                            <button className="room-details-buttons">Share <CiShare2 /></button>
+                            <button className="room-details-buttons" onClick={handleShare}>Share <CiShare2 /></button>
                         </div>
                     </div>
 
