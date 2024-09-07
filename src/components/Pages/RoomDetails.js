@@ -6,7 +6,7 @@ import { viewRoomDetails, isRoomReserved, isRoomPaid, showLoader } from "../../r
 import '../Styling/RoomDetails.css';
 
 // FIRESTORE
-import { getFirestore, doc, getDoc, collection, addDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
 
 // ICONS
 import { CiSaveDown2 } from "react-icons/ci";
@@ -65,24 +65,33 @@ function RoomDetails(){
 
     //   HANDLE ADDING TO FAVORITE
     const handleSaveRoomToFavorites = async () => {
+        dispatch(showLoader(true));
         try {
-          if (accommodation) {
-            // Add the selected room to the "favorites" collection in Firestore
-            dispatch(showLoader(true));
-            await addDoc(collection(db, "favorites"), {
-              ...accommodation,
-            });
+            if (accommodation) {
+                const favoriteDocRef = doc(db, "favorites", accommodation.id);
+                const accommodationDocRef = doc(db, "accommodations", accommodation.id);
     
-            alert("Room has been saved to your favorites!");
-          } else {
-            console.error("No accommodation details found!");
-          }
+                // Add to favorites collection (create or update)
+                await setDoc(favoriteDocRef, { 
+                    accommodationId: accommodation.id // Ensure the ID is saved with the document
+                }, { merge: true });
+    
+                // Increment the likes count in the accommodations collection
+                await updateDoc(accommodationDocRef, {
+                    likes: increment(1) // Increment likes by 1
+                });
+    
+                alert("Room has been saved to your favorites!");
+            } else {
+                console.error("No accommodation details found!");
+            }
         } catch (error) {
-          console.error("Error saving room to favorites:", error);
-        } finally{
+            console.error("Error saving room to favorites:", error);
+        } finally {
             dispatch(showLoader(false));
         }
-      };
+    };
+    
       
 
 
