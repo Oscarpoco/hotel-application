@@ -14,7 +14,7 @@ function Reserved({ HandleReservation, HandlePayment, accommodation }) {
         return <div>Loading...</div>;
     }
 
-    const userId = user.id || user.uid; // Adjust if necessary based on your actual user object
+    const userId = user.id || user.uid; 
 
     const onToken = async (token) => {
         try {
