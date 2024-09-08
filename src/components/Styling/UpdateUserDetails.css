@@ -69,7 +69,7 @@
     gap: 1em;
     width: 95%;
     border-radius: 10px;
-    box-shadow: var(--box-shadow);
+    /* box-shadow: var(--box-shadow); */
     padding: 1.5em;
 }
 
@@ -88,6 +88,7 @@
     align-items: center;
     width: 100%;
     gap: 1em;
+    
 }
 
 .input-wrapper
@@ -98,6 +99,9 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: .5em;
+    padding: .7em;
+    background: rgba(42, 188, 242, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .input-box
@@ -109,29 +113,34 @@
     width: 100%;
 }
 
-.input-box button
+.input-wrapper button
 {
     display: flex;
     justify-content: center;
+    width: 30%;
+    color: white;
     align-items: center;
-    /* border-radius: 10px; */
-    /* background: silver; */
+    border-radius: 50px; 
+    background: green;
     border: 2px solid silver;
     cursor: pointer;
+    padding: 1em;
+    gap: .7em;
 }
 
-.input-box button:hover
+.input-wrapper button:hover
 {
     border-radius: 0;
     background: silver;
     border: 2px solid silver;
-    transition: all .5s ease-in-out;
+    transition: all .5s ease-in;
+    transition: all .7s ease-out;
 }
 
-.edit-icon
+.save-icon
 {
     font-size: 1.6em;
-    padding: .4em;
+    /* padding: .4em; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,7 +152,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 1em 0;
+    padding: 1em;
     border: 2px solid var(--faint-color);
     /* border-radius: 10px; */
     outline: none;
@@ -160,9 +169,8 @@
     align-items: center;
     flex-direction: column;
     gap: .5em;
-    width: 95%;
-    border-radius: 10px;
-    box-shadow: var(--box-shadow);
+    width: 100%;
+    border: 2px solid var(--faint-color);
     padding: 1.5em;
 }
 
@@ -184,6 +192,27 @@
     padding: 1.5em;
 }
 
+.bookings-title-wrapper
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 .5em;
+    gap: .3em;
+}
+
+.bookings-title-wrapper p
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: .7em; */
+    background: #1DA1F2;
+    height: 3em;
+    /* width: 100%; */
+}
+
 .bookings
 {
     display: flex;
@@ -191,13 +220,80 @@
     align-items: center;
     width: 100%;
     padding: 0 .5em;
-    /* border-radius: 10px; */
-    border-bottom: 2px solid var(--faint-color);
-    /* background: var(--faint-color); */
+    gap: .3em;
 }
 
-.delete-icon
+.bookings p
 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1DA1F2;
+    height: 3em;
+}
+
+.btn-primary
+{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    /* background: #1DA1F2; */
+    height: 3em;
+    gap: .2em;
+}
+
+.btn-primary button
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .7em .7em;
+    border-radius: 10px;
+    background: #1877F2;
+    border: 2px solid #1877F2;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, .1);
+    font-weight: 700;
+    color: whitesmoke;
     cursor: pointer;
-    color: red;
+}
+
+.actions-button
+{
+    position: relative;
+    transition: all .5s .2s ease-in;
+    transition: all .5s .2s ease-out;
+}
+
+.tooltip
+{
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .3s ease;
+    color: white;
+    padding: .7em 1em;
+    width: 3.5em;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    font-family: 'Helvetica Neue ';
+    z-index: 2000;
+}
+
+
+
+.actions-button:hover .tooltip
+{
+    top: -150px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.btn-primary button:hover
+{
+    border-radius: 10px;
+    background: #1DA1F2;
+    border: 2px solid #1DA1F2;
+    transition: all .5s ease-in-out;
 }

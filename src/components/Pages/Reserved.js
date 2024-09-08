@@ -24,9 +24,12 @@ function Reserved({ HandleReservation, HandlePayment, accommodation }) {
                 guests: reservation.guests,
                 nights: reservation.nights,
                 totalPrice: reservation.totalPrice,
+                accommodationId: accommodation.id,
+                title: reservation.title,
                 userId: userId,
                 paymentMethodId: token.id,
                 createdAt: new Date().toISOString(),
+                status: "Pending",
             };
 
             await setDoc(doc(db, "bookings", `${userId}_${new Date().getTime()}`), bookingData);

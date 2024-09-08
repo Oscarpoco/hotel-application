@@ -13,8 +13,17 @@ export default function ReservationDetails({ HandleReservation, accommodation })
     const [checkOut, setCheckOut] = useState("");
     const [guests, setGuests] = useState("");
     const [nights, setNights] = useState(0); 
+    const [title, setTitle] = useState(""); 
     const [totalPrice, setTotalPrice] = useState(0); 
     
+
+    useEffect(() => {
+        if (accommodation) {
+            setTitle(accommodation.title);
+        }
+    }, [accommodation]);
+
+    console.log('title',title)
 
     // Calculate the number of nights and total price whenever checkIn or checkOut changes
     useEffect(() => {
@@ -39,7 +48,10 @@ export default function ReservationDetails({ HandleReservation, accommodation })
         const weeklyDiscount = validNights >= 7 ? accommodation.price * validNights * 0.1 : 0; 
         const discountedPrice = validNights * accommodation.price - weeklyDiscount; 
         setTotalPrice(discountedPrice > 0 ? discountedPrice : 0);
+
     };
+
+    
 
     // Handle form submission
     const handleSubmit = (e) => {
@@ -52,6 +64,7 @@ export default function ReservationDetails({ HandleReservation, accommodation })
         formData.append('guests', guests);
         formData.append('nights', nights);
         formData.append('totalPrice', totalPrice);
+        formData.append('title', title);
 
         // Dispatch form data to Redux store
         dispatch(setReservation({
@@ -60,6 +73,7 @@ export default function ReservationDetails({ HandleReservation, accommodation })
             guests,
             nights,
             totalPrice,
+            title,
         }));
 
         // Clear input fields after submission
@@ -68,9 +82,9 @@ export default function ReservationDetails({ HandleReservation, accommodation })
         setGuests("");
         setNights(0);
         setTotalPrice(0);
+        setTitle("");
 
-        // Handle the reservation as needed (if there's a specific function to handle it)
-        HandleReservation(checkIn, checkOut, guests, nights, totalPrice);
+        HandleReservation(checkIn, checkOut, guests, nights, totalPrice, title);
     };
 
     return (
