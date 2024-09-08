@@ -1,62 +1,61 @@
 import React from "react";
 import '../Styling/RoomDetails.css';
 import { IoIosArrowBack } from "react-icons/io";
-import { useSelector } from "react-redux"; // Import useSelector to get data from Redux
+import { useSelector } from "react-redux";
+import StripeCheckout from 'react-stripe-checkout';
+import { doc, setDoc, getFirestore } from "firebase/firestore";
 
 function Reserved({ HandleReservation, HandlePayment, accommodation }) {
-    // Access reservation data from Redux store
-    const reservation = useSelector((state) => state.authentication.reservation); // Replace with your correct state path
+    const reservation = useSelector((state) => state.authentication.reservation);
+    const user = useSelector((state) => state.authentication.user); 
+    const db = getFirestore();
 
-    if (!reservation) {
-        return <div>Loading...</div>; // Loading state or error handling if reservation is not available
+    if (!reservation || !user) {
+        return <div>Loading...</div>;
     }
+
+    const userId = user.id || user.uid; // Adjust if necessary based on your actual user object
+
+    const onToken = async (token) => {
+        try {
+            const bookingData = {
+                checkIn: reservation.checkIn,
+                checkOut: reservation.checkOut,
+                guests: reservation.guests,
+                nights: reservation.nights,
+                totalPrice: reservation.totalPrice,
+                userId: userId,
+                paymentMethodId: token.id,
+                createdAt: new Date().toISOString(),
+            };
+
+            await setDoc(doc(db, "bookings", `${userId}_${new Date().getTime()}`), bookingData);
+
+            alert("Payment and booking successful!");
+            HandlePayment();
+        } catch (error) {
+            console.error("Error saving booking:", error);
+            alert("Failed to save booking. Please try again.");
+        }
+    };
 
     return (
         <div className="payment-wrapper">
             {/* PAYMENT HEADER */}
             <div className="payment-header">
                 <h2><IoIosArrowBack onClick={HandleReservation} className="return-icon" />Request to book</h2>
+                <StripeCheckout
+                    token={onToken}
+                    stripeKey="pk_test_51PwZqI08I0xTXWPP7UTZfEAVdMoIU4t0XKBdoDS49bbEwNbUIqa4y8Ci873JogyaFKo1osvNOOrZExH98PsYIYPZ00HvFJUzqv"
+                    name="Accommodation"
+                    description="Payment for Accommodation"
+                    amount={reservation.totalPrice * 100} // Convert to cents
+                    currency="ZAR"
+                />
             </div>
 
             {/* LEFT AND RIGHT CONTAIN WRAPPER */}
             <div className="left-right-contain-wrapper">
-                {/* LEFT CONTAINER PAYMENT */}
-                <div className="room-details-left-container-payment">
-                    <p>Payment Details</p>
-
-                    <div className="payment-gateway">
-                        <input type="text" placeholder="Credit or debit card" />
-                    </div>
-
-                    <div className="payment-gateway-card">
-                        <div className="payment-top">
-                            <input type="text" placeholder="Card number" />
-                        </div>
-                        <div className="payment-bottom">
-                            <div className="card-detail">
-                                <input type="text" placeholder="Expiration" />
-                            </div>
-                            <div className="card-detail">
-                                <input type="text" placeholder="CVV" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="payment-gateway-zip-code">
-                        <input type="text" placeholder="ZIP CODE" />
-                    </div>
-                    <div className="payment-gateway-country">
-                        <input type="text" placeholder="Country" />
-                    </div>
-
-                    <div className="confirm-button-box">
-                        <button type="submit" className="confirm-button" onClick={HandlePayment}>
-                            <strong>Confirm payment</strong>
-                        </button>
-                    </div>
-                </div>
-                {/* PAYMENT ENDS */}
-
                 {/* RIGHT CONTAINER */}
                 <div className="content-right">
                     <div className="reservation">
@@ -94,7 +93,7 @@ function Reserved({ HandleReservation, HandlePayment, accommodation }) {
                         </div>
 
                         {/* CANCEL BUTTON */}
-                        <button type="submit" onClick={HandleReservation} className="confirm-button" style={{ background: 'red', color: 'white' }}>
+                        <button type="button" onClick={HandleReservation} className="confirm-button" style={{ background: 'red', color: 'white' }}>
                             <strong>Cancel</strong>
                         </button>
                         {/* CANCEL BUTTON ENDS */}

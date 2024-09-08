@@ -258,6 +258,7 @@ function RoomDetails(){
             // IF ROOM IS RESERVED SHOW THIS
             
             <div className="room-details-content">
+                
                 <Reserved 
                 HandlePayment={HandlePayment}
                 HandleReservation={HandleReservation}

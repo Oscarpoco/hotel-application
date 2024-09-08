@@ -450,6 +450,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .payment-header h2
@@ -464,77 +465,9 @@
     width: 100%;
     box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.room-details-left-container-payment
-{
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    justify-content: space-between;
-    align-items: center;
-    border: 2px solid var(--faint-color);
-    border-radius: 20px;
-    padding: 0 1em 1em 1em;
-}
-
-.room-details-left-container-payment p
-{
-    font-size: 1.7em;
-}
-
-.payment-gateway,
-.payment-gateway-card,
-.payment-gateway-zip-code,
-.payment-gateway-country
-{
-    width: 100%;
-    display: flex;
-}
-
-.payment-gateway input,
-.payment-gateway-card input,
-.payment-gateway-zip-code input,
-.payment-gateway-country input
-{
-    width: 100%;
-    display: flex;
-    border: 2px solid var(--faint-color);
-    border-radius: 10px;
-    padding: 1em;
-
-}
-
-.payment-gateway-card
-{
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-}
-
-.card-detail
-{
-    width: 50%;
-    display: flex;
     justify-content: center;
+    align-items: center;
 }
-
-.payment-top
-{
-    height: 50%;
-    display: flex;
-}
-
-.payment-bottom
-{
-    height: 50%;
-    display: flex;
-    gap: 1em;
-}
-
 
 
 .confirm-button-box
