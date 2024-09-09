@@ -309,3 +309,59 @@
     width: 99%;
 }
 
+/* REVIEW FORM */
+.review-form-layout
+{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, .7);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 5000;
+    padding: 1em;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+}
+
+.review-form
+{
+
+    width: 100%;
+    height: 100%;
+    background: #1DA1F2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    gap: 1em;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+}
+
+.review-form textarea
+{
+    width: 90%;
+    height: 50%;
+    padding: .7em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+}
+
+.review-form input
+{
+    width: 40%;
+    padding: .7em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+    outline: none;
+}
+
+.review-form button
+{
+    padding: 1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+}
