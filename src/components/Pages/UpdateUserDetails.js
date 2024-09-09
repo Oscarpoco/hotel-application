@@ -107,6 +107,7 @@ function UpdateUserDetails() {
 
     setTimeout(() => {
       dispatch(openUpdate());
+      window.location.reload();
       dispatch(showLoader(false));
     }, 3000);
   };
@@ -118,6 +119,7 @@ function UpdateUserDetails() {
     setTimeout(() => {
       dispatch(openUpdate(false));
       dispatch(handleOnSignOut());
+      window.location.reload();
       dispatch(showLoader(false));
     }, 3000);
   };

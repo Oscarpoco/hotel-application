@@ -128,6 +128,7 @@ function RoomDetails(){
 
         setTimeout (()=> {
             dispatch(viewRoomDetails());
+            window.location.reload();
             dispatch(showLoader(false));
         }, 2000);
         
@@ -149,7 +150,8 @@ function RoomDetails(){
         dispatch(showLoader(true));
 
         setTimeout (()=> {
-            dispatch(isRoomPaid());
+            dispatch(isRoomPaid(false));
+            dispatch(isRoomReserved(false));
             dispatch(showLoader(false));
         }, 2000);
         

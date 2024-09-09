@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getFirestore, collection, query, where, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { getFirestore, collection, query, where, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { auth } from "../../firebase/firebase"; 
 import '../Styling/UpdateUserDetails.css';
 import { useDispatch, useSelector } from "react-redux";

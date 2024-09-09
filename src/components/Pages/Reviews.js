@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../Styling/Reviews.css";
+import '../Styling/Reviews.css'
 import { useDispatch } from "react-redux";
 import { viewReviews, showLoader } from "../../redux/actions/UserInterface";
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore"; // Import Firestore methods
@@ -24,6 +24,7 @@ function Reviews() {
 
     setTimeout(() => {
       dispatch(viewReviews());
+      window.location.reload();
       dispatch(showLoader(false));
     }, 3000);
   };
@@ -142,6 +143,8 @@ function Reviews() {
                   </div>
                   <div className="reviews-card-review">
                     <p>{review.review}</p>
+                    <br></br>
+                    <p><strong>Date: </strong> {review.createdAt}</p>
                   </div>
                   <div className="reviews-card-user">
                     <p>

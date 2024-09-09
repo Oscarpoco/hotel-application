@@ -29,10 +29,11 @@ export default function ReviewForm({ accommodationId }) {
 
             await updateDoc(accommodationDocRef, {
                 reviews: arrayUnion({
-                    fullName: fullName,  // Include reviewer's full name
+                    fullName: fullName,  
                     review: review,
                     rating: rating,
                     createdAt: new Date().toISOString(),
+                    UniqueReviewId: Math.random().toString(36).substr(2, 9),
                 }),
             });
 

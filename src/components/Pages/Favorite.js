@@ -4,8 +4,8 @@ import { auth } from "../../firebase/firebase"; // Auth import
 import '../Styling/Favorite.css';
 
 export function Favorite() {
-    const [favorites, setFavorites] = useState([]); // State to hold favorites
-    const [loading, setLoading] = useState(true); // State to handle loading status
+    const [favorites, setFavorites] = useState([]); 
+    const [loading, setLoading] = useState(true); 
 
     // Initialize Firestore
     const firestore = getFirestore(); 
@@ -13,13 +13,13 @@ export function Favorite() {
     useEffect(() => {
         const fetchFavorites = async () => {
             setLoading(true); // Start loading
-            const user = auth.currentUser; // Get the currently logged-in user
+            const user = auth.currentUser; 
             if (user) {
                 try {
                     // Query Firestore for favorites associated with the logged-in user's UID
                     const favoritesQuery = query(
-                        collection(firestore, "favorites"), // Replace with your actual collection name
-                        where("userId", "==", user.uid) // Match favorites by user ID
+                        collection(firestore, "favorites"), 
+                        where("userId", "==", user.uid) 
                     );
 
                     const querySnapshot = await getDocs(favoritesQuery);
