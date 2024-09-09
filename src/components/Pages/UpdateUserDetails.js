@@ -141,7 +141,7 @@ function UpdateUserDetails() {
 
         <div className="user-details">
           <div className="user-details-header">
-            <p>Personal details</p>
+            <h1>Personal details</h1>
           </div>
           <div className="user-details-data">
             {/* FULL NAMES */}
