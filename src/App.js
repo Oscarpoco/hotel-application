@@ -25,6 +25,7 @@ function App() {
   const isGalleryOpen = useSelector((state) => state.userInterface.isGalleryOpen);
   const isLoading = useSelector((state) => state.userInterface.isLoading);
 
+
   // HANDLE SCROLL TO FOOTER
   const handleScroll = () => {
     if (footerRef.current) {

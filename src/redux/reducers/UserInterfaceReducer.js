@@ -10,6 +10,7 @@ import {
     ON_GALLERY,
     ON_LOADER,
     SET_SELECTED_ROOM,
+    ON_REVIEW,
 } 
     from "../actions/UserInterface";
 
@@ -27,6 +28,7 @@ const initialState = {
     isGalleryOpen: false,
     isLoading: false,
     selectedRoom: null,
+    reviewing: false,
 }
 
 // INITIAL STATE ENDS
@@ -83,6 +85,11 @@ const userInterfaceReducer = (state = initialState, action) =>{
                 return{
                     ...state,
                     isReviewOpen: !state.isReviewOpen
+                }
+            case ON_REVIEW:
+                return{
+                    ...state,
+                    reviewing: !state.reviewing
                 }
 
             // MAPS

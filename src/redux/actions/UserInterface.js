@@ -33,6 +33,9 @@ export const ON_LOADER = 'ON_LOADER';
 // SELECTED ROOM
 export const SET_SELECTED_ROOM = 'SET_SELECTED_ROOM';
 
+// ON REVIEW
+export const ON_REVIEW = 'ON_REVIEW';
+
 
 // ACTION TYPES ENDS
 
@@ -88,6 +91,13 @@ export const viewReviews = ()=>{
         type: ON_OPEN_REVIEW,
         }
     }
+
+// ON REVIEW
+export const onReviewing = ()=> {
+    return{
+        type: ON_REVIEW,
+    }
+}
 
 // MAPS
 export const viewMaps = ()=>{

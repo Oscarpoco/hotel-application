@@ -11,6 +11,7 @@ import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import { IoIosArrowBack } from "react-icons/io";
 import { BiSave } from "react-icons/bi";
 import Bookings from "./Bookings";
+import { Favorite } from "./Favorite";
 
 function UpdateUserDetails() {
   const dispatch = useDispatch();
@@ -28,6 +29,8 @@ function UpdateUserDetails() {
     location: "",
     age: "",
     phone: "",
+    userId: userId,
+    status: "Active",
   });
 
   // FETCH PROFILE
@@ -73,6 +76,8 @@ function UpdateUserDetails() {
           location: userDetails.location,
           age: userDetails.age,
           phone: userDetails.phone,
+          userId: userDetails.userId,
+          status: "Active",
         },
         { merge: true }
       ); 
@@ -85,6 +90,8 @@ function UpdateUserDetails() {
         location: "",
         age: "",
         phone: "",
+        userId: "",
+        status: "",
       });
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -241,6 +248,13 @@ function UpdateUserDetails() {
           <Bookings />
         {/* </div> */}
         {/* ENDS */}
+
+        {/* FAVORITE */}
+        <div className="my-favorites">
+          <Favorite />
+        </div>
+        {/* ENDS */}
+
       </div>
     </div>
   );

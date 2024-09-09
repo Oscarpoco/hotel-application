@@ -7,6 +7,7 @@ import '../Styling/RoomDetails.css';
 
 // FIRESTORE
 import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
+import { auth } from "../../firebase/firebase";
 
 // ICONS
 import { CiSaveDown2 } from "react-icons/ci";
@@ -64,25 +65,30 @@ function RoomDetails(){
         }
       };
 
-    //   HANDLE ADDING TO FAVORITE
-    const handleSaveRoomToFavorites = async () => {
+      const handleSaveRoomToFavorites = async () => {
         dispatch(showLoader(true));
         try {
             if (accommodation) {
-                const favoriteDocRef = doc(db, "favorites", accommodation.id);
-                const accommodationDocRef = doc(db, "accommodations", accommodation.id);
+                const user = auth.currentUser; // Get the currently logged-in user
+                if (user) {
+                    const favoriteDocRef = doc(db, "favorites", `${user.uid}_${accommodation.id}`); // Use a composite key for uniqueness
+                    const accommodationDocRef = doc(db, "accommodations", accommodation.id);
     
-                // Add to favorites collection (create or update)
-                await setDoc(favoriteDocRef, { 
-                    accommodationId: accommodation.id // Ensure the ID is saved with the document
-                }, { merge: true });
+                    // Add to favorites collection (create or update)
+                    await setDoc(favoriteDocRef, { 
+                        ...accommodation, // Save all details about the accommodation
+                        userId: user.uid, // Include user ID
+                    }, { merge: true });
     
-                // Increment the likes count in the accommodations collection
-                await updateDoc(accommodationDocRef, {
-                    likes: increment(1) // Increment likes by 1
-                });
+                    // Increment the likes count in the accommodations collection
+                    await updateDoc(accommodationDocRef, {
+                        likes: increment(1) // Increment likes by 1
+                    });
     
-                alert("Room has been saved to your favorites!");
+                    alert("Room has been saved to your favorites!");
+                } else {
+                    console.error("No user is logged in!");
+                }
             } else {
                 console.error("No accommodation details found!");
             }

@@ -33,11 +33,11 @@ body
 .App
 {
   width: 100%;
-  /* height: auto; */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   /* gap: 1em; */
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   background: var(--background-color);
 }

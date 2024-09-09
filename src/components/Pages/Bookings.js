@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore"; // Import Firestore methods
-import { auth } from "../../firebase/firebase"; // Import Auth instance
+
+import { getFirestore, collection, query, where, getDocs, deleteDoc, doc } from "firebase/firestore"; // Import Firestore methods
+import { auth } from "../../firebase/firebase"; 
 import '../Styling/UpdateUserDetails.css';
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Bookings() {
-    const [bookings, setBookings] = useState([]); // State to hold bookings
-    const [loading, setLoading] = useState(true); // State to handle loading status
+    const [bookings, setBookings] = useState([]); 
+    const [loading, setLoading] = useState(true); 
+
+    const dispatch = useDispatch();
+    const reviewing = useSelector((state) => state.userInterface.reviewing);
 
     // Initialize Firestore
     const firestore = getFirestore(); 
 
     useEffect(() => {
         const fetchBookings = async () => {
-            setLoading(true); // Start loading
-            const user = auth.currentUser; // Get the currently logged-in user
+            setLoading(true);
+            const user = auth.currentUser; 
             if (user) {
                 try {
-                    // Query Firestore for bookings associated with the logged-in user's UID
+                   
                     const bookingsQuery = query(
                         collection(firestore, "bookings"), // Assuming bookings are stored in the "bookings" collection
                         where("userId", "==", user.uid) // Match bookings by user ID
@@ -37,7 +42,25 @@ export default function Bookings() {
         };
 
         fetchBookings();
-    }, []); // Empty dependency array means this effect runs once on mount
+    }, []); 
+
+    // Function to delete a booking
+    const handleDelete = async (bookingId) => {
+        try {
+            // Reference to the booking document
+            const bookingDocRef = doc(firestore, "bookings", bookingId);
+            
+            // Delete the booking document
+            await deleteDoc(bookingDocRef);
+            
+            // Update the state to remove the deleted booking
+            setBookings((prevBookings) => prevBookings.filter((booking) => booking.id !== bookingId));
+            
+            alert("Booking deleted successfully!");
+        } catch (error) {
+            console.error("Error deleting booking:", error);
+        }
+    };
 
     return (
         <div className="bookings-details">
@@ -87,7 +110,7 @@ export default function Bookings() {
                                         <br></br>
                                         from profile
                                     </span>
-                                    <button className="btn-2">Delete</button>
+                                    <button className="btn-2" onClick={() => handleDelete(booking.id)}>Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -96,6 +119,14 @@ export default function Bookings() {
                     <p>No bookings found.</p> 
                 )}
             </div>
+
+            {/* REVIEWING */}
+            {reviewing && (
+                <div className="review-form">
+                    <textarea></textarea>
+                    <input type="text" placeholder="Rate us between 1 - 10"></input>
+                </div>
+            )}
         </div>
     );
 }
