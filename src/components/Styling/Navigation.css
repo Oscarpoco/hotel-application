@@ -9,6 +9,7 @@
     background: var(--primary-color);
     border: 1px solid black;
     border-radius: 20px;
+    box-sizing: border-box;
 }
 
 span
@@ -193,4 +194,152 @@ span
 {
     font-size: 2em;
     color: red;
+}
+
+@media only screen and (max-width: 740px) {
+    
+    .Navigation
+    {
+        width: 95%;
+        padding: .7em;
+        gap: .5em;
+        box-shadow: 0 0 10px;
+        border: 1px solid rgba(0, 0, 0, .1);
+        box-sizing: border-box;
+    }
+    
+    /* MENU */
+    .menu
+    {
+        gap: .5em;
+        box-sizing: border-box;
+    }
+    
+    /* MENU LOGO */
+    .menu-logo h3
+    {
+        display: none;
+    }
+    
+    .logo-abbreviation
+    {
+        height: 45px;
+        width: 45px;
+        padding: .3em;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    }
+
+    .logo-abbreviation h2
+    {
+        font-size: 1.3em;
+    }
+    /* MENU LOGO ENDS */
+    
+    /* MENU NAVIGATION */
+    .menu-navigation
+    {
+        display: flex;
+        justify-content: space-between;
+        gap: 1.5em;
+        align-items: center;
+        cursor: pointer;
+    }
+    /* MENU NAVIGATION ENDS */
+    
+    /* MENU ACCOUNT */
+    .menu-account
+    {
+        gap: .5em;
+    }
+
+    .menu-account p
+    {
+        font-size: .9em;
+    }
+    
+    .menu-account button
+    {
+        background: transparent;
+        padding: .5em .4em;
+        color: whitesmoke;
+        font-weight: 900;
+        border: unset;
+    }
+    
+    .user-icon
+    {
+        font-size: 1.7em;
+        color: black;
+    }
+    
+    .user-radius
+    {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .1em;
+    }
+    /* MENU ACCOUNT */
+
+    /* SEARCH */
+    .search
+    {
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    .search input
+    {
+        width: 90%;
+        padding: 1.2em;
+    }
+
+    .search-icon
+    {
+        height: 38px;
+        width: 38px;
+        right: 1%;
+    }
+
+    /* SEARCH ENDS */
+
+    /* NAVIGATION BAR */
+
+    .navigation-bar
+    {
+        gap: .5em;
+        padding: .5em;
+    }
+
+    .nav-bar
+    {
+        width: 25%;
+        gap: .3em;
+    }
+
+    .nav-bar p
+    {
+        font-size: .7em;
+        font-weight: 530;
+    }
+
+    .nav-bar:hover
+    {
+        background: var(--grey-color);
+        transition: all .7s ease-in-out;
+        border-radius: 50px;
+    }
+
+    .menu-icons
+    {
+        font-size: 1em;
+        display: none;
+    }
+
+
+
 }

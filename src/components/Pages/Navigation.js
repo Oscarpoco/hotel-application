@@ -105,7 +105,7 @@ function Navigation( {handleScroll} ){
 
                     :
                     
-                    <div style={{borderRadius: '50px', border: '2px solid black', padding: '.3em', background: 'white'}}>
+                    <div style={{borderRadius: '50px', border: '1px solid rgba(0, 0, 0, .2)', padding: '.3em', background: '#1877F2', boxShadow: '0 0 10px rgba(0, 0, 0, .5)'}}>
                         <button onClick={handleSignInClick}>
                         Sign In
                         </button>
