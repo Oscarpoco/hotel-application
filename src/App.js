@@ -75,7 +75,7 @@ function App() {
       {isGalleryOpen && (<Gallery />)}
 
       {/* LOADER */}
-      {isLoading && (<Loader />)}
+      {/* {isLoading && (<Loader />)} */}
 
       
     </div>
