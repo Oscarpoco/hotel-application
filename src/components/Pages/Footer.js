@@ -63,8 +63,8 @@ function Footer(){
                 </div>
                 {/* FOOTER SECTION ENDS */}
 
-                    {/* FOOTER NAVIGATION */}
-                    <div className="footer-navigation-bar">
+                {/* FOOTER NAVIGATION */}
+                <div className="footer-navigation-bar">
 
                         {/* Gallery */}
                         <div className="nav-bar-footer" onClick={handleGalleryClick}>
@@ -81,15 +81,10 @@ function Footer(){
                             <p> Maps</p>
                         </div>
 
-                            {/* contact us */}
-                        <div className="nav-bar-footer">
-                            <p> Contact Us</p>
-                        </div>
+                </div>
+                {/* ENDS */}
 
-                        </div>
-                    {/* ENDS */}
-
-                    {/* SOCIAL MEDIA */}
+                {/* SOCIAL MEDIA */}
 
                 <div className="footer-social">
 
@@ -121,7 +116,7 @@ function Footer(){
             <p>&copy; 2024 Rest Hotely. All rights reserved.</p>
             <p>
                 Rest Hotely is committed to protecting your privacy and ensuring a secure and transparent experience on our platform.
-                By using our services, you agree to our .
+                By using our services, you agree to all our <span style={{color: '#1DA1F2', cursor: 'pointer'}}>Privacy & Policy</span> and <span style={{color: '#1DA1F2', cursor: 'pointer'}}>Terms & Conditions</span>
              </p>
             </div>
         </div>

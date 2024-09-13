@@ -55,7 +55,7 @@ export default function ReservationDetails({ HandleReservation, accommodation })
 
     // Handle form submission
     const handleSubmit = (e) => {
-        e.preventDefault(); // Prevent form from submitting
+        e.preventDefault(); 
 
         // Create FormData object
         const formData = new FormData();
@@ -159,7 +159,7 @@ export default function ReservationDetails({ HandleReservation, accommodation })
 
                     {/* RIGHT */}
                     <div className="check-content-top-right">
-                        <p>{(accommodation.price * nights).toFixed(2)} ZAR</p>
+                        <p>+{(accommodation.price * nights).toFixed(2)} ZAR</p>
                       
                         <p>-{(nights >= 7 ? (accommodation.price * 0.1 * nights) : 0).toFixed(2)} ZAR</p>   {/*  */}
                     </div>

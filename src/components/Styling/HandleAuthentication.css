@@ -20,8 +20,8 @@
 {
     background: white;
     width: 100%; 
+    height: 100vh;
     height: 100%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background: rgba(255, 255, 255, 1);
     position: relative;
     box-sizing: border-box;
@@ -43,8 +43,9 @@
 .group 
 {
     display: flex;
-    width: 90%;
+    width: 100%;
     justify-content: center;
+    /* background: red; */
     align-items: center;
     gap: 1em;
 }
@@ -94,30 +95,13 @@
     align-items: center;
     flex-direction: column;
     gap: 2em;
-    width: 50%;
-    padding: 1em 0;
+    width: 40%;
+    padding: 1.5em 0;
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background: white;
-    border-radius: 30% 70% / 50% 50%;
     z-index: 1000;
-}
-
-.form::before 
-{
-    content: "";
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    width: 100%;
-    transform: translate(-50%, -50%);
-    height: 100%;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 50% 50% / 30% 70% ;
-    background: rgba(255, 255, 255, .5);
-    z-index: -1000;
 }
 
 
@@ -125,7 +109,7 @@
 
 .signIn-group
 {
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -153,7 +137,7 @@
     border-bottom: 3px solid var(--grey-color);
     box-sizing: border-box;
     box-shadow: 4px 0 2px rgba(0, 0, 0, 0.1);
-    width: 82%;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -171,7 +155,7 @@
 .signIn-group label
 {
     border: none;
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -181,7 +165,7 @@
 
 .signIn-group input
 {
-    width: 90%;
+    width: 100%;
     padding: .7em 0;
     border: 2px solid #1876f290;
     border-radius: 0;
@@ -199,30 +183,12 @@
     transition: all .5s ease-out;
 }
 
-/* .signIn-group-child form
-{
-    width: 70%;
-    padding: .5em 1em;
-    border-radius: 50px;
-    background: var(--background-color);
-    box-shadow: var(--box-shadow);
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 1em;
-    box-sizing: border-box;
-    background: blue;
-} */
-/* ENDS */
-
 
 /* FORM BUTTONS */
 .form .signIn-form-button
 {
     width: 40%;
-    padding: .5em 1em;
+    padding: .9em 1em;
     border-radius: 50px;
     background: var(--background-color);
     box-shadow: var(--box-shadow);
@@ -259,12 +225,12 @@
 .form-footer
 {
     display: flex;
-    width: 54%;
+    width: 90%;
     box-sizing: border-box;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    border-top: 2px solid var(--secondary-color);
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
     gap: .1em;
     /* background: blue; */
 }
@@ -295,4 +261,96 @@
     line-height: 1.5;
     color: var(--faint-color);
     font-size: 11.6px;
+}
+
+
+@media only screen and (max-width: 740px) {
+
+    .handle-authentication-overlay 
+    {
+        height: 100vh;
+    }
+
+    .handle-authentication 
+    {
+        padding: 3em .7em;
+    }
+
+    .form
+    {
+        gap: 2em;
+        width: 100%;
+        padding: 1.5em .7em;
+        border-radius: 0;
+    }
+
+    .handle-authentication label p
+    {
+        align-self: center;
+        width: 100%;
+        font-size: 1.2em;
+        color: #1877F2;
+        z-index: 1000;
+        padding-left: 1em;
+    }
+
+    .handle-authentication label
+    {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .signIn-group
+    {
+        width: 100%;
+    }
+
+    .close
+    {
+        top: 5px;
+        right:0px;
+        height: 45px;
+        width: 45px;
+        z-index: 10000;
+    }
+
+    .signIn-group input
+    {
+        border-bottom: .2em solid var(--grey-color);
+        width: 100%;
+    }
+
+    .form .signIn-form-button
+    {
+        width: 100%;
+    }
+
+    .group
+    {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 1em;
+    }
+
+    .form-footer
+    {
+        width: 100%;
+        border-top: 1px solid var(--secondary-color);
+    }
+
+    .form-footer p
+    {
+        width: 100%;
+        text-align: center;
+    }
+
+    .signIn-group-p-tag
+    {
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+        width: 100%;
+    }
+    
 }

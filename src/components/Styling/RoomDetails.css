@@ -11,15 +11,21 @@
     justify-content: center;
     z-index: 1000;
     overflow-y: auto;
-    padding-top: 1em;
     box-sizing: border-box; 
+}
+
+.content-right h2
+{
+    display: none;
 }
 
 
 .room-details-content 
 {
     background: white;
-    width: 95%;
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
     position: relative;
     box-sizing: border-box;
     display: flex;
@@ -27,12 +33,25 @@
     justify-content: start;
     align-items: center;
     gap: 0.5em;
-    border-radius: 20px;
     padding: 1em;
     padding-top: 0.5em;
     overflow-y: auto;
-    max-height: 90vh; /* Prevent the content from exceeding the viewport height */
+    max-height: 90vh; 
 }
+
+/* SCROLL */
+.room-details-content 
+{
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+
+.room-details-content::-webkit-scrollbar 
+{
+  display: none;
+}
+/* ENDS */
 
 
 /* GALLERY */
@@ -95,7 +114,7 @@
     padding: .5em;
 }
 
-/* FLEX */
+/* GRID */
 
 .room-gallery
 {
@@ -178,16 +197,6 @@
     padding: 1em 0;
 }
 
-.rating-box
-{
-    display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-    width: 100%;
-    border: 1px solid var(--faint-color);
-    border-radius: 10px;
-}
-
 .box
 {
     width: 33%;
@@ -219,28 +228,13 @@
 {
     display: flex;
     justify-content: flex-start;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    gap: .5em;
-}
-
-.offered-items-left
-{
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    gap: .1em;
-    /* background: blue; */
-}
-
-.offered-items-left p
-{
-    display: flex;
     align-items: center;
-    gap: .5em;
-    font-size: 1.1em;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 3em;
 }
+
+
 
 .offer-icon
 {
@@ -267,7 +261,7 @@
     border: 2px solid var(--faint-color);
     border-radius: 20px;
     box-sizing: border-box;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     width: 100%;
     padding: 1em;
     gap: 1em;
@@ -279,8 +273,8 @@
 
 .reservation p span
 {
-    color: black;
-    font-weight: lighter;
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 500;
 }
 
 .check
@@ -290,6 +284,7 @@
     justify-content: flex-start;
     align-items: center;
     width: 100%;
+    box-sizing: border-box;
 }
 
 
@@ -299,8 +294,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 2px solid var(--faint-color);
-    border-radius: 10px;
+    box-sizing: border-box;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border: 1px solid rgba(0, 0, 0, 0.7);
     width: 100%;
 }
 
@@ -311,9 +308,11 @@
     gap: .5em;
     flex-direction: column;
     justify-content: center;
-    padding: .3em .7em;
+    padding: .3em 1em;
     width: 50%;
     border-right: 1px solid black;
+    box-sizing: border-box;
+    padding-bottom: .7em;
 }
 
 .check-out
@@ -338,6 +337,8 @@
     background: greenyellow;
     padding: 1em;
     cursor: pointer;
+    margin-top: 1.1em;
+    box-sizing: border-box;
 }
 
 /* BOTTOM */
@@ -351,21 +352,24 @@
     width: 100%;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    box-sizing: border-box;
+    padding: 0 1em;
+    padding-bottom: 1em;
 }
 
 .check-bottom p
 {
     
     width: 100%;
-    padding-left: 1em;
+    padding: 0;
 }
 
 .check-bottom input
 {
     
-    width:91%;
-    padding: 0.5em;
-    margin: 0 0 .5em 1em;
+    width:100%;
+    margin: 0;
+    padding: .5em 0;
     outline: none;
 
 }
@@ -381,6 +385,9 @@
     padding: .3em .7em;
     padding-bottom: 0;
     width: 100%;
+    align-items: end;
+        box-sizing: border-box;
+        padding: 0;
 }
 
 /* TOP */
@@ -408,6 +415,7 @@
     align-items: center;
     padding: 0 .2em;
     padding-top: .5em;
+    box-sizing: border-box;
 }
 
 .check-content-bottom P
@@ -417,32 +425,14 @@
 }
 /* ENDS */
 
-/* reservation-location */
-.reservation-location
-{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    align-items: center;
-    border: 1px solid var(--faint-color);
-    box-sizing: border-box;
-    border-radius: 20px;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.reservation-location p
-{
-    font-size: 1.5em;
-    font-weight: bold;
-    text-align: center;
-}
-
 /* ROOM RESERVATION */
 .payment-wrapper
 {
     display: flex;
     flex-direction: column;
     width: 100%;
+    position: relative;
+    box-sizing: border-box;
 }
 
 .payment-header
@@ -451,6 +441,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .payment-header h2
@@ -556,4 +547,254 @@ button:hover
     padding: .5em;
     box-shadow: var(--box-shadow);
     color: greenyellow;
+}
+
+/* MEDIA QUERY */
+
+@media only screen and (max-width: 740px) {
+    
+    .room-details-content 
+    {
+        width: 100%;
+        gap: 0.5em;
+        border-radius: 0;
+        padding: 1em;
+        padding-top: 0.5em;
+        max-height: 100vh; 
+        height: 100%;
+    }
+
+    .room-details-overlay 
+    {
+        padding-top: unset;
+    }
+
+        /* GALLERY */
+    .Gallery
+    {
+        padding: 0;
+    }
+
+    .gallery-header
+    {
+        box-sizing: border-box;
+    }
+    
+    .gallery-header h2
+    {
+        gap: .1em;
+        font-size: 1.2em;
+        overflow: hidden;
+        white-space: nowrap; 
+        text-overflow: ellipsis;
+    }
+    
+    .return-icon
+    {
+        cursor: pointer;
+        font-size: 1.5em;
+    }
+    
+    .room-details-buttons-box
+    {
+        gap: .4em;
+    }
+    
+    .room-details-buttons
+    {
+        font-size: 1.1em;
+        gap: .5em;
+        padding: 0;
+    }
+
+    /* GRID */
+    .room-gallery
+    {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1em;
+        padding: .1; 
+    }
+
+    .room-pictures
+    {
+        box-shadow: var(--box-shadow);
+        border-radius: var(--box-border-radius);
+        cursor: pointer;
+        height: 300px;
+    }
+    .room-gallery-details img 
+    {
+        height: 100%;
+    }
+
+    /* ENDS */
+
+    /* location */
+    .room-location h3
+    {
+        font-size: 1em;
+    }
+
+    .room-location p
+    {
+        font-size: .9em;
+    }
+
+    /* ends */
+
+    /* ROOM CONTENT */
+    .room-full-content
+    {
+        flex-direction: column;
+    }
+
+    .content-left,
+    .content-right
+    {
+        width: 100%;
+        padding: 1em 0;
+    }
+
+    .offers
+    {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+    
+    .offer-icon
+    {
+        font-size: 1.2em;
+        color: red;
+    }
+    
+    /* ENDS */
+
+    /* RESERVATION FORM */
+    .reservation
+    {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .reservation p span
+    {
+        color: rgba(0, 0, 0, 0.7);
+        font-weight: 500;
+    }
+
+    .content-right h2
+{
+    display: flex;
+}
+    
+    .check
+    {
+        box-sizing: border-box;
+    }
+    
+    
+    /* TOP */
+    .check-top
+    {
+        box-sizing: border-box;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    
+    .check-in,
+    .check-out
+    {
+        box-sizing: border-box;
+        padding: .3em 1em;
+        padding-bottom: .7em;
+    }
+
+    .check-in input,
+    .check-out input
+    {
+        
+        width:100%;
+        margin: 0;
+        padding: .4em 0;
+        outline: none;
+    
+    }
+    
+    .reservation .confirm-button
+    {
+        margin-top: 1.1em;
+        box-sizing: border-box;
+    }
+    
+    /* BOTTOM */
+    .check-bottom
+    {
+        box-sizing: border-box;
+        padding: 0 1em;
+        padding-bottom: 1em;
+    }
+    
+    .check-bottom p
+    {
+        
+        width: 100%;
+        padding: 0;
+    }
+    
+    .check-bottom input
+    {
+        
+        width:100%;
+        margin: 0;
+        padding: .5em 0;
+        outline: none;
+    
+    }
+    /* ENDS */
+    
+    /* CHECK CONTENT */
+    .check-content
+    {
+        align-items: end;
+        box-sizing: border-box;
+        padding: 0;
+    }
+    
+    /* TOP */
+    .check-content-top p
+    {
+        font-size: 16px;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+    }
+    
+    
+    /* BOTTOM */
+    .check-content-bottom
+    {
+        box-sizing: border-box;
+    }
+    /* ENDS */
+
+    .payment-header h2
+    {
+        font-size: 1em;
+    }
+
+    .StripeCheckout
+    {
+        position: absolute;
+        bottom: 0;
+        right: 50%;
+        transform: translate(50%, 130%);
+        background-color: red;
+    }
+    
 }

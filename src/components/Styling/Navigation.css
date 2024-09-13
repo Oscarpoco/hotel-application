@@ -101,6 +101,14 @@ span
     align-items: center;
     padding: .1em;
 }
+
+.user-wrapper
+{
+    border-radius: 50px;
+    border: 2px solid rgba(0, 0, 0, .3);
+    padding: 0;
+    background: white;
+}
 /* MENU ACCOUNT */
 
 /* MENU ENDS */
@@ -109,21 +117,34 @@ span
 .search
 {
     display: flex;
-    justify-content: center;
-    gap: 1em;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
-    position: relative;
+    /* background: blue; */
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, .2);
+    border-radius: 50px;
+    padding: 0 .3em;
 }
 
-.search input
+.search-input-wrapper
 {
-    width: 60%;
+    width: 30%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .3em;
+}
+
+.search-input-wrapper input
+{
+    width: 100%;
     border-radius: 50px;
+    border: none;
     padding: 1.3em;
     box-shadow: var(--box-shadow);
-    border: 1px solid var(--faint-color);
-    background: var(--background-color);
+    background: rgba(0, 0, 0, .1);
 }
 
 .search-icon
@@ -138,8 +159,8 @@ span
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    right: 19.2%;
+    /* position: absolute; */
+    /* right: 19.2%; */
 }
 
 .search-icon .search-icon-image
@@ -250,11 +271,14 @@ span
     .menu-account
     {
         gap: .5em;
+        justify-content: space-between;
+        width: 75%;
     }
 
     .menu-account p
     {
-        font-size: .9em;
+        font-size: 1em;
+        font-weight: 270;
     }
     
     .menu-account button
@@ -292,17 +316,24 @@ span
         box-sizing: border-box;
     }
 
-    .search input
+    .search-input-wrapper input
     {
-        width: 90%;
-        padding: 1.2em;
+        width: 100%;
+        padding: .9em 0;
+        text-align: center;
+        border: none;
+    }
+
+    .search-input-wrapper input::placeholder
+    {
+        text-align: center;
     }
 
     .search-icon
     {
-        height: 38px;
-        width: 38px;
-        right: 1%;
+        height: 40px;
+        width: 40px;
+        /* left: 1%; */
     }
 
     /* SEARCH ENDS */
@@ -319,6 +350,11 @@ span
     {
         width: 25%;
         gap: .3em;
+        border-radius: 50px;
+        box-shadow: 0 0 10px;
+        color: whitesmoke;
+        background: #0077B5;
+        padding: .3em .5em;
     }
 
     .nav-bar p
@@ -340,6 +376,20 @@ span
         display: none;
     }
 
+    #icon
+    {
+        display: none;
+    }
+
+    .user-wrapper
+    {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
 
 }

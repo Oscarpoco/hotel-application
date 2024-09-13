@@ -3,6 +3,11 @@ import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { viewRoomDetails, showLoader, setSelectedRoom  } from "../../redux/actions/UserInterface";
 
+// ICONS
+import { GiRoundStar } from "react-icons/gi";
+import { FaHeart } from "react-icons/fa";
+
+
 // FIRESTORE
 import {  getFirestore,collection, getDocs} from "firebase/firestore"; // Firestore imports
 
@@ -56,8 +61,12 @@ function Rooms(){
                 </div>
                 <div className="room-content">
                     <p>{accommodation.location}</p>
-                    <p><span>Available: {accommodation.availability}</span></p>
-                    <p>{accommodation.price} ZAR <span>night</span></p>
+                    <p>Availability: <span>{accommodation.availability}</span></p>
+                    <p>{accommodation.price} ZAR /<span> night</span></p>
+                    <div className="room-rating-likes">
+                      <p className="p-wrapper"><GiRoundStar className="room-star"/> <span>{accommodation.rating || 0}</span></p>
+                      <p className="p-wrapper"><FaHeart className="love"/> <span>{accommodation.likes || 0}</span></p>
+                    </div>
                 </div>
             </div>
             ))}

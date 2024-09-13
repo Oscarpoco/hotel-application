@@ -246,6 +246,8 @@ function RoomDetails(){
                         {/* RIGHT CONTAINER */}
 
                         <div className="content-right">
+
+                        <h2>Reservation form</h2>
                         <ReservationDetails 
                                 HandleReservation={HandleReservation}
                                 accommodation={accommodation}

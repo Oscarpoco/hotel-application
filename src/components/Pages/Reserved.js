@@ -42,18 +42,30 @@ function Reserved({ HandleReservation, HandlePayment, accommodation }) {
         }
     };
 
+    const customButtonStyles = {
+        background: '#1877F2',
+        border: 'none',
+        padding: '10px 20px',
+        color: 'white',
+        borderRadius: '5px',
+        fontSize: '16px',
+        cursor: 'pointer',
+      };
+
     return (
         <div className="payment-wrapper">
             {/* PAYMENT HEADER */}
             <div className="payment-header">
                 <h2><IoIosArrowBack onClick={HandleReservation} className="return-icon" />Request to book</h2>
-                <StripeCheckout
+                <StripeCheckout 
+                    className="StripeCheckout"
                     token={onToken}
                     stripeKey="pk_test_51PwZqI08I0xTXWPP7UTZfEAVdMoIU4t0XKBdoDS49bbEwNbUIqa4y8Ci873JogyaFKo1osvNOOrZExH98PsYIYPZ00HvFJUzqv"
-                    name="Accommodation"
-                    description="Payment for Accommodation"
+                    name="Payment for Accommodation"
+                    description={reservation.title}
                     amount={reservation.totalPrice * 100} // Convert to cents
                     currency="ZAR"
+                    style={customButtonStyles}
                 />
             </div>
 

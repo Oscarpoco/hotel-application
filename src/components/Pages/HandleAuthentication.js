@@ -23,7 +23,7 @@ function HandleAuthentication() {
         dispatch(showLoader(true));
 
         setTimeout (()=> {
-            dispatch(handleOnSignIn());
+            dispatch(handleOnSignIn(false));
             dispatch(showLoader(false));
         }, 3000);
         

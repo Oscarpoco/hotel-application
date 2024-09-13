@@ -92,11 +92,11 @@ function Navigation( {handleScroll} ){
                     <div><p>Rest Hotel<span>y your home</span></p></div>
 
                     {isAuthenticated ? 
-                    <div style={{borderRadius: '50px', border: '2px solid black', padding: 0, background: 'white'}}>
+                    <div className="user-wrapper">
                         <button style={{background: 'white', border: 'none', padding: '.2em .4em'}}
                         onClick={handleUpdateClick}
                         >
-                        <ImMenu className="user-icon"/>
+                        <ImMenu className="user-icon" id="icon"/>
                         <div className="user-radius">
                             <FaRegCircleUser className="user-icon" style={{color: 'white'}}/>
                         </div>
@@ -120,9 +120,20 @@ function Navigation( {handleScroll} ){
 
             {/* SEARCH NAVIGATION */}
             <div className="search">
-                <input type="text" placeholder="Where ?"></input>
+                
                 <div className="search-icon">
                     <CiSearch className="search-icon-image"/>
+                </div>
+
+                <div className="search-input-wrapper" style={{borderRight: '2px solid rgba(0, 0, 0, .3)', borderRadius: '50px'}}>
+                    <input type="text" placeholder="Name"></input>
+                </div>
+                <div className="search-input-wrapper" style={{borderRight: '2px solid rgba(0, 0, 0, .3)', borderRadius: '50px'}}>
+                    <input type="text" placeholder="Prices"></input>
+                </div>
+
+                <div className="search-input-wrapper" >
+                    <input type="text" placeholder="Prices"></input>
                 </div>
             </div>
             {/* SEARCH ENDS */}
@@ -148,7 +159,7 @@ function Navigation( {handleScroll} ){
      
                     {/* contact us */}
                 <div className="nav-bar" onClick={handleScroll}>
-                    <p> <BiSolidContact className="menu-icons"/>Contact Us</p>
+                    <p> <BiSolidContact className="menu-icons"/>Contact</p>
                 </div>
 
             </div>
