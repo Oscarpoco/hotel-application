@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import '../Styling/Navigation.css';
 import { useDispatch, useSelector } from "react-redux";
 import { handleOnSignIn, openUpdate, viewReviews, viewMaps, viewGallery, showLoader } from "../../redux/actions/UserInterface";
@@ -16,7 +17,22 @@ import { BiSolidContact } from "react-icons/bi";
 function Navigation( {handleScroll} ){
 
     const dispatch = useDispatch();
-    const isAuthenticated = useSelector((state)=> state.authentication.isAuthenticated)
+    const isAuthenticated = useSelector((state)=> state.authentication.isAuthenticated);
+
+    // SEARCH
+    const [searchTerms, setSearchTerms] = useState({
+        name: '',
+        price: '',
+        availability: ''
+      });
+
+      const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setSearchTerms((prev) => ({ ...prev, [name]: value }));
+      };
+    
+    //   ENDS
+
 
      // Function to handle the button click
      const handleSignInClick = () => {
@@ -122,18 +138,36 @@ function Navigation( {handleScroll} ){
             <div className="search">
                 
                 <div className="search-icon">
-                    <CiSearch className="search-icon-image"/>
+                    <CiSearch className="search-icon-image" />
                 </div>
 
                 <div className="search-input-wrapper" style={{borderRight: '2px solid rgba(0, 0, 0, .3)', borderRadius: '50px'}}>
-                    <input type="text" placeholder="Name"></input>
+                    <input type="text" 
+                    placeholder="Johannesburg"
+                    readOnly
+                    name="name"
+                    value={searchTerms.name}
+                    onChange={handleInputChange}
+                    ></input>
                 </div>
+
                 <div className="search-input-wrapper" style={{borderRight: '2px solid rgba(0, 0, 0, .3)', borderRadius: '50px'}}>
-                    <input type="text" placeholder="Prices"></input>
+                    <input type="number" 
+                    placeholder="Prices"
+                    name="price"
+                    min={1}
+                    value={searchTerms.price}
+                    onChange={handleInputChange}
+                    ></input>
                 </div>
 
                 <div className="search-input-wrapper" >
-                    <input type="text" placeholder="Prices"></input>
+                    <input type="text" 
+                    placeholder="Availability"
+                    name="availability"
+                    value={searchTerms.availability}
+                    onChange={handleInputChange}
+                    ></input>
                 </div>
             </div>
             {/* SEARCH ENDS */}

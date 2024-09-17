@@ -154,6 +154,16 @@ function RoomDetails(){
         
     }
 
+    // Handle close reservation
+    const HandleCloseReservation = ()=> {
+        dispatch(showLoader(true));
+        setTimeout (()=> {
+            dispatch(viewRoomDetails(false));
+            dispatch(showLoader(false));
+        }, 2000)
+    }
+
+
     // HANDLE PAYMENT
     const HandlePayment = ()=> {
         dispatch(showLoader(true));
@@ -280,8 +290,8 @@ function RoomDetails(){
                 
                 <Reserved 
                 HandlePayment={HandlePayment}
-                HandleReservation={HandleReservation}
                 accommodation={accommodation}
+                HandleCloseReservation = {HandleCloseReservation}
                 />
             </div>
             

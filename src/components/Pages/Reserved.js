@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import StripeCheckout from 'react-stripe-checkout';
 import { doc, setDoc, getFirestore } from "firebase/firestore";
 
-function Reserved({ HandleReservation, HandlePayment, accommodation }) {
+function Reserved({ HandleCloseReservation, HandlePayment, accommodation }) {
     const reservation = useSelector((state) => state.authentication.reservation);
     const user = useSelector((state) => state.authentication.user); 
     const db = getFirestore();
@@ -56,7 +56,7 @@ function Reserved({ HandleReservation, HandlePayment, accommodation }) {
         <div className="payment-wrapper">
             {/* PAYMENT HEADER */}
             <div className="payment-header">
-                <h2><IoIosArrowBack onClick={HandleReservation} className="return-icon" />Request to book</h2>
+                <h2><IoIosArrowBack onClick={HandleCloseReservation} className="return-icon" />Request to book</h2>
                 <StripeCheckout 
                     className="StripeCheckout"
                     token={onToken}
@@ -108,7 +108,7 @@ function Reserved({ HandleReservation, HandlePayment, accommodation }) {
                         </div>
 
                         {/* CANCEL BUTTON */}
-                        <button type="button" onClick={HandleReservation} className="confirm-button" style={{ background: 'red', color: 'white' }}>
+                        <button type="button" onClick={HandleCloseReservation} className="confirm-button" style={{ background: 'red', color: 'white' }}>
                             <strong>Cancel</strong>
                         </button>
                         {/* CANCEL BUTTON ENDS */}
