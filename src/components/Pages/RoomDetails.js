@@ -2,6 +2,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { handleOnSignIn } from "../../redux/actions/UserInterface";
 import { viewRoomDetails, isRoomReserved, isRoomPaid, showLoader } from "../../redux/actions/UserInterface";
 import '../Styling/RoomDetails.css';
 
@@ -13,7 +14,7 @@ import { auth } from "../../firebase/firebase";
 import { CiSaveDown2 } from "react-icons/ci";
 import { CiShare2 } from "react-icons/ci";
 import { IoIosArrowBack } from "react-icons/io";
-// import { IoStarOutline } from "react-icons/io5";
+
 import { FaKitchenSet } from "react-icons/fa6";
 import { PiOfficeChairLight } from "react-icons/pi";
 import { IoTvSharp } from "react-icons/io5";
@@ -29,6 +30,7 @@ function RoomDetails(){
     const isReserved = useSelector((state)=> state.userInterface.isReserved)
     const isPaid = useSelector((state)=> state.userInterface.isPaid)
     const selectedRoomId = useSelector((state) => state.userInterface.selectedRoom);
+    const isAuthenticated = useSelector((state) => state.authentication.isAuthenticated);
 
     const [accommodation, setAccommodation] = useState(null);
 
@@ -65,6 +67,7 @@ function RoomDetails(){
         }
       };
 
+    //   handle save rooms
       const handleSaveRoomToFavorites = async () => {
         dispatch(showLoader(true));
         try {
@@ -104,7 +107,7 @@ function RoomDetails(){
         const shareData = {
             title: `Check out this accommodation: ${accommodation.location}`,
             text: `Take a look at this accommodation in ${accommodation.location} for ${accommodation.price} ZAR/night.`,
-            url: window.location.href + `accommodation/${accommodation.id}`,  // Example share link
+            url: window.location.href + `accommodation/${accommodation.id}`,  
         };
 
         if (navigator.share) {
@@ -139,6 +142,12 @@ function RoomDetails(){
         dispatch(showLoader(true));
 
         setTimeout (()=> {
+
+            if (isAuthenticated === true){
+                dispatch(isRoomReserved());
+            } else{
+                dispatch(handleOnSignIn(true));
+            }
             dispatch(isRoomReserved());
             dispatch(showLoader(false));
         }, 2000);

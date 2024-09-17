@@ -8,7 +8,7 @@ import { handleSignInWithGoogle, handleSignInWithEmail, handleSignUpWithEmail  }
 import { TfiEmail } from "react-icons/tfi";
 import { FcGoogle } from "react-icons/fc";
 
-function HandleAuthentication() {
+function HandleAuthentication({handleOpenPrivacy}) {
     const isSignInOpen = useSelector((state) => state.userInterface.isSignInOpen);
     const isSignUpOpen = useSelector((state) => state.userInterface.isSignUpOpen);
     
@@ -179,13 +179,13 @@ function HandleAuthentication() {
                                 <div className="form-footer">
                                     <p>
                                         By creating an account, you agree with our 
-                                        <span>Terms & conditions</span> and <span>Privacy</span>
+                                        <span onClick={handleOpenPrivacy}>Terms & conditions</span> and <span onClick={handleOpenPrivacy}>Privacy</span>
                                     </p>
 
                                     <div className="footer-rights">
                                         All right reserved.
                                         <br />
-                                        Copyright [2024] - resthotely.com&trade;
+                                        Copyright 2024 - resthotely.com&trade;
                                     </div>
                                 </div>
                                 {/* ENDS */}

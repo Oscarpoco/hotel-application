@@ -44,7 +44,7 @@ function App() {
     setTimeout(()=>{
       setOpenPrivacy(!openPrivacy);
       dispatch(showLoader(false));
-    }, 20000)
+    }, 2000)
   }
 
   return (
@@ -71,7 +71,7 @@ function App() {
       {/* POPUPS */}
 
       {/* SIGN IN AND UP */}
-      <HandleAuthentication />
+      <HandleAuthentication  handleOpenPrivacy={handleOpenPrivacy}/>
 
       {/* ROOM DETAILS */}
       {isViewRoomDetailsOpen && (<RoomDetails />)}
