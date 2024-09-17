@@ -119,8 +119,7 @@ span
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    /* background: blue; */
+    width: 50%;
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, .2);
     border-radius: 50px;
@@ -142,9 +141,10 @@ span
     width: 100%;
     border-radius: 50px;
     border: none;
-    padding: 1.3em;
+    padding: 1em 1.3em;
     box-shadow: var(--box-shadow);
     background: rgba(0, 0, 0, .1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
 }
 
 .search-icon
@@ -314,6 +314,7 @@ span
     {
         position: relative;
         box-sizing: border-box;
+        width: 100%;
     }
 
     .search-input-wrapper input

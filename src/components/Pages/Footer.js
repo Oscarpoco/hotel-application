@@ -11,7 +11,7 @@ import { BiLogoLinkedin } from "react-icons/bi";
 import { RiInstagramFill } from "react-icons/ri";
 import { IoLogoWhatsapp } from "react-icons/io";
 
-function Footer(){
+function Footer({handleOpenPrivacy}){
     const dispatch = useDispatch();
 
 
@@ -116,7 +116,7 @@ function Footer(){
             <p>&copy; 2024 Rest Hotely. All rights reserved.</p>
             <p>
                 Rest Hotely is committed to protecting your privacy and ensuring a secure and transparent experience on our platform.
-                By using our services, you agree to all our <span style={{color: '#1DA1F2', cursor: 'pointer'}}>Privacy & Policy</span> and <span style={{color: '#1DA1F2', cursor: 'pointer'}}>Terms & Conditions</span>
+                By using our services, you agree to all our <span style={{color: '#1DA1F2', cursor: 'pointer'}} onClick={handleOpenPrivacy}>Privacy & Policy</span> and <span style={{color: '#1DA1F2', cursor: 'pointer'}} onClick={handleOpenPrivacy}>Terms & Conditions</span>
              </p>
             </div>
         </div>

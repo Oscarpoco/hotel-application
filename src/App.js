@@ -1,6 +1,7 @@
 import './App.css';
-import { useSelector } from 'react-redux';
-import React, { useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import React, { useRef, useState } from 'react';
+import { showLoader } from './redux/actions/UserInterface';
 
 // 
 import Footer from './components/Pages/Footer';
@@ -13,10 +14,14 @@ import Reviews from './components/Pages/Reviews';
 import Maps from './components/Pages/Maps';
 import Gallery from './components/Pages/Gallery';
 import Loader from './components/Pages/Loader';
+import Privacy from './components/Pages/Privacy';
 
 function App() {
 
+  const [openPrivacy, setOpenPrivacy] = useState(false);
+
   const footerRef = useRef(null);
+  const dispatch = useDispatch();
 
   const isViewRoomDetailsOpen = useSelector((state) => state.userInterface.isViewRoomDetailsOpen);
   const isUpdateOpen = useSelector((state) => state.userInterface.isUpdateOpen);
@@ -32,6 +37,15 @@ function App() {
       footerRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // OPEN PRIVACY
+  const handleOpenPrivacy = () => {
+    dispatch(showLoader(true));
+    setTimeout(()=>{
+      setOpenPrivacy(!openPrivacy);
+      dispatch(showLoader(false));
+    }, 20000)
+  }
 
   return (
     <div className="App">
@@ -50,7 +64,7 @@ function App() {
 
       {/* FOOTER */}
       <footer ref={footerRef}>
-        <Footer />
+        <Footer handleOpenPrivacy = {handleOpenPrivacy}/>
       </footer>
       {/* FOOTER ENDS */}
 
@@ -77,6 +91,10 @@ function App() {
       {/* LOADER */}
       {isLoading && (<Loader />)}
 
+      {/* PRIVACY */}
+      {openPrivacy && (
+        <Privacy handleOpenPrivacy = {handleOpenPrivacy}/>
+      )}
       
     </div>
   );
