@@ -137,18 +137,16 @@ function RoomDetails(){
         
     }
 
-    // HANDLES RESERVATION AND CANCELLATION OF RESERVATION
+    // HANDLES RESERVATION
     const HandleReservation = ()=> {
         dispatch(showLoader(true));
 
         setTimeout (()=> {
 
-            if (isAuthenticated === true){
-                dispatch(isRoomReserved());
-            } else{
+            dispatch(isRoomReserved(true));
+            if (!isAuthenticated){
                 dispatch(handleOnSignIn(true));
             }
-            dispatch(isRoomReserved());
             dispatch(showLoader(false));
         }, 2000);
         
@@ -158,19 +156,21 @@ function RoomDetails(){
     const HandleCloseReservation = ()=> {
         dispatch(showLoader(true));
         setTimeout (()=> {
-            dispatch(viewRoomDetails(false));
+            dispatch(isRoomReserved(false));
+            dispatch(viewRoomDetails());
             dispatch(showLoader(false));
         }, 2000)
     }
 
 
-    // HANDLE PAYMENT
+    // END PAYMENT
     const HandlePayment = ()=> {
         dispatch(showLoader(true));
 
         setTimeout (()=> {
             dispatch(isRoomPaid(false));
             dispatch(isRoomReserved(false));
+            dispatch(viewRoomDetails(true));
             dispatch(showLoader(false));
         }, 2000);
         

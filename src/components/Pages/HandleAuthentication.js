@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import '../Styling/HandleAuthentication.css';
-import { handleOnSignIn, handleOnSignUp, showLoader } from "../../redux/actions/UserInterface";
+import { handleOnSignIn, handleOnSignUp, showLoader} from "../../redux/actions/UserInterface";
 import { handleSignInWithGoogle, handleSignInWithEmail, handleSignUpWithEmail  } from "../../redux/actions/Authentication";
 import { TfiEmail } from "react-icons/tfi";
 import { FcGoogle } from "react-icons/fc";
@@ -21,9 +21,10 @@ function HandleAuthentication({handleOpenPrivacy}) {
     // Handle close
     const handleClose = () => {
         dispatch(showLoader(true));
-
+            
         setTimeout (()=> {
             dispatch(handleOnSignIn(false));
+            // window.location.reload(true);
             dispatch(showLoader(false));
         }, 3000);
         

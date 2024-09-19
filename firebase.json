@@ -1,10 +1,7 @@
 {
   "hosting": {
-    "public": "hotel-application",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
+    "target": "hotel",
+    "public": "build",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   }
 }
