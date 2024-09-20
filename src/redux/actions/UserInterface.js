@@ -1,8 +1,6 @@
 
 // ACTION TYPES
 
-
-
 // sign in and sign out
 export const ON_SIGN_IN = 'ON_SIGN_IN';
 export const ON_SIGN_UP = 'ON_SIGN_UP';
@@ -35,6 +33,15 @@ export const SET_SELECTED_ROOM = 'SET_SELECTED_ROOM';
 
 // ON REVIEW
 export const ON_REVIEW = 'ON_REVIEW';
+
+// PERSONAL DETAILS VISIBILITY
+export const PERSONAL_DETAILS_VISIBILITY = 'PERSONAL_DETAILS_VISIBILITY';
+
+// BOOKINGS DETAILS VISIBILITY
+export const BOOKINGS_DETAILS_VISIBILITY = 'BOOKINGS_DETAILS_VISIBILITY';
+
+// FAVORITE DETAILS VISIBILITY
+export const FAVORITE_DETAILS_VISIBILITY = 'FAVORITE_DETAILS_VISIBILITY';
 
 
 // ACTION TYPES ENDS
@@ -125,3 +132,24 @@ export const setSelectedRoom = (roomId) => ({
     type: SET_SELECTED_ROOM,
     payload: roomId,
   });
+
+// FAVORITE DETAILS VISIBILITY
+export const setFavoriteDetailsVisibility = () => {
+    return{
+        type: FAVORITE_DETAILS_VISIBILITY,
+    }
+    };
+
+//  BOOKINGS_DETAILS_VISIBILITY
+export const setBookingsDetailsVisibility = () => {
+    return{
+        type: BOOKINGS_DETAILS_VISIBILITY,
+    }
+    };
+
+// PERSONAL_DETAILS_VISIBILITY
+export const setPersonalDetailsVisibility = () => {
+    return{
+        type: PERSONAL_DETAILS_VISIBILITY,
+    }
+    };

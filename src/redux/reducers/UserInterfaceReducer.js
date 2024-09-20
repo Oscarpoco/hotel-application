@@ -11,6 +11,9 @@ import {
     ON_LOADER,
     SET_SELECTED_ROOM,
     ON_REVIEW,
+    PERSONAL_DETAILS_VISIBILITY,
+    BOOKINGS_DETAILS_VISIBILITY,
+    FAVORITE_DETAILS_VISIBILITY
 } 
     from "../actions/UserInterface";
 
@@ -29,6 +32,9 @@ const initialState = {
     isLoading: false,
     selectedRoom: null,
     reviewing: false,
+    personalDetailsVisibility: false,
+    bookingsDetailsVisibility: false,
+    favoriteDetailsVisibility: false,
 }
 
 // INITIAL STATE ENDS
@@ -110,7 +116,7 @@ const userInterfaceReducer = (state = initialState, action) =>{
             case ON_LOADER:
                 return{
                     ...state,
-                    isLoading: !state.isLoading
+                    isLoading: !state.isLoading,
                     }
             // LOADER ENDS
 
@@ -121,6 +127,26 @@ const userInterfaceReducer = (state = initialState, action) =>{
                 selectedRoom: action.payload,
                     }
 
+            // PERSONAL_DETAILS_VISIBILITY
+            case PERSONAL_DETAILS_VISIBILITY:
+                return{
+                    ...state,
+                    personalDetailsVisibility: !state.personalDetailsVisibility,
+                }
+
+            // BOOKINGS_DETAILS_VISIBILITY
+            case BOOKINGS_DETAILS_VISIBILITY:
+                return{
+                    ...state,
+                    bookingsDetailsVisibility: !state.bookingsDetailsVisibility,
+                    }
+
+            // FAVORITE_DETAILS_VISIBILITY
+            case FAVORITE_DETAILS_VISIBILITY:
+                return{
+                    ...state,
+                    favoriteDetailsVisibility: !state.favoriteDetailsVisibility,
+                    }
 
         default:
             return state

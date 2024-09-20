@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../Styling/UpdateUserDetails.css";
 import { useDispatch, useSelector } from "react-redux";
-import { openUpdate, showLoader } from "../../redux/actions/UserInterface";
+import { openUpdate, showLoader, setPersonalDetailsVisibility,setBookingsDetailsVisibility,setFavoriteDetailsVisibility } from "../../redux/actions/UserInterface";
 import { handleOnSignOut } from "../../redux/actions/Authentication";
 
 // FIRESTORE
@@ -21,7 +21,11 @@ function UpdateUserDetails() {
 
   // REDUX
   const user = useSelector((state) => state.authentication.user);
-  const userId = user.id || user.uid; // Updated to handle both user.id and user.uid
+  const userId = user.id || user.uid;
+  const personalDetailsVisibility = useSelector((state) => state.userInterface.personalDetailsVisibility);
+  const bookingsDetailsVisibility = useSelector((state) => state.userInterface.bookingsDetailsVisibility);
+  const favoriteDetailsVisibility = useSelector((state) => state.userInterface.favoriteDetailsVisibility);
+
 
   // USESTATE
   const [userDetails, setUserDetails] = useState({
@@ -124,7 +128,9 @@ function UpdateUserDetails() {
     }, 3000);
   };
 
-  console.log("Current user ID:", userId); 
+  const handleOpenpersonalDetails = ()=>{
+    dispatch(setPersonalDetailsVisibility())
+  }
 
 
   return (
@@ -141,108 +147,112 @@ function UpdateUserDetails() {
           </button>
         </div>
 
-        <div className="user-details">
-          <div className="user-details-header">
-            <h1>Personal details</h1>
-          </div>
-          <div className="user-details-data">
-            {/* FULL NAMES */}
-            <div className="input-wrapper">
-              <label>
-                Full names: <span> {userDetails.fullnames}</span>
-              </label>
-              <div className="input-box">
-                <input
-                  type="text"
-                  name="fullnames"
-                  placeholder="Enter Full Names"
-                  value={userDetails.fullnames}
-                  onChange={handleInputChange}
-                ></input>
-              </div>
-            </div>
+        <div className="" onClick={handleOpenpersonalDetails} style={{background: 'red', border: '2px solid', boxShadow: '0 0 10px', width: '100%'}}><h1>Personal Details</h1></div>
+        {personalDetailsVisibility && (
+                      <div className="user-details">
+                      <div className="user-details-header">
+                      </div>
+                      <div className="user-details-data">
+                        {/* FULL NAMES */}
+                        <div className="input-wrapper">
+                          <label>
+                            Full names: <span> {userDetails.fullnames}</span>
+                          </label>
+                          <div className="input-box">
+                            <input
+                              type="text"
+                              name="fullnames"
+                              placeholder="Enter Full Names"
+                              value={userDetails.fullnames}
+                              onChange={handleInputChange}
+                            ></input>
+                          </div>
+                        </div>
+            
+                        {/* LOCATION */}
+                        <div className="input-wrapper">
+                          <label>
+                            Location: <span> {userDetails.location}</span>
+                          </label>
+                          <div className="input-box">
+                            <input
+                              type="text"
+                              placeholder="Enter your city and country"
+                              name="location"
+                              value={userDetails.location}
+                              onChange={handleInputChange}
+                            ></input>
+                          </div>
+                        </div>
+                      </div>
+                      {/* ENDS */}
+            
+                      <div className="user-details-data">
+                        {/* AGE */}
+                        <div className="input-wrapper">
+                          <label>
+                            Age: <span> {userDetails.age}</span>
+                          </label>
+            
+                          <div className="input-box">
+                            <input
+                              type="number"
+                              placeholder="Enter your age only over 17 years"
+                              name="age"
+                              value={userDetails.age}
+                              onChange={handleInputChange}
+                              min="18"
+                              max="80"
+                            ></input>
+                          </div>
+                        </div>
+                        {/* ENDS */}
+            
+                      </div>
+                      {/* ENDS */}
+            
+                      {/* WRAPPER */}
+                      <div className="user-details-data">
+                        {/* PHONE */}
+                        <div className="input-wrapper">
+                          <label>
+                            Phone: <span> {userDetails.phone}</span>
+                          </label>
+            
+                          <div className="input-box">
+                            <input
+                              type="number"
+                              placeholder="Enter your phone number"
+                              name="phone"
+                              value={userDetails.phone}
+                              onChange={handleInputChange}
+                              minLength="10"
+                              maxLength="10"
+                            ></input>
+                          </div>
+                        </div>
+                        {/* ENDS */}
+            
+                       
+                      </div>
+            
+                      {/* WRAPPER */}
+                      <div className="user-details-data">
+                        {/* button */}
+                        <div className="input-wrapper" style={{ background: "white", boxShadow: "unset" }}>
+                          {/* SAVE BUTTON */}
+                          <button onClick={handleSave}>
+                            <BiSave className="save-icon" /> Save
+                          </button>
+                        </div>
+                        {/* ENDS */}
+            
+                      </div>
+                      {/* ENDS */}
+                    </div>
+        )}
 
-            {/* LOCATION */}
-            <div className="input-wrapper">
-              <label>
-                Location: <span> {userDetails.location}</span>
-              </label>
-              <div className="input-box">
-                <input
-                  type="text"
-                  placeholder="Enter your city and country"
-                  name="location"
-                  value={userDetails.location}
-                  onChange={handleInputChange}
-                ></input>
-              </div>
-            </div>
-          </div>
-          {/* ENDS */}
-
-          <div className="user-details-data">
-            {/* AGE */}
-            <div className="input-wrapper">
-              <label>
-                Age: <span> {userDetails.age}</span>
-              </label>
-
-              <div className="input-box">
-                <input
-                  type="number"
-                  placeholder="Enter your age only over 17 years"
-                  name="age"
-                  value={userDetails.age}
-                  onChange={handleInputChange}
-                  min="18"
-                  max="80"
-                ></input>
-              </div>
-            </div>
-            {/* ENDS */}
-
-          </div>
-          {/* ENDS */}
-
-          {/* WRAPPER */}
-          <div className="user-details-data">
-            {/* PHONE */}
-            <div className="input-wrapper">
-              <label>
-                Phone: <span> {userDetails.phone}</span>
-              </label>
-
-              <div className="input-box">
-                <input
-                  type="number"
-                  placeholder="Enter your phone number"
-                  name="phone"
-                  value={userDetails.phone}
-                  onChange={handleInputChange}
-                  minLength="10"
-                  maxLength="10"
-                ></input>
-              </div>
-            </div>
-            {/* ENDS */}
-
-           
-          </div>
-
-          {/* WRAPPER */}
-          <div className="user-details-data">
-            {/* button */}
-            <div className="input-wrapper" style={{ background: "white", boxShadow: "unset" }}>
-              {/* SAVE BUTTON */}
-              <button onClick={handleSave}>
-                <BiSave className="save-icon" /> Save
-              </button>
-            </div>
-            {/* ENDS */}
-
-          </div>
-          {/* ENDS */}
-        </div>
+        
         {/* USER DETAILS ENDS */}
 
         {/* BOOKINGS */}
