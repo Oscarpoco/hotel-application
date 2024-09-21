@@ -61,7 +61,7 @@ function HandleAuthentication({handleOpenPrivacy}) {
         setTimeout (()=> {
             dispatch(handleOnSignUp());
             dispatch(showLoader(false));
-        }, 3000);
+        }, 2000);
         
     }
 

@@ -128,10 +128,29 @@ function UpdateUserDetails() {
     }, 3000);
   };
 
+
+  // HANDLE VISIBILITY OF PROFILE DATAILS
   const handleOpenpersonalDetails = ()=>{
+
     dispatch(setPersonalDetailsVisibility())
+
+  }
+  
+  const handleOpenpersonalBookings = ()=>{
+    
+    dispatch(setBookingsDetailsVisibility())
+
+  }
+  
+
+
+  const handleOpenpersonalFavorites = ()=>{
+
+    dispatch(setFavoriteDetailsVisibility())
+
   }
 
+  // ENDS
 
   return (
     <div className="update-overlay">
@@ -147,7 +166,7 @@ function UpdateUserDetails() {
           </button>
         </div>
 
-        <div className="" onClick={handleOpenpersonalDetails} style={{background: 'red', border: '2px solid', boxShadow: '0 0 10px', width: '100%'}}><h1>Personal Details</h1></div>
+        <div className="hearder-reveal" onClick={handleOpenpersonalDetails}><h1>Personal Details</h1></div>
         {personalDetailsVisibility && (
                       <div className="user-details">
                       <div className="user-details-header">
@@ -256,14 +275,14 @@ function UpdateUserDetails() {
         {/* USER DETAILS ENDS */}
 
         {/* BOOKINGS */}
-        {/* <div className="bookings-details"> */}
-          <Bookings />
-        {/* </div> */}
+        <div className="hearder-reveal" onClick={handleOpenpersonalBookings}><h1>Bookings list</h1></div>
+          {bookingsDetailsVisibility && (<Bookings/>)}
         {/* ENDS */}
 
         {/* FAVORITE */}
+        <div className="hearder-reveal" onClick={handleOpenpersonalFavorites}><h1>Favorites Gallery</h1></div>
         <div className="my-favorites">
-          <Favorite />
+          {favoriteDetailsVisibility && (<Favorite />)}
         </div>
         {/* ENDS */}
 

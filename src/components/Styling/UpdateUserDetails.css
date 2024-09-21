@@ -31,9 +31,23 @@
     padding: 2em;
     padding-top: 0.5em;
     overflow-y: auto;
-    /* max-height: 90vh; */
     box-sizing: border-box;
+    border-radius: 0;
 }
+
+/* SCROLL */
+.update-content
+{
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+
+.update-content::-webkit-scrollbar 
+{
+  display: none;
+}
+/* ENDS */
 
 .details-header
 {
@@ -70,10 +84,12 @@
     align-items: center;
     flex-direction: column;
     gap: 1em;
-    width: 95%;
+    width: 100%;
     border-radius: 10px;
-    /* box-shadow: var(--box-shadow); */
-    padding: 1.5em 0;
+    transition: all .5s ease-in;
+    transition: all .5s ease-in;
+    border: 2px solid var(--faint-color);
+    padding: 1em;
     box-sizing: border-box;
 }
 
@@ -85,6 +101,30 @@
     width: 100%;
 }
 
+.hearder-reveal
+{
+    width: 100%;
+    text-align: center;
+    background: rgb(182, 180, 180);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    color: rgba(0, 0, 0, .5);
+    cursor: pointer;
+    line-height: .5;
+    padding: .1em 0;
+    font-size: .8em;
+    border-radius: 10px;
+    transition: all .5s ease-in;
+    transition: all .5s ease-out;
+}
+
+.hearder-reveal:hover
+{
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    transition: all .5s ease-in;
+    transition: all .5s ease-out;
+}
+
 .user-details-data
 {
     display: flex;
@@ -92,7 +132,6 @@
     align-items: center;
     width: 100%;
     gap: 1em;
-    
 }
 
 .input-wrapper
@@ -103,9 +142,10 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: .5em;
-    padding: .7em;
-    background: rgba(42, 188, 242, 0.1);
+    padding: 1em;
+    background: rgba(163, 163, 164, 0.374);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
 .input-box
@@ -157,9 +197,9 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 1em;
+    padding: .7em 1em;
     border: 2px solid var(--faint-color);
-    /* border-radius: 10px; */
+    border-radius: 10px;
     outline: none;
     box-sizing: border-box;
 }
@@ -178,6 +218,7 @@
     width: 100%;
     border: 2px solid var(--faint-color);
     padding: 1em;
+    border-radius: 10px;
     box-sizing: border-box;
 }
 

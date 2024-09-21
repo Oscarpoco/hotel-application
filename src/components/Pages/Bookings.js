@@ -64,9 +64,6 @@ export default function Bookings() {
 
     return (
         <div className="bookings-details">
-            <div className="bookings-details-header">
-                <h1>My bookings</h1>
-            </div>
             <div className="bookings-details-items">
                 <div className="bookings-title-wrapper">
                     <p style={{ width: '3%' }}>No</p>

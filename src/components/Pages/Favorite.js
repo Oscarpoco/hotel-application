@@ -41,7 +41,6 @@ export function Favorite() {
 
     return (
         <div className="favorites-wrapper">
-            <h1>FAVORITES</h1>
 
             <div className="favorite-grid-wrapper">
                 {loading ? ( 
