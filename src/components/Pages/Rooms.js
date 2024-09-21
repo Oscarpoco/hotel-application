@@ -22,32 +22,46 @@ function Rooms(){
 
     // FETCH ACCOMODATION
     useEffect(() => {
-        fetchAccommodations();
-    }, []);
-
-    const fetchAccommodations = async () => {
-        try {
+      fetchAccommodations();
+  }, []);
+  
+  const fetchAccommodations = async () => {
+      try {
           const accommodationsCollection = collection(db, "accommodations");
           const accommodationsSnapshot = await getDocs(accommodationsCollection);
-          const accommodationsList = accommodationsSnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
+          const accommodationsList = await Promise.all(
+              accommodationsSnapshot.docs.map(async (doc) => {
+                  const data = doc.data();
+                  let averageRating = 0;
+                  
+                  // Check if reviews exist
+                  if (data.reviews && data.reviews.length > 0) {
+                      const totalRatings = data.reviews.reduce((acc, review) => acc + Number(review.rating), 0);
+                      averageRating = totalRatings / data.reviews.length;
+                  }
+                  
+                  return {
+                      id: doc.id,
+                      ...data,
+                      averageRating: averageRating || 0, // Default to 0 if no reviews
+                  };
+              })
+          );
           setAccommodations(accommodationsList);
-        } catch (error) {
+      } catch (error) {
           console.error("Error fetching accommodations:", error);
-        }
-      };
-    
-      const handleOpenRoomDetails = (roomId) => {
-        dispatch(showLoader(true));
-        dispatch(setSelectedRoom(roomId));
-        setTimeout(() => {
+      }
+  };
+  
+  const handleOpenRoomDetails = (roomId) => {
+      dispatch(showLoader(true));
+      dispatch(setSelectedRoom(roomId));
+      setTimeout(() => {
           dispatch(viewRoomDetails());
           dispatch(showLoader(false));
-        }, 2000);
-      };
-    
+      }, 2000);
+  };
+  
 
     return(
         <div className="rooms">
@@ -64,7 +78,7 @@ function Rooms(){
                     <p>Availability: <span>{accommodation.availability}</span></p>
                     <p>{accommodation.price} ZAR /<span> night</span></p>
                     <div className="room-rating-likes">
-                      <p className="p-wrapper"><GiRoundStar className="room-star"/> <span>{accommodation.ratings || 0}</span></p>
+                      <p className="p-wrapper"><GiRoundStar className="room-star"/> <span>{accommodation.averageRating.toFixed(1) || 0}</span></p>
                       <p className="p-wrapper"><FaHeart className="love"/> <span>{accommodation.likes || 0}</span></p>
                     </div>
                 </div>

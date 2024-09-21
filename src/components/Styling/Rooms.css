@@ -114,11 +114,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1em;
+    gap: .5em;
     width: 30%;
     border-radius: 50px;
     box-shadow: 0 0 4px;
     background: #0077B5;
+}
+
+.p-wrapper span
+{
+    font-weight: 900;
+    color: white;
 }
 
 .room-star

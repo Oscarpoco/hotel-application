@@ -79,11 +79,6 @@ function Reviews() {
           Reviews
         </h2>
         <div className="review-header">
-          {/* PICTURE */}
-          <div className="review-header-picture">
-            <img src="reviews.jpeg" alt="cover"></img>
-          </div>
-          {/* ENDS */}
 
           {/* STEPS */}
           <div className="review-header-steps">
