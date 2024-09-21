@@ -157,24 +157,12 @@ function RoomDetails(){
         dispatch(showLoader(true));
         setTimeout (()=> {
             dispatch(isRoomReserved(false));
-            dispatch(viewRoomDetails());
+            dispatch(viewRoomDetails(false));
+            window.location.reload();
             dispatch(showLoader(false));
         }, 2000)
     }
 
-
-    // END PAYMENT
-    const HandlePayment = ()=> {
-        dispatch(showLoader(true));
-
-        setTimeout (()=> {
-            dispatch(isRoomPaid(false));
-            dispatch(isRoomReserved(false));
-            dispatch(viewRoomDetails(true));
-            dispatch(showLoader(false));
-        }, 2000);
-        
-        }
 
     // Show a loading message while fetching data
     if (!accommodation) {
@@ -289,7 +277,6 @@ function RoomDetails(){
             <div className="room-details-content">
                 
                 <Reserved 
-                HandlePayment={HandlePayment}
                 accommodation={accommodation}
                 HandleCloseReservation = {HandleCloseReservation}
                 />
@@ -297,19 +284,6 @@ function RoomDetails(){
             
             }
             {/* ENDS */}
-
-
-            {/* CONFIRMATION NOTIFICATION */}
-            {isPaid && (
-                <div className="confirmation-notification-layout">
-                    <div className="confirmation-notification">
-                        <p>Payment successful!</p>
-                        <div><GiCheckMark className= "tick"/></div>
-                        <button className="confirm-button" onClick={HandlePayment}>Complete</button>
-                    </div>
-                </div>
-            )}
-
 
         </div>
     )

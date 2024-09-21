@@ -4,7 +4,21 @@ import { auth } from "../../firebase/firebase";
 import '../Styling/UpdateUserDetails.css';
 import { useDispatch, useSelector } from "react-redux";
 import { onReviewing } from "../../redux/actions/UserInterface";
+import { showLoader } from "../../redux/actions/UserInterface";
 import ReviewForm from "./ReviewForm";
+
+// MUI
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Button,
+    Tooltip
+} from '@mui/material';
 
 export default function Bookings() {
     const [bookings, setBookings] = useState([]);
@@ -41,8 +55,10 @@ export default function Bookings() {
             setLoading(false);
         };
 
-        fetchBookings();
-    }, []);
+        
+        fetchBookings()
+        
+    }, [firestore, dispatch]);
 
     // Function to delete a booking
     const handleDelete = async (bookingId) => {
@@ -64,57 +80,73 @@ export default function Bookings() {
 
     return (
         <div className="bookings-details">
-            <div className="bookings-details-items">
-                <div className="bookings-title-wrapper">
-                    <p style={{ width: '3%' }}>No</p>
-                    <p style={{ width: '10%' }}>Check in</p>
-                    <p style={{ width: '10%' }}>Check out</p>
-                    <p style={{ width: '10%' }}>Price</p>
-                    <p style={{ width: '25%' }}>Token</p>
-                    <p style={{ width: '10%' }}>Created At</p>
-                    <p style={{ width: '10%' }}>Room</p>
-                    <p style={{ width: '8%' }}>Status</p>
-                    <p style={{ width: '14%' }}>Action</p>
-                </div>
-
-                {loading ? (
-                    <p>Loading...</p>
-                ) : bookings.length > 0 ? (
-                    bookings.map((booking, index) => (
-                        <div className="bookings" key={booking.id}>
-                            <p style={{ width: '3%' }}>{`${index + 1}`}</p>
-                            <p style={{ width: '10%' }}>{booking.checkIn}</p>
-                            <p style={{ width: '10%' }}>{booking.checkOut}</p>
-                            <p style={{ width: '10%' }}>{booking.totalPrice}</p>
-                            <p style={{ width: '25%' }}>T{booking.paymentMethodId}</p>
-                            <p style={{ width: '10%' }}>{new Date(booking.createdAt).toLocaleDateString()}</p>
-                            <p style={{ width: '10%' }}>{booking.title}</p>
-                            <p style={{ width: '8%' }}>{booking.status}</p>
-                            <div className="btn-primary" style={{ width: '14%' }}>
-                                <div className="actions-button">
-                                    <span className="tooltip" style={{ background: "#DD2A7B" }}>
-                                        Get to tell us
-                                        <br></br>
-                                        about your stay!
-                                    </span>
-                                    <button className="btn-1" onClick={() => handleOpenReviewForm(booking.accommodationId)}>Review</button>
-                                </div>
-
-                                <div className="actions-button">
-                                    <span className="tooltip" style={{ background: "#DD2A7B" }}>
-                                        Delete your booking
-                                        <br></br>
-                                        from profile
-                                    </span>
-                                    <button className="btn-2" onClick={() => handleDelete(booking.id)}>Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <p>No bookings found.</p>
-                )}
-            </div>
+            
+                <TableContainer component={Paper}>
+                <Table aria-label="bookings table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>No</TableCell>
+                            <TableCell>Check in</TableCell>
+                            <TableCell>Check out</TableCell>
+                            <TableCell>Price</TableCell>
+                            <TableCell>Token</TableCell>
+                            <TableCell>Created At</TableCell>
+                            <TableCell>Room</TableCell>
+                            <TableCell>Status</TableCell>
+                            <TableCell>Action</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {loading ? (
+                            <TableRow>
+                                <TableCell colSpan={9} align="center">
+                                    Loading...
+                                </TableCell>
+                            </TableRow>
+                        ) : bookings.length > 0 ? (
+                            bookings.map((booking, index) => (
+                                <TableRow key={booking.id}>
+                                    <TableCell>{index + 1}</TableCell>
+                                    <TableCell>{booking.checkIn}</TableCell>
+                                    <TableCell>{booking.checkOut}</TableCell>
+                                    <TableCell>{booking.totalPrice}</TableCell>
+                                    <TableCell>T{booking.paymentMethodId}</TableCell>
+                                    <TableCell>{new Date(booking.createdAt).toLocaleDateString()}</TableCell>
+                                    <TableCell>{booking.title}</TableCell>
+                                    <TableCell>{booking.status}</TableCell>
+                                    <TableCell>
+                                        <Tooltip title="Tell us about your stay!">
+                                            <Button
+                                                variant="contained"
+                                                color="primary"
+                                                onClick={() => handleOpenReviewForm(booking.accommodationId)}
+                                                style={{ marginRight: '10px' }}
+                                            >
+                                                Review
+                                            </Button>
+                                        </Tooltip>
+                                        <Tooltip title="Delete your booking from profile">
+                                            <Button
+                                                variant="contained"
+                                                color="secondary"
+                                                onClick={() => handleDelete(booking.id)}
+                                            >
+                                                Delete
+                                            </Button>
+                                        </Tooltip>
+                                    </TableCell>
+                                </TableRow>
+                            ))
+                        ) : (
+                            <TableRow>
+                                <TableCell colSpan={9} align="center">
+                                    No bookings found.
+                                </TableCell>
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
+            </TableContainer>
 
             {/* Review Form */}
             {reviewing && (

@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import { getFirestore, doc, updateDoc, arrayUnion } from "firebase/firestore";
-import '../Styling/UpdateUserDetails.css';
-import { onReviewing } from '../../redux/actions/UserInterface';
 import { useDispatch } from 'react-redux';
+import { onReviewing } from '../../redux/actions/UserInterface';
+import {
+    TextField,
+    Button,
+    Box,
+    Typography,
+    Grid,
+    Rating,
+    Paper,
+} from '@mui/material';
 
 export default function ReviewForm({ accommodationId }) {
     const [fullName, setFullName] = useState(''); // State for reviewer's full name
@@ -50,35 +58,67 @@ export default function ReviewForm({ accommodationId }) {
         }
     };
 
-
     // HANDLE CLOSE
     const handleClose = () => {
         dispatch(onReviewing(false));
     }
 
     return (
-        <div className="review-form-layout">
-            <div className='review-form'>
-                <input
-                    type="text"
-                    placeholder="Your full name"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                />
-                <textarea
-                    placeholder='Write your review....'
-                    value={review}
-                    onChange={(e) => setReview(e.target.value)}
-                ></textarea>
-                <input
-                    type="text"
-                    placeholder="Rate us between 1 - 10"
-                    value={rating}
-                    onChange={(e) => setRating(e.target.value)}
-                />
-                <button onClick={handleSubmit}>Submit</button>
-                <button onClick={handleClose}>Close</button>
-            </div>
-        </div>
+        <Paper elevation={3} sx={{ padding: 4, maxWidth: 500, margin: 'auto' }}>
+            <Typography variant="h5" gutterBottom>
+                Leave a Review
+            </Typography>
+            <Box component="form" noValidate autoComplete="off">
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <TextField
+                            fullWidth
+                            label="Your full name"
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
+                            required
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            fullWidth
+                            label="Write your review"
+                            multiline
+                            rows={4}
+                            value={review}
+                            onChange={(e) => setReview(e.target.value)}
+                            required
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography component="legend">Rate Us</Typography>
+                        <Rating
+                            name="rating"
+                            value={rating} // Rating as a number
+                            onChange={(e, newValue) => setRating(newValue)}
+                            precision={0.5}
+                            max={10}
+                        />
+                    </Grid>
+                </Grid>
+
+                <Box mt={3} display="flex" justifyContent="space-between">
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSubmit}
+                    >
+                        Submit
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                        onClick={handleClose}
+                    >
+                        Close
+                    </Button>
+                </Box>
+            </Box>
+        </Paper>
     );
 }

@@ -2,17 +2,20 @@ import React, { useEffect, useState } from "react";
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore"; // Firestore imports
 import { auth } from "../../firebase/firebase"; // Auth import
 import '../Styling/Favorite.css';
+import { showLoader } from "../../redux/actions/UserInterface";
+import { useDispatch } from "react-redux";
 
 export function Favorite() {
     const [favorites, setFavorites] = useState([]); 
     const [loading, setLoading] = useState(true); 
+    const dispatch = useDispatch()
 
     // Initialize Firestore
     const firestore = getFirestore(); 
 
     useEffect(() => {
         const fetchFavorites = async () => {
-            setLoading(true); // Start loading
+            setLoading(true);
             const user = auth.currentUser; 
             if (user) {
                 try {
@@ -33,11 +36,14 @@ export function Favorite() {
                     console.error("Error fetching favorites:", error);
                 }
             }
-            setLoading(false); // End loading
+            setLoading(false); 
         };
 
+        
+    
         fetchFavorites();
-    }, []); // Empty dependency array means this effect runs once on mount
+        
+    }, [firestore]); 
 
     return (
         <div className="favorites-wrapper">

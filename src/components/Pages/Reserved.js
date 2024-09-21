@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import StripeCheckout from 'react-stripe-checkout';
 import { doc, setDoc, getFirestore } from "firebase/firestore";
 
-function Reserved({ HandleCloseReservation, HandlePayment, accommodation }) {
+function Reserved({ HandleCloseReservation, accommodation }) {
     const reservation = useSelector((state) => state.authentication.reservation);
     const user = useSelector((state) => state.authentication.user); 
     const db = getFirestore();
@@ -35,7 +35,8 @@ function Reserved({ HandleCloseReservation, HandlePayment, accommodation }) {
             await setDoc(doc(db, "bookings", `${userId}_${new Date().getTime()}`), bookingData);
 
             alert("Payment and booking successful!");
-            HandlePayment();
+            HandleCloseReservation();
+
         } catch (error) {
             console.error("Error saving booking:", error);
             alert("Failed to save booking. Please try again.");

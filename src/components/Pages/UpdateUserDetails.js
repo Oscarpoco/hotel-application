@@ -12,6 +12,11 @@ import { IoIosArrowBack } from "react-icons/io";
 import { BiSave } from "react-icons/bi";
 import Bookings from "./Bookings";
 import { Favorite } from "./Favorite";
+import { FaChevronDown } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
+
+// MUI
+import { TextField, Button, Box, Grid, Typography } from '@mui/material';
 
 function UpdateUserDetails() {
   const dispatch = useDispatch();
@@ -41,7 +46,7 @@ function UpdateUserDetails() {
   useEffect(() => {
     const fetchUserDetails = async () => {
       if (userId) {
-        dispatch(showLoader(true));
+      
         try {
           const userDoc = await getDoc(doc(db, "users", userId));
           if (userDoc.exists()) {
@@ -52,11 +57,11 @@ function UpdateUserDetails() {
         } catch (error) {
           console.error("Error fetching user data:", error);
         }
-        dispatch(showLoader(false));
+  
       }
     };
 
-    fetchUserDetails();
+    fetchUserDetails()
   }, [userId, dispatch, db]);
   // ENDS
 
@@ -71,8 +76,9 @@ function UpdateUserDetails() {
 
   // HANDLE SAVE
   const handleSave = async () => {
-    dispatch(showLoader(true));
+    
     try {
+      dispatch(showLoader(true));
       await setDoc(
         doc(db, "users", userId),
         {
@@ -87,6 +93,7 @@ function UpdateUserDetails() {
       ); 
 
       alert("Profile updated successfully!");
+      window.location.reload();
 
       // Clear input fields
       setUserDetails({
@@ -100,8 +107,11 @@ function UpdateUserDetails() {
     } catch (error) {
       console.error("Error updating profile:", error);
       alert("Failed to update profile. Please try again.");
+    } finally{
+      dispatch(showLoader(false));
+      
     }
-    dispatch(showLoader(false));
+
   };
   // ENDS
 
@@ -166,121 +176,120 @@ function UpdateUserDetails() {
           </button>
         </div>
 
-        <div className="hearder-reveal" onClick={handleOpenpersonalDetails}><h1>Personal Details</h1></div>
+        <div className="hearder-reveal" onClick={handleOpenpersonalDetails}>
+          <h1>Personal Details</h1> 
+
+          {personalDetailsVisibility ? <FaChevronUp className="viewDetails"/> : <FaChevronDown className="viewDetails"/>}
+
+        </div>
+
         {personalDetailsVisibility && (
-                      <div className="user-details">
-                      <div className="user-details-header">
-                      </div>
-                      <div className="user-details-data">
-                        {/* FULL NAMES */}
-                        <div className="input-wrapper">
-                          <label>
-                            Full names: <span> {userDetails.fullnames}</span>
-                          </label>
-                          <div className="input-box">
-                            <input
-                              type="text"
-                              name="fullnames"
-                              placeholder="Enter Full Names"
-                              value={userDetails.fullnames}
-                              onChange={handleInputChange}
-                            ></input>
-                          </div>
-                        </div>
-            
-                        {/* LOCATION */}
-                        <div className="input-wrapper">
-                          <label>
-                            Location: <span> {userDetails.location}</span>
-                          </label>
-                          <div className="input-box">
-                            <input
-                              type="text"
-                              placeholder="Enter your city and country"
-                              name="location"
-                              value={userDetails.location}
-                              onChange={handleInputChange}
-                            ></input>
-                          </div>
-                        </div>
-                      </div>
-                      {/* ENDS */}
-            
-                      <div className="user-details-data">
-                        {/* AGE */}
-                        <div className="input-wrapper">
-                          <label>
-                            Age: <span> {userDetails.age}</span>
-                          </label>
-            
-                          <div className="input-box">
-                            <input
-                              type="number"
-                              placeholder="Enter your age only over 17 years"
-                              name="age"
-                              value={userDetails.age}
-                              onChange={handleInputChange}
-                              min="18"
-                              max="80"
-                            ></input>
-                          </div>
-                        </div>
-                        {/* ENDS */}
-            
-                      </div>
-                      {/* ENDS */}
-            
-                      {/* WRAPPER */}
-                      <div className="user-details-data">
-                        {/* PHONE */}
-                        <div className="input-wrapper">
-                          <label>
-                            Phone: <span> {userDetails.phone}</span>
-                          </label>
-            
-                          <div className="input-box">
-                            <input
-                              type="number"
-                              placeholder="Enter your phone number"
-                              name="phone"
-                              value={userDetails.phone}
-                              onChange={handleInputChange}
-                              minLength="10"
-                              maxLength="10"
-                            ></input>
-                          </div>
-                        </div>
-                        {/* ENDS */}
-            
-                       
-                      </div>
-            
-                      {/* WRAPPER */}
-                      <div className="user-details-data">
-                        {/* button */}
-                        <div className="input-wrapper" style={{ background: "white", boxShadow: "unset" }}>
-                          {/* SAVE BUTTON */}
-                          <button onClick={handleSave}>
-                            <BiSave className="save-icon" /> Save
-                          </button>
-                        </div>
-                        {/* ENDS */}
-            
-                      </div>
-                      {/* ENDS */}
-                    </div>
+                      <Box className="user-details" p={3} sx={{ backgroundColor: '#fff', boxShadow: 3 }}>
+                      {/* Header (optional, you can add content if needed) */}
+                      <Box className="user-details-header" mb={2}>
+                        <Typography variant="h6">Edit Profile</Typography>
+                      </Box>
+              
+                      {/* Full Names */}
+                      <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                          <TextField
+                            fullWidth
+                            label="Full names"
+                            name="fullnames"
+                            value={userDetails.fullnames}
+                            onChange={handleInputChange}
+                            placeholder="Enter Full Names"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        </Grid>
+              
+                        {/* Location */}
+                        <Grid item xs={12}>
+                          <TextField
+                            fullWidth
+                            label="Location"
+                            name="location"
+                            value={userDetails.location}
+                            onChange={handleInputChange}
+                            placeholder="Enter your city and country"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        </Grid>
+              
+                        {/* Age */}
+                        <Grid item xs={12}>
+                          <TextField
+                            fullWidth
+                            type="number"
+                            label="Age"
+                            name="age"
+                            value={userDetails.age}
+                            onChange={handleInputChange}
+                            placeholder="Enter your age (18+)"
+                            inputProps={{ min: 18, max: 80 }}
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        </Grid>
+              
+                        {/* Phone */}
+                        <Grid item xs={12}>
+                          <TextField
+                            fullWidth
+                            type="tel"
+                            label="Phone"
+                            name="phone"
+                            value={userDetails.phone}
+                            onChange={handleInputChange}
+                            placeholder="Enter your phone number"
+                            inputProps={{ maxLength: 10 }}
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        </Grid>
+              
+                        {/* Save Button */}
+                        <Grid item xs={12}>
+                          <Box mt={2} display="flex" justifyContent="center">
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              onClick={handleSave}
+                              startIcon={<BiSave style={{color: 'white'}}/>}
+                            >
+                              Save
+                            </Button>
+                          </Box>
+                        </Grid>
+                      </Grid>
+                    </Box>
         )}
 
         
         {/* USER DETAILS ENDS */}
 
         {/* BOOKINGS */}
-        <div className="hearder-reveal" onClick={handleOpenpersonalBookings}><h1>Bookings list</h1></div>
+        <div className="hearder-reveal" onClick={handleOpenpersonalBookings}>
+          <h1>Bookings list</h1>
+          {bookingsDetailsVisibility ? <FaChevronUp className="viewDetails"/> : <FaChevronDown className="viewDetails"/>}
+        </div>
+
           {bookingsDetailsVisibility && (<Bookings/>)}
         {/* ENDS */}
 
         {/* FAVORITE */}
-        <div className="hearder-reveal" onClick={handleOpenpersonalFavorites}><h1>Favorites Gallery</h1></div>
+        <div className="hearder-reveal" onClick={handleOpenpersonalFavorites}>
+          <h1>Favorites Gallery</h1>
+          {favoriteDetailsVisibility ? <FaChevronUp className="viewDetails"/> : <FaChevronDown className="viewDetails"/>}
+        </div>
+
         <div className="my-favorites">
           {favoriteDetailsVisibility && (<Favorite />)}
         </div>

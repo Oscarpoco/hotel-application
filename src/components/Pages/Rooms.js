@@ -64,7 +64,7 @@ function Rooms(){
                     <p>Availability: <span>{accommodation.availability}</span></p>
                     <p>{accommodation.price} ZAR /<span> night</span></p>
                     <div className="room-rating-likes">
-                      <p className="p-wrapper"><GiRoundStar className="room-star"/> <span>{accommodation.rating || 0}</span></p>
+                      <p className="p-wrapper"><GiRoundStar className="room-star"/> <span>{accommodation.ratings || 0}</span></p>
                       <p className="p-wrapper"><FaHeart className="love"/> <span>{accommodation.likes || 0}</span></p>
                     </div>
                 </div>

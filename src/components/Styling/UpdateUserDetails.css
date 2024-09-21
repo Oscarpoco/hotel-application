@@ -104,17 +104,27 @@
 .hearder-reveal
 {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     text-align: center;
     background: rgb(182, 180, 180);
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     color: rgba(0, 0, 0, .5);
     cursor: pointer;
     line-height: .5;
-    padding: .1em 0;
+    padding: .1em 3em;
+    box-sizing: border-box;
     font-size: .8em;
     border-radius: 10px;
     transition: all .5s ease-in;
     transition: all .5s ease-out;
+}
+
+
+.viewDetails
+{
+    font-size: 2em;
 }
 
 .hearder-reveal:hover
@@ -452,13 +462,6 @@
         box-shadow: 0 0 10px;
         cursor: pointer;
         padding: .8em 1em;
-    }
-
-    /* under maintenance */
-
-    .bookings-details
-    {
-        display: none;
     }
 
         /* FAVORITE */
