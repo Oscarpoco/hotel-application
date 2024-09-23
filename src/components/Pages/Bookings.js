@@ -4,7 +4,6 @@ import { auth } from "../../firebase/firebase";
 import '../Styling/UpdateUserDetails.css';
 import { useDispatch, useSelector } from "react-redux";
 import { onReviewing } from "../../redux/actions/UserInterface";
-import { showLoader } from "../../redux/actions/UserInterface";
 import ReviewForm from "./ReviewForm";
 
 // MUI

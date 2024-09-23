@@ -43,7 +43,7 @@ function Rooms(){
                   return {
                       id: doc.id,
                       ...data,
-                      averageRating: averageRating || 0, // Default to 0 if no reviews
+                      averageRating: averageRating || 0,
                   };
               })
           );
@@ -61,6 +61,8 @@ function Rooms(){
           dispatch(showLoader(false));
       }, 2000);
   };
+
+  
   
 
     return(

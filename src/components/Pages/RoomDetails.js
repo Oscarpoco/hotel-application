@@ -36,10 +36,10 @@ function RoomDetails(){
 
     // AMENITIES ICONS
     const iconMapping = {
-        Kitchen: <FaKitchenSet className="offer-icon" />,
-        Chair: <PiOfficeChairLight className="offer-icon" />,
-        TV: <IoTvSharp className="offer-icon" />,
-        Fridge: <RiFridgeFill className="offer-icon" />,
+        "Kitchen": <FaKitchenSet className="offer-icon" />,
+        "Chair": <PiOfficeChairLight className="offer-icon" />,
+        "TV": <IoTvSharp className="offer-icon" />,
+        "Fridge": <RiFridgeFill className="offer-icon" />,
         "Night Stand": <MdOutlineNightsStay className="offer-icon" />,
       };
     //   ENDS
@@ -88,7 +88,9 @@ function RoomDetails(){
                         likes: increment(1) // Increment likes by 1
                     });
     
-                    alert("Room has been saved to your favorites!");
+                    setTimeout(()=>{
+                        alert("Room has been saved to your favorites!");
+                    }, 2000)
                 } else {
                     console.error("No user is logged in!");
                 }

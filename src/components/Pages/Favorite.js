@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore"; // Firestore imports
 import { auth } from "../../firebase/firebase"; // Auth import
 import '../Styling/Favorite.css';
-import { showLoader } from "../../redux/actions/UserInterface";
 import { useDispatch } from "react-redux";
+import DataLoader from "./DataLoader";
 
 export function Favorite() {
     const [favorites, setFavorites] = useState([]); 
@@ -50,7 +50,8 @@ export function Favorite() {
 
             <div className="favorite-grid-wrapper">
                 {loading ? ( 
-                    <p>Loading...</p>
+                    
+                    <p><DataLoader/></p>
                 ) : favorites.length > 0 ? ( 
                     favorites.map((favorite) => (
                         <div className="favorite-grid-item" key={favorite.id}>
