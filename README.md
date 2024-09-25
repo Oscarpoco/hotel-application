@@ -1,5 +1,5 @@
 # Hotel Application
-https://hotel-application-79f01.firebaseapp.com/
+https://hotel-application-beta.vercel.app
 
 ## Figma design
 https://www.figma.com/design/0Sigko5TsdTfD3n8ubKHE2/HOTEL-APPLICATION-WIREFRAME?node-id=0-1&t=iXNQjEwg7KHEM6p0-1
