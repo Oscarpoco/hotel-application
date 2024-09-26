@@ -3,15 +3,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { handleOnSignIn } from "../../redux/actions/UserInterface";
-import { viewRoomDetails, isRoomReserved, isRoomPaid, showLoader } from "../../redux/actions/UserInterface";
+import { viewRoomDetails, isRoomReserved,  showLoader } from "../../redux/actions/UserInterface";
 import '../Styling/RoomDetails.css';
 
 // FIRESTORE
-import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
-import { auth } from "../../firebase/firebase";
+import { getFirestore, doc, getDoc} from "firebase/firestore";
 
 // ICONS
-import { CiSaveDown2 } from "react-icons/ci";
 import { CiShare2 } from "react-icons/ci";
 import { IoIosArrowBack } from "react-icons/io";
 
@@ -20,7 +18,6 @@ import { PiOfficeChairLight } from "react-icons/pi";
 import { IoTvSharp } from "react-icons/io5";
 import { RiFridgeFill } from "react-icons/ri";
 import { MdOutlineNightsStay } from "react-icons/md";
-import { GiCheckMark } from "react-icons/gi";
 import Reserved from "./Reserved";
 import ReservationDetails from "./ReservationDetails";
 
@@ -28,7 +25,6 @@ function RoomDetails(){
 
     const dispatch = useDispatch();
     const isReserved = useSelector((state)=> state.userInterface.isReserved)
-    const isPaid = useSelector((state)=> state.userInterface.isPaid)
     const selectedRoomId = useSelector((state) => state.userInterface.selectedRoom);
     const isAuthenticated = useSelector((state) => state.authentication.isAuthenticated);
 
@@ -67,42 +63,7 @@ function RoomDetails(){
         }
       };
 
-    //   handle save rooms
-      const handleSaveRoomToFavorites = async () => {
-        dispatch(showLoader(true));
-        try {
-            if (accommodation) {
-                const user = auth.currentUser; // Get the currently logged-in user
-                if (user) {
-                    const favoriteDocRef = doc(db, "favorites", `${user.uid}_${accommodation.id}`); // Use a composite key for uniqueness
-                    const accommodationDocRef = doc(db, "accommodations", accommodation.id);
     
-                    // Add to favorites collection (create or update)
-                    await setDoc(favoriteDocRef, { 
-                        ...accommodation, // Save all details about the accommodation
-                        userId: user.uid, // Include user ID
-                    }, { merge: true });
-    
-                    // Increment the likes count in the accommodations collection
-                    await updateDoc(accommodationDocRef, {
-                        likes: increment(1) // Increment likes by 1
-                    });
-    
-                    setTimeout(()=>{
-                        alert("Room has been saved to your favorites!");
-                    }, 2000)
-                } else {
-                    console.error("No user is logged in!");
-                }
-            } else {
-                console.error("No accommodation details found!");
-            }
-        } catch (error) {
-            console.error("Error saving room to favorites:", error);
-        } finally {
-            dispatch(showLoader(false));
-        }
-    };
 
     // HANDLE SHARING
     const handleShare = (accommodation) => {
@@ -185,10 +146,16 @@ function RoomDetails(){
                     
                     <div className="gallery-header">
                         <h2><IoIosArrowBack onClick={HandleCloseRoomDetails} className="return-icon" />{accommodation.title}</h2>
-                        <div className="room-details-buttons-box">
-                            <button className="room-details-buttons" onClick={handleSaveRoomToFavorites}>Save <CiSaveDown2 /></button>
-                            <button className="room-details-buttons" onClick={handleShare}>Share <CiShare2 /></button>
-                        </div>
+                        
+                            
+                            {isAuthenticated && 
+                            (
+                                <div className="room-details-buttons-box">
+                                    <button className="room-details-buttons" onClick={handleShare}>Share <CiShare2 /></button>
+                                </div>
+                            )}
+                            
+                        
                     </div>
 
                     {/* Picture */}

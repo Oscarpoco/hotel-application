@@ -13,7 +13,8 @@ import {
     ON_REVIEW,
     PERSONAL_DETAILS_VISIBILITY,
     BOOKINGS_DETAILS_VISIBILITY,
-    FAVORITE_DETAILS_VISIBILITY
+    FAVORITE_DETAILS_VISIBILITY,
+    LIKED,
 } 
     from "../actions/UserInterface";
 
@@ -35,6 +36,7 @@ const initialState = {
     personalDetailsVisibility: false,
     bookingsDetailsVisibility: false,
     favoriteDetailsVisibility: false,
+    isLiked: false,
 }
 
 // INITIAL STATE ENDS
@@ -146,6 +148,13 @@ const userInterfaceReducer = (state = initialState, action) =>{
                 return{
                     ...state,
                     favoriteDetailsVisibility: !state.favoriteDetailsVisibility,
+                    }
+
+            // LIKED
+            case LIKED:
+                return{
+                    ...state,
+                    isLiked: !state.isLiked
                     }
 
         default:

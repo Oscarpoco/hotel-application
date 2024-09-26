@@ -1,15 +1,57 @@
+.Navigation-layout
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    height: 80vh;
+    padding: 0;
+    position: relative;
+}
+
+.banner-text
+{
+    color: rgba(255, 255, 255, .5);
+    font-size: 3.1em;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 60%;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.Navigation-layout img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%; 
+    max-height: 100%; 
+    position: absolute; 
+    top: 0;
+    left: 0;
+}
+
 .Navigation
 {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    width: 97%;
-    padding: .7em;
-    background: var(--primary-color);
-    border: 1px solid black;
-    border-radius: 20px;
+    width: 100%;
     box-sizing: border-box;
+    background: rgba(0, 0, 0, .5);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
 }
 
 span
@@ -25,6 +67,13 @@ span
     gap: 1em;
     align-items: center;
     width: 100%;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    padding: .3em 1em;
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    position: fixed;
+    top: 2;
 }
 
 /* MENU LOGO */
@@ -38,15 +87,17 @@ span
 
 .logo-abbreviation
 {
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     border-radius: var(--circle-radius);
     background: var(--primary-color);
     box-shadow: var(--box-shadow);
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: .3em;
+    padding: .5em;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 /* MENU LOGO ENDS */
 
@@ -65,7 +116,7 @@ span
 .menu-account
 {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 1em;
     align-items: center;
 }
@@ -74,33 +125,21 @@ span
 {
     background: black;
     border-radius: var(--box-border-radius);
-    padding: .5em .8em;
     color: var(--primary-color);
     border: 2px solid black;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1em;
 }
 
 .user-icon
 {
     font-size: 1.7em;
-    color: black;
+    height: 40px;
+    width: 40px;
 }
 
-.user-radius
-{
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: .1em;
-}
 
 .user-wrapper
 {
@@ -109,67 +148,7 @@ span
     padding: 0;
     background: white;
 }
-/* MENU ACCOUNT */
 
-/* MENU ENDS */
-
-/* SEARCH */
-.search
-{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 50%;
-    box-sizing: border-box;
-    border: 2px solid rgba(0, 0, 0, .2);
-    border-radius: 50px;
-    padding: 0 .3em;
-}
-
-.search-input-wrapper
-{
-    width: 30%;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: .3em;
-}
-
-.search-input-wrapper input
-{
-    width: 100%;
-    border-radius: 50px;
-    border: none;
-    padding: 1em 1.3em;
-    box-shadow: var(--box-shadow);
-    background: rgba(0, 0, 0, .1);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-}
-
-.search-icon
-{
-    /* padding: 1em; */
-    border-radius: var(--circle-radius);
-    border: 1px solid var(--faint-color);
-    box-shadow: var(--box-shadow);
-    background: var(--red);
-    height: 40px;
-    width: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* position: absolute; */
-    /* right: 19.2%; */
-}
-
-.search-icon .search-icon-image
-{
-    color: var(--primary-color);
-    font-size: 1.3em;
-    font-weight: bold;
-}
-/* SEARCH ENDS */
 
 /* NAVIGATION BAR */
 
@@ -178,21 +157,16 @@ span
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--primary-color);
-    gap: .5em;
-    width: 100%;
-    padding: .5em;
+    gap: 2em;
+    padding: 0 2em;
 }
 
 .nav-bar
 {
-    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--primary-color);
     box-sizing: border-box;
-    box-shadow: var(--box-shadow);
     cursor: pointer;
 }
 
@@ -202,19 +176,24 @@ span
     justify-content: center;
     align-items: center;
     gap: .7em;
+    font-weight: 900;
+    font-size: 1.19em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgba(0, 0, 0, .9);
 }
 
-.nav-bar:hover
+.nav-bar p:hover
 {
-    background: var(--grey-color);
-    transition: all .7s ease-in-out;
-    border-radius: 50px;
+    color: red;
+    transition: all .5s ease-in;
+    transition: all .5s ease-out;
 }
 
 .menu-icons
 {
-    font-size: 2em;
+    font-size: 1.5em;
     color: red;
+    display: none;
 }
 
 @media only screen and (max-width: 740px) {

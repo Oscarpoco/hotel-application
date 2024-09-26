@@ -43,6 +43,9 @@ export const BOOKINGS_DETAILS_VISIBILITY = 'BOOKINGS_DETAILS_VISIBILITY';
 // FAVORITE DETAILS VISIBILITY
 export const FAVORITE_DETAILS_VISIBILITY = 'FAVORITE_DETAILS_VISIBILITY';
 
+// LIKED
+export const LIKED = 'LIKED';
+
 
 // ACTION TYPES ENDS
 
@@ -144,12 +147,20 @@ export const setFavoriteDetailsVisibility = () => {
 export const setBookingsDetailsVisibility = () => {
     return{
         type: BOOKINGS_DETAILS_VISIBILITY,
-    }
+        }
     };
 
 // PERSONAL_DETAILS_VISIBILITY
 export const setPersonalDetailsVisibility = () => {
     return{
         type: PERSONAL_DETAILS_VISIBILITY,
-    }
+        }
+    };
+
+
+//  LIKED
+export const setLiked = () => {
+    return{
+        type: LIKED,
+        }
     };

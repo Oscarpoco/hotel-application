@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore"; // Firestore imports
 import { auth } from "../../firebase/firebase"; // Auth import
 import '../Styling/Favorite.css';
-import { useDispatch } from "react-redux";
 import DataLoader from "./DataLoader";
 
 export function Favorite() {
     const [favorites, setFavorites] = useState([]); 
     const [loading, setLoading] = useState(true); 
-    const dispatch = useDispatch()
 
     // Initialize Firestore
     const firestore = getFirestore(); 
@@ -31,7 +29,7 @@ export function Favorite() {
                         ...doc.data(),
                     }));
 
-                    setFavorites(fetchedFavorites); // Set fetched favorites in state
+                    setFavorites(fetchedFavorites); 
                 } catch (error) {
                     console.error("Error fetching favorites:", error);
                 }
@@ -51,7 +49,7 @@ export function Favorite() {
             <div className="favorite-grid-wrapper">
                 {loading ? ( 
                     
-                    <p><DataLoader/></p>
+                    <DataLoader/>
                 ) : favorites.length > 0 ? ( 
                     favorites.map((favorite) => (
                         <div className="favorite-grid-item" key={favorite.id}>

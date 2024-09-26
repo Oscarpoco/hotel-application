@@ -51,9 +51,11 @@ nav
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--primary-color);
-  padding: .7em 0;
+  background: black;
+  padding: 1em 0;
+  box-sizing: border-box;
 }
+
 /* ENDS */
 
 /* MAIN */
