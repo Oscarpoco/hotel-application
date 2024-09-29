@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { viewRoomDetails, showLoader, setSelectedRoom, setLiked } from "../../redux/actions/UserInterface";
 
 // ICONS
@@ -15,7 +15,8 @@ import SearchHotels from "./SearchHotels";
 function Rooms() {
     const dispatch = useDispatch();
     const [accommodations, setAccommodations] = useState([]);
-    const [likedRooms, setLikedRooms] = useState({}); // Track liked rooms locally
+    const [filteredAccommodations, setFilteredAccommodations] = useState([]);
+    const [likedRooms, setLikedRooms] = useState({}); 
 
     const db = getFirestore();
 
@@ -47,6 +48,7 @@ function Rooms() {
                 })
             );
             setAccommodations(accommodationsList);
+            setFilteredAccommodations(accommodationsList);
         } catch (error) {
             console.error("Error fetching accommodations:", error);
         }
@@ -55,9 +57,11 @@ function Rooms() {
     // Open Room Details
     const handleOpenRoomDetails = (roomId) => {
         dispatch(showLoader(true));
+       
         dispatch(setSelectedRoom(roomId));
+        dispatch(viewRoomDetails());
         setTimeout(() => {
-            dispatch(viewRoomDetails());
+            
             dispatch(showLoader(false));
         }, 2000);
     };
@@ -122,17 +126,41 @@ function Rooms() {
         }
     };
 
+    // HANDLE SEARCH
+
+    const handleSearch = ({ searchQuery, minPrice, maxPrice, availability }) => {
+        const filtered = accommodations.filter(accommodation => {
+            const location = accommodation.location || ''; 
+            const name = accommodation.name || ''; 
+    
+            const matchesQuery = location.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                 name.toLowerCase().includes(searchQuery.toLowerCase());
+    
+            const matchesPrice = (!minPrice || accommodation.price >= minPrice) && 
+                                 (!maxPrice || accommodation.price <= maxPrice);
+    
+            const matchesAvailability = availability === "all" || 
+                                       (availability === "available" && accommodation.availability === "available") ||
+                                       (availability === "booked" && accommodation.availability === "booked");
+    
+            return matchesQuery && matchesPrice && matchesAvailability;
+        });
+        setFilteredAccommodations(filtered);
+    };
+    
+
+
     return (
         <div className="rooms-layout">
             <div className="search-bar">
-                <SearchHotels />
+                <SearchHotels onSearch={handleSearch}/>
             </div>
             <div className="rooms">
                 {/* ROOM DETAILS */}
-                {accommodations.map((accommodation) => (
+                {filteredAccommodations.map((accommodation) => (
                     <div className="room-details" key={accommodation.id}>
                         <div className="room-picture" onClick={() => handleOpenRoomDetails(accommodation.id)}>
-                            <img src={accommodation.images[2]} alt="room"></img>
+                            <img src={accommodation.images[0]} alt="room"></img>
                         </div>
                         <div className="room-content">
                             <p>{accommodation.location}</p>
@@ -140,13 +168,13 @@ function Rooms() {
                             <p>{accommodation.price} ZAR /<span> night</span></p>
                             <div className="room-rating-likes">
                                 <p className="p-wrapper">
-                                    <GiRoundStar className="room-star" />
+                                    <GiRoundStar className="room-star" style={{color: accommodation.averageRating < 3.0 ? 'red' : 'gold'}}/>
                                     <span>{accommodation.averageRating.toFixed(1) || 0}</span>
                                 </p>
                                 <p className="p-wrapper">
                                     <FaHeart
                                         className="love"
-                                        style={{ color: likedRooms[accommodation.id] ? 'red' : 'white' }}
+                                        style={{ color: likedRooms[accommodation.id] ? 'red' : 'white'}}
                                         onClick={() => handleToggleLike(accommodation)}
                                     />
                                     <span>{accommodation.likes || 0}</span>

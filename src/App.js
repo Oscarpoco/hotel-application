@@ -15,6 +15,8 @@ import Maps from './components/Pages/Maps';
 import Gallery from './components/Pages/Gallery';
 import Loader from './components/Pages/Loader';
 import Privacy from './components/Pages/Privacy';
+import About from './components/Pages/About';
+
 
 function App() {
 
@@ -59,6 +61,7 @@ function App() {
       {/* MAIN */}
       <main>
         <Rooms />
+        <About />
       </main>
       {/* MAIN */}
 

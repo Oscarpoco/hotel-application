@@ -86,7 +86,7 @@ function Navigation( {handleScroll} ){
 
                     {/* MENU LOGO */}
                     <div className="menu-logo">
-                        <div className="logo-abbreviation"><h2>R<span>H</span></h2></div>
+                        <div className="logo-abbreviation"><h3 style={{color: 'rgba(0, 0, 0, .7)'}}>R<span>H</span></h3></div>
                         <div><h3>Rest Hotel<span>y</span></h3></div>
                     </div>
                     {/* MENU LOGO ENDS */}
@@ -110,6 +110,11 @@ function Navigation( {handleScroll} ){
                             <p><SiGooglemaps className="menu-icons"/> Maps</p>
                         </div>
 
+                            {/* trending */}
+                        <div className="nav-bar" onClick={handleScroll}>
+                            <p> <BiSolidContact className="menu-icons"/>Trending</p>
+                        </div>
+
                             {/* contact us */}
                         <div className="nav-bar" onClick={handleScroll}>
                             <p> <BiSolidContact className="menu-icons"/>Contact</p>
@@ -125,17 +130,17 @@ function Navigation( {handleScroll} ){
 
                         {isAuthenticated ? 
                         <div className="user-wrapper">
-                            <button style={{background: 'white', border: 'none', padding: '.2em', height: '40px', width: '40px', borderRadius: '50%'}}
+                            <button style={{background: 'white', border: 'none', padding: '.2em', height: '45px', width: '45px', borderRadius: '50%', boxSizing: 'border-box'}}
                             onClick={handleUpdateClick}
                             >
-                                <FaRegCircleUser className="user-icon" style={{color: 'black'}}/>
+                                <FaRegCircleUser className="user-icon" style={{color: 'rgba(0, 0, 0, .7)'}}/>
                             </button>
                         </div>
 
                         :
                         
-                        <div style={{borderRadius: '50px', border: '1px solid rgba(0, 0, 0, .2)', padding: '.3em', background: '#1877F2', boxShadow: '0 0 10px rgba(0, 0, 0, .5)'}}>
-                            <button onClick={handleSignInClick}>
+                        <div className="user-wrapper">
+                            <button onClick={handleSignInClick} style={{padding: '.7em 1em'}}>
                             Sign In
                             </button>
                         </div>

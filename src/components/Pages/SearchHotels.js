@@ -39,22 +39,15 @@ const useStyles = makeStyles({
   },
 });
 
-const SearchHotels = () => {
+const SearchHotels = ({ onSearch }) => {
   const classes = useStyles();
   const [searchQuery, setSearchQuery] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [availability, setAvailability] = useState("all");
 
-  // Handle change in input fields
-  const handleSearchQueryChange = (e) => setSearchQuery(e.target.value);
-  const handleMinPriceChange = (e) => setMinPrice(e.target.value);
-  const handleMaxPriceChange = (e) => setMaxPrice(e.target.value);
-  const handleAvailabilityChange = (e) => setAvailability(e.target.value);
-
-  // Handle search button click
   const handleSearch = () => {
-    console.log("Search for:", searchQuery, minPrice, maxPrice, availability);
+    onSearch({ searchQuery, minPrice, maxPrice, availability });
   };
 
   return (
@@ -69,7 +62,7 @@ const SearchHotels = () => {
         fullWidth
         className={classes.inputField}
         value={searchQuery}
-        onChange={handleSearchQueryChange}
+        onChange={(e) => setSearchQuery(e.target.value)}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -87,7 +80,7 @@ const SearchHotels = () => {
             variant="outlined"
             className={classes.priceField}
             value={minPrice}
-            onChange={handleMinPriceChange}
+            onChange={(e) => setMinPrice(e.target.value)}
           />
         </Grid>
         <Grid item xs={6}>
@@ -97,7 +90,7 @@ const SearchHotels = () => {
             variant="outlined"
             className={classes.priceField}
             value={maxPrice}
-            onChange={handleMaxPriceChange}
+            onChange={(e) => setMaxPrice(e.target.value)}
           />
         </Grid>
       </Grid>
@@ -108,12 +101,12 @@ const SearchHotels = () => {
         fullWidth
         variant="outlined"
         value={availability}
-        onChange={handleAvailabilityChange}
+        onChange={(e) => setAvailability(e.target.value)}
         className={classes.inputField}
       >
         <MenuItem value="all">All</MenuItem>
         <MenuItem value="available">Available</MenuItem>
-        <MenuItem value="unavailable">Unavailable</MenuItem>
+        <MenuItem value="booked">Booked</MenuItem>
       </TextField>
 
       <Button

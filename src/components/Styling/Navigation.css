@@ -12,7 +12,7 @@
 
 .banner-text
 {
-    color: rgba(255, 255, 255, .5);
+    color: rgba(255, 255, 255, 1);
     font-size: 3.1em;
     position: absolute;
     bottom: 0;
@@ -24,7 +24,19 @@
     height: 60%;
     text-align: center;
     line-height: 1.5;
+    animation: typing 3s steps(30, end), blink 0.75s step-end infinite;
 }
+  
+@keyframes typing 
+  {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink 
+  {
+    50% { border-color: transparent; }
+  }  
 
 .Navigation-layout img
 {
@@ -51,7 +63,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 1;
+    z-index: 2;
 }
 
 span
@@ -74,7 +86,7 @@ span
     font-family: Georgia, 'Times New Roman', Times, serif;
     position: fixed;
     top: 2;
-    z-index: 40000000;
+    z-index: 3;
 }
 
 /* MENU LOGO */
@@ -88,16 +100,15 @@ span
 
 .logo-abbreviation
 {
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     border-radius: var(--circle-radius);
-    background: var(--primary-color);
-    box-shadow: var(--box-shadow);
+    background: rgba(0, 0, 0, .2);
+    box-shadow: 0 0 10px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: .5em;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 /* MENU LOGO ENDS */
@@ -139,6 +150,7 @@ span
     font-size: 1.7em;
     height: 40px;
     width: 40px;
+    
 }
 
 
@@ -160,6 +172,7 @@ span
     align-items: center;
     gap: 2em;
     padding: 0 2em;
+    z-index: 4;
 }
 
 .nav-bar
@@ -181,6 +194,7 @@ span
     font-size: 1.19em;
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: rgba(0, 0, 0, .9);
+    z-index: 5;
 }
 
 .nav-bar p:hover
@@ -198,179 +212,33 @@ span
 }
 
 @media only screen and (max-width: 740px) {
-    
-    .Navigation
+
+    .banner-text
     {
-        width: 95%;
-        padding: .7em;
-        gap: .5em;
-        /* box-shadow: 0 0 10px; */
-        border: 1px solid rgba(0, 0, 0, .1);
-        box-sizing: border-box;
+        color: rgba(255, 255, 255, 1);
+        font-size: 1.7em;
     }
     
     /* MENU */
     .menu
     {
-        gap: .5em;
-        box-sizing: border-box;
+        padding: 0 1em;
     }
-    
-    /* MENU LOGO */
-    .menu-logo h3
-    {
-        display: none;
-    }
-    
+
     .logo-abbreviation
-    {
-        height: 45px;
-        width: 45px;
-        padding: .3em;
-        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    }
-
-    .logo-abbreviation h2
-    {
-        font-size: 1.3em;
-    }
-    /* MENU LOGO ENDS */
-    
-    /* MENU NAVIGATION */
-    .menu-navigation
-    {
-        display: flex;
-        justify-content: space-between;
-        gap: 1.5em;
-        align-items: center;
-        cursor: pointer;
-    }
-    /* MENU NAVIGATION ENDS */
-    
-    /* MENU ACCOUNT */
-    .menu-account
-    {
-        gap: .5em;
-        justify-content: space-between;
-        width: 75%;
-    }
-
-    .menu-account p
-    {
-        font-size: 1em;
-        font-weight: 270;
-    }
-    
-    .menu-account button
-    {
-        background: transparent;
-        padding: .5em .4em;
-        color: whitesmoke;
-        font-weight: 900;
-        border: unset;
-    }
-    
-    .user-icon
-    {
-        font-size: 1.7em;
-        color: black;
-    }
-    
-    .user-radius
-    {
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
-        background: black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: .1em;
-    }
-    /* MENU ACCOUNT */
-
-    /* SEARCH */
-    .search
-    {
-        position: relative;
-        box-sizing: border-box;
-        width: 100%;
-        padding: 0 .2em;
-    }
-
-    .search-input-wrapper input
-    {
-        width: 100%;
-        padding: 1em 0;
-        text-align: center;
-        border: none;
-    }
-
-    .search-input-wrapper input::placeholder
-    {
-        text-align: center;
-    }
-
-    .search-icon
     {
         height: 40px;
         width: 40px;
-        /* left: 1%; */
     }
-
-    /* SEARCH ENDS */
-
-    /* NAVIGATION BAR */
 
     .navigation-bar
     {
-        gap: .5em;
-        padding: .5em;
-    }
-
-    .nav-bar
-    {
-        width: 25%;
-        gap: .3em;
-        border-radius: 50px;
-        box-shadow: 0 0 10px;
-        color: whitesmoke;
-        background: #0077B5;
-        padding: .3em .5em;
-    }
-
-    .nav-bar p
-    {
-        font-size: .7em;
-        font-weight: 530;
-    }
-
-    .nav-bar:hover
-    {
-        background: var(--grey-color);
-        transition: all .7s ease-in-out;
-        border-radius: 50px;
-    }
-
-    .menu-icons
-    {
-        font-size: 1em;
         display: none;
     }
 
-    #icon
+    .menu-account
     {
         display: none;
-    }
-
-    .user-wrapper
-    {
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
 

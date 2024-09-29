@@ -42,7 +42,6 @@
 /* SCROLL */
 .room-details-content 
 {
-  scrollbar-width: none; 
   -ms-overflow-style: none; 
 }
 
