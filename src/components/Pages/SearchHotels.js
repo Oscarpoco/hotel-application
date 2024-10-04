@@ -58,6 +58,7 @@ const SearchHotels = ({ onSearch }) => {
 
       <TextField
         label="Search by location, hotel name, etc."
+        placeholder="Search by location (Johannesburg only), hotel name, etc."
         variant="outlined"
         fullWidth
         className={classes.inputField}

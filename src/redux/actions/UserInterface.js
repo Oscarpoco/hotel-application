@@ -46,6 +46,10 @@ export const FAVORITE_DETAILS_VISIBILITY = 'FAVORITE_DETAILS_VISIBILITY';
 // LIKED
 export const LIKED = 'LIKED';
 
+// HUMBURGER_TOGGLE
+
+export const HUMBURGER_TOGGLE = 'HUMBURGER_TOGGLE';
+
 
 // ACTION TYPES ENDS
 
@@ -162,5 +166,12 @@ export const setPersonalDetailsVisibility = () => {
 export const setLiked = () => {
     return{
         type: LIKED,
+        }
+    };
+
+// hamburger
+export const setHamburger = () => {
+    return{
+        type: HUMBURGER_TOGGLE,
         }
     };

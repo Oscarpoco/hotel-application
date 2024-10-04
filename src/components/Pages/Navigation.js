@@ -1,20 +1,19 @@
 import React from "react";
 import '../Styling/Navigation.css';
 import { useDispatch, useSelector } from "react-redux";
-import { handleOnSignIn, openUpdate, viewReviews, viewMaps, viewGallery, showLoader } from "../../redux/actions/UserInterface";
+import { handleOnSignIn, openUpdate, viewReviews, viewMaps, viewGallery, showLoader, setHamburger } from "../../redux/actions/UserInterface";
 
-// OTHER IMPORTS INCLUDING ICONS
-import { PiWarehouseLight } from "react-icons/pi";
-import { MdOutlineReviews } from "react-icons/md";
-import { SiGooglemaps } from "react-icons/si";
+//ICONS
 import { FaRegCircleUser } from "react-icons/fa6";
-import { BiSolidContact } from "react-icons/bi";
+import { IoMdMenu } from "react-icons/io";
+import { RiCloseFill } from "react-icons/ri";
 
 
 function Navigation( {handleScroll} ){
 
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state)=> state.authentication.isAuthenticated);
+    const isHumburger = useSelector((state)=> state.userInterface.isHumburger);
 
 
      // Function to handle the button click
@@ -24,7 +23,7 @@ function Navigation( {handleScroll} ){
         setTimeout (()=> {
             dispatch(handleOnSignIn());
             dispatch(showLoader(false));
-        }, 3000);
+        }, 2000);
         
     };
 
@@ -35,7 +34,7 @@ function Navigation( {handleScroll} ){
         setTimeout (()=> {
             dispatch(openUpdate());
             dispatch(showLoader(false));
-        }, 3000);
+        }, 2000);
         
     }
 
@@ -46,7 +45,7 @@ function Navigation( {handleScroll} ){
         setTimeout (()=> {
             dispatch(viewReviews());
             dispatch(showLoader(false));
-        }, 3000);
+        }, 2000);
         
         }
 
@@ -57,7 +56,7 @@ function Navigation( {handleScroll} ){
         setTimeout (()=> {
             dispatch(viewMaps());
             dispatch(showLoader(false));
-        }, 3000);
+        }, 2000);
         
     }
 
@@ -68,7 +67,17 @@ function Navigation( {handleScroll} ){
         setTimeout (()=> {
             dispatch(viewGallery());
             dispatch(showLoader(false));
-        }, 3000);
+        }, 2000);
+    }
+
+    // VIEW GALLERY
+    const handleToggleHumburger = () => {
+        dispatch(showLoader(true));
+
+        setTimeout (()=> {
+            dispatch(setHamburger());
+            dispatch(showLoader(false));
+        }, 500);
     }
 
     return(
@@ -77,7 +86,9 @@ function Navigation( {handleScroll} ){
         <div className="Navigation-layout">
 
             <img src="banner.jpeg" alt="Hotel Banner" />
-            <h1 className="banner-text">Welcome to Rest Hotely, your home away from home! Whether you're here for business or leisure, we offer a perfect blend of comfort and luxury to make your stay memorable.</h1>
+            <h1 className="banner-text">
+                Welcome to Rest Hotely, your home away from home! Whether you're here for business or leisure, we offer a perfect blend of comfort and luxury to make your stay memorable.
+            </h1>
 
             <div className="Navigation">
 
@@ -97,27 +108,27 @@ function Navigation( {handleScroll} ){
 
                         {/* Gallery */}
                         <div className="nav-bar" onClick={handleGalleryClick}>
-                            <p><PiWarehouseLight className="menu-icons"/> Gallery</p>
+                            <p>Gallery</p>
                         </div>
 
                             {/* reviews */}
                         <div className="nav-bar" onClick={handleReviewClick}>
-                            <p><MdOutlineReviews className="menu-icons"/> Reviews</p>
+                            <p>Reviews</p>
                         </div>
                             
                             {/* maps */}
                         <div className="nav-bar" onClick={handleOpenMapsClick}>
-                            <p><SiGooglemaps className="menu-icons"/> Maps</p>
+                            <p>Maps</p>
                         </div>
 
                             {/* trending */}
                         <div className="nav-bar" onClick={handleScroll}>
-                            <p> <BiSolidContact className="menu-icons"/>Trending</p>
+                            <p>Trending</p>
                         </div>
 
                             {/* contact us */}
                         <div className="nav-bar" onClick={handleScroll}>
-                            <p> <BiSolidContact className="menu-icons"/>Contact</p>
+                            <p>Contact</p>
                         </div>
 
                     </div>
@@ -126,11 +137,11 @@ function Navigation( {handleScroll} ){
 
                     {/* MENU ACCOUNT */}
                     <div className="menu-account">
-                        <div><p>Rest Hotel<span>y your home</span></p></div>
+                        <div className="slogan"><p>Rest Hotel<span>y your home</span></p></div>
 
                         {isAuthenticated ? 
                         <div className="user-wrapper">
-                            <button style={{background: 'white', border: 'none', padding: '.2em', height: '45px', width: '45px', borderRadius: '50%', boxSizing: 'border-box'}}
+                            <button className="user-wrapper-button" style={{background: 'white'}}
                             onClick={handleUpdateClick}
                             >
                                 <FaRegCircleUser className="user-icon" style={{color: 'rgba(0, 0, 0, .7)'}}/>
@@ -146,6 +157,10 @@ function Navigation( {handleScroll} ){
                         </div>
                         }
 
+                        <div className="humburger" onClick={handleToggleHumburger}>
+                            {isHumburger ? <RiCloseFill className="humburger-icon"/> : <IoMdMenu className="humburger-icon"/>}
+                        </div>
+
                     </div>
                     {/* MENU ACCOUNT */}
 
@@ -153,6 +168,40 @@ function Navigation( {handleScroll} ){
                 {/* MENU ENDS */}  
 
             </div>
+
+            {/* HUMBURGER POPUP */}
+            {isHumburger && (
+                <div className="humburger-layout">
+                    <div className="humburger-menu">
+
+                        {/* NAVIGATION */}
+                        <div className="nav-bar" onClick={handleGalleryClick}>
+                            <p>Gallery</p>
+                        </div>
+
+                            {/* reviews */}
+                        <div className="nav-bar" onClick={handleReviewClick}>
+                            <p>Reviews</p>
+                        </div>
+                            
+                            {/* maps */}
+                        <div className="nav-bar" onClick={handleOpenMapsClick}>
+                            <p>Maps</p>
+                        </div>
+
+                            {/* trending */}
+                        <div className="nav-bar" onClick={handleScroll}>
+                            <p>Trending</p>
+                        </div>
+
+                            {/* contact us */}
+                        <div className="nav-bar" onClick={handleScroll}>
+                            <p>Contact</p>
+                        </div>
+                        {/* NAVIGATION ENDS */}
+                    </div>
+                </div>
+            )}
         </div>
         // PARENT COMPONENT ENDS
     )

@@ -101,7 +101,7 @@ function Rooms() {
                     }
 
                     // Update the accommodations state to reflect the new likes count
-                    setAccommodations((prevAccommodations) => prevAccommodations.map((item) =>
+                    setFilteredAccommodations((prevAccommodations) => prevAccommodations.map((item) =>
                         item.id === accommodation.id
                             ? { ...item, likes: item.likes + (docSnapshot.exists() ? -1 : 1) }
                             : item
@@ -164,8 +164,11 @@ function Rooms() {
                         </div>
                         <div className="room-content">
                             <p>{accommodation.location}</p>
-                            <p>Availability: <span>{accommodation.availability}</span></p>
-                            <p>{accommodation.price} ZAR /<span> night</span></p>
+                            <p>Availability: <span>{accommodation.availability.charAt(0).toUpperCase() + accommodation.availability.slice(1)}</span></p>
+                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
+                                <p style={{color: 'red'}}>{accommodation.title.toUpperCase()}</p>
+                                <p>R{accommodation.price} /<span> 🛏️🌙</span></p>
+                            </div>
                             <div className="room-rating-likes">
                                 <p className="p-wrapper">
                                     <GiRoundStar className="room-star" style={{color: accommodation.averageRating < 3.0 ? 'red' : 'gold'}}/>

@@ -56,16 +56,6 @@
     transition: transform 0.3s; 
 }
 
-.image-card img:hover 
-{
-    border-radius: 50%;
-    height: 200px;
-    width: 200px;
-    transition: all .5s ease-in;
-    transition: all .5s ease-out;
-    background: white;
-}
-
 .content-card 
 {
     width: 100%; 

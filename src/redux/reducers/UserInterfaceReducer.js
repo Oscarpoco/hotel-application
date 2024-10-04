@@ -15,6 +15,7 @@ import {
     BOOKINGS_DETAILS_VISIBILITY,
     FAVORITE_DETAILS_VISIBILITY,
     LIKED,
+    HUMBURGER_TOGGLE,
 } 
     from "../actions/UserInterface";
 
@@ -37,6 +38,7 @@ const initialState = {
     bookingsDetailsVisibility: false,
     favoriteDetailsVisibility: false,
     isLiked: false,
+    isHumburger: false,
 }
 
 // INITIAL STATE ENDS
@@ -155,6 +157,13 @@ const userInterfaceReducer = (state = initialState, action) =>{
                 return{
                     ...state,
                     isLiked: !state.isLiked
+                    }
+
+            // HUMBURGER_TOGGLE
+            case HUMBURGER_TOGGLE:
+                return{
+                    ...state,
+                    isHumburger: !state.isHumburger
                     }
 
         default:
