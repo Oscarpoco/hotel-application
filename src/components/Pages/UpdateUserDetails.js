@@ -28,6 +28,7 @@ function UpdateUserDetails() {
     age: "",
     phone: "",
     userId: userId,
+    email: user.email,
     status: "Active",
   });
 
@@ -71,6 +72,7 @@ function UpdateUserDetails() {
           phone: userDetails.phone,
           userId: userDetails.userId,
           status: "Active",
+          email: userDetails.email,
         },
         { merge: true }
       );

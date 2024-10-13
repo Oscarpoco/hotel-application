@@ -3,18 +3,42 @@ import '../Styling/RoomDetails.css';
 import { IoIosArrowBack } from "react-icons/io";
 import { useSelector } from "react-redux";
 import StripeCheckout from 'react-stripe-checkout';
-import { doc, setDoc, getFirestore } from "firebase/firestore";
+import { doc, setDoc, getFirestore, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 function Reserved({ HandleCloseReservation, accommodation }) {
     const reservation = useSelector((state) => state.authentication.reservation);
     const user = useSelector((state) => state.authentication.user); 
     const db = getFirestore();
 
+    const [userData, setUserData] = useState('')
+    const userId = user.id || user.uid; 
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const userDocRef = doc(db, "users", userId);
+                const userDoc = await getDoc(userDocRef);
+
+                if (userDoc.exists()) {
+                    setUserData(userDoc.data());
+                } else {
+                    console.error("No user data found");
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        };
+
+        fetchUserData();
+    }, [db, userId]);
+
     if (!reservation || !user) {
         return <div>Loading...</div>;
     }
 
-    const userId = user.id || user.uid; 
+    
+    const { email, fullnames } = userData;
 
     const onToken = async (token) => {
         try {
@@ -30,6 +54,9 @@ function Reserved({ HandleCloseReservation, accommodation }) {
                 paymentMethodId: token.id,
                 createdAt: new Date().toISOString(),
                 status: "Pending",
+                fullnames: fullnames,
+                email: email
+            
             };
 
             await setDoc(doc(db, "bookings", `${userId}_${new Date().getTime()}`), bookingData);
