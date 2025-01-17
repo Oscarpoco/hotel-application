@@ -121,11 +121,6 @@ function Navigation( {handleScroll} ){
                             <p>Maps</p>
                         </div>
 
-                            {/* trending */}
-                        <div className="nav-bar" onClick={handleScroll}>
-                            <p>Trending</p>
-                        </div>
-
                             {/* contact us */}
                         <div className="nav-bar" onClick={handleScroll}>
                             <p>Contact</p>
@@ -187,11 +182,6 @@ function Navigation( {handleScroll} ){
                             {/* maps */}
                         <div className="nav-bar" onClick={handleOpenMapsClick}>
                             <p>Maps</p>
-                        </div>
-
-                            {/* trending */}
-                        <div className="nav-bar" onClick={handleScroll}>
-                            <p>Trending</p>
                         </div>
 
                             {/* contact us */}

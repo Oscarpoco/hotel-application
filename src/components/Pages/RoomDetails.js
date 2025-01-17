@@ -78,6 +78,7 @@ function RoomDetails(){
                 .then(() => console.log('Successful share'))
                 .catch((error) => console.error('Error sharing:', error));
         } else {
+            
             // Fallback for browsers that do not support navigator.share
             navigator.clipboard.writeText(shareData.url)
                 .then(() => alert('Link copied to clipboard!'))
@@ -90,14 +91,7 @@ function RoomDetails(){
 
     // HANDLES CLOSING THE ROOM DETAILS PAGE
     const HandleCloseRoomDetails = ()=> {
-        dispatch(showLoader(true));
-
-        setTimeout (()=> {
-            dispatch(viewRoomDetails());
-            window.location.reload();
-            dispatch(showLoader(false));
-        }, 2000);
-        
+        dispatch(viewRoomDetails());  
     }
 
     // HANDLES RESERVATION

@@ -27,8 +27,8 @@ function UpdateUserDetails() {
     location: "",
     age: "",
     phone: "",
-    userId: userId,
-    email: user.email,
+    userId: userId || '',
+    email: user?.email || "",
     status: "Active",
   });
 
@@ -66,19 +66,18 @@ function UpdateUserDetails() {
       await setDoc(
         doc(db, "users", userId),
         {
-          fullnames: userDetails.fullnames,
-          location: userDetails.location,
-          age: userDetails.age,
-          phone: userDetails.phone,
-          userId: userDetails.userId,
+          fullnames: userDetails?.fullnames,
+          location: userDetails?.location,
+          age: userDetails?.age,
+          phone: userDetails?.phone,
+          userId: userDetails?.userId,
           status: "Active",
-          email: userDetails.email,
+          email: userDetails?.email,
         },
         { merge: true }
       );
 
       alert("Profile updated successfully!");
-      window.location.reload();
       setUserDetails({
         fullnames: "",
         location: "",
@@ -99,7 +98,6 @@ function UpdateUserDetails() {
     dispatch(showLoader(true));
     setTimeout(() => {
       dispatch(openUpdate());
-      window.location.reload();
       dispatch(showLoader(false));
     }, 3000);
   };
@@ -109,7 +107,6 @@ function UpdateUserDetails() {
     setTimeout(() => {
       dispatch(openUpdate(false));
       dispatch(handleOnSignOut());
-      window.location.reload();
       dispatch(showLoader(false));
     }, 3000);
   };
@@ -154,7 +151,7 @@ function UpdateUserDetails() {
                   fullWidth
                   label="Full names"
                   name="fullnames"
-                  value={userDetails.fullnames}
+                  value={userDetails?.fullnames || ''}
                   onChange={handleInputChange}
                   placeholder="Enter Full Names"
                   InputLabelProps={{ shrink: true }}
@@ -165,7 +162,7 @@ function UpdateUserDetails() {
                   fullWidth
                   label="Location"
                   name="location"
-                  value={userDetails.location}
+                  value={userDetails?.location || ''}
                   onChange={handleInputChange}
                   placeholder="Enter your city and country"
                   InputLabelProps={{ shrink: true }}
@@ -177,7 +174,7 @@ function UpdateUserDetails() {
                   type="number"
                   label="Age"
                   name="age"
-                  value={userDetails.age}
+                  value={userDetails?.age || ''}
                   onChange={handleInputChange}
                   placeholder="Enter your age (18+)"
                   inputProps={{ min: 18, max: 80 }}
@@ -190,7 +187,7 @@ function UpdateUserDetails() {
                   type="tel"
                   label="Phone"
                   name="phone"
-                  value={userDetails.phone}
+                  value={userDetails?.phone || ''}
                   onChange={handleInputChange}
                   placeholder="Enter your phone number"
                   inputProps={{ maxLength: 10 }}

@@ -33,10 +33,6 @@ function Reserved({ HandleCloseReservation, accommodation }) {
         fetchUserData();
     }, [db, userId]);
 
-    if (!reservation || !user) {
-        return <div>Loading...</div>;
-    }
-
     
     const { email, fullnames } = userData;
 
@@ -54,8 +50,8 @@ function Reserved({ HandleCloseReservation, accommodation }) {
                 paymentMethodId: token.id,
                 createdAt: new Date().toISOString(),
                 status: "Pending",
-                fullnames: fullnames,
-                email: email
+                fullnames: fullnames || '',
+                email: email || ''
             
             };
 
