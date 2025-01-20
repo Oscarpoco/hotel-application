@@ -14,6 +14,7 @@ import { CiShare2 } from "react-icons/ci";
 import { IoIosArrowBack } from "react-icons/io";
 
 import { FaKitchenSet } from "react-icons/fa6";
+import { MdOutlineLocalActivity } from "react-icons/md";
 import { PiOfficeChairLight } from "react-icons/pi";
 import { IoTvSharp } from "react-icons/io5";
 import { RiFridgeFill } from "react-icons/ri";
@@ -32,7 +33,7 @@ function RoomDetails(){
 
     // AMENITIES ICONS
     const iconMapping = {
-        "Kitchen": <FaKitchenSet className="offer-icon" />,
+        "Kitchen": <MdOutlineLocalActivity className="offer-icon" />,
         "Chair": <PiOfficeChairLight className="offer-icon" />,
         "TV": <IoTvSharp className="offer-icon" />,
         "Fridge": <RiFridgeFill className="offer-icon" />,
@@ -105,7 +106,7 @@ function RoomDetails(){
                 dispatch(handleOnSignIn(true));
             }
             dispatch(showLoader(false));
-        }, 2000);
+        }, 500);
         
     }
 
@@ -117,7 +118,7 @@ function RoomDetails(){
             dispatch(viewRoomDetails(false));
             window.location.reload();
             dispatch(showLoader(false));
-        }, 2000)
+        }, 500)
     }
 
 
@@ -200,8 +201,8 @@ function RoomDetails(){
                                 <h2><strong>What this place offers</strong></h2>
                                 <div className="offers">
                                 {accommodation.amenities.map((amenity, index) => (
-                                    <p key={index}>
-                                    {iconMapping[amenity] || <FaKitchenSet className="offer-icon" />}{" "}
+                                    <p key={index} className="amenity-wrapper">
+                                    {iconMapping[amenity] || <MdOutlineLocalActivity className="offer-icon" />}{" "}
                                     {amenity}
                                     </p>
                                 ))}

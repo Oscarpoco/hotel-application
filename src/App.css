@@ -85,6 +85,8 @@ main
   align-items: center;
   background: var(--primary-color);
   box-sizing: border-box;
+  padding: 2rem 0;
+  gap: 3rem
 }
 /* ENDS */
 

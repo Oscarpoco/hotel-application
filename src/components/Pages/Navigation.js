@@ -23,7 +23,7 @@ function Navigation( {handleScroll} ){
         setTimeout (()=> {
             dispatch(handleOnSignIn());
             dispatch(showLoader(false));
-        }, 2000);
+        }, 500);
         
     };
 
@@ -34,7 +34,7 @@ function Navigation( {handleScroll} ){
         setTimeout (()=> {
             dispatch(openUpdate());
             dispatch(showLoader(false));
-        }, 2000);
+        }, 500);
         
     }
 
@@ -45,7 +45,7 @@ function Navigation( {handleScroll} ){
         setTimeout (()=> {
             dispatch(viewReviews());
             dispatch(showLoader(false));
-        }, 2000);
+        }, 500);
         
         }
 
@@ -56,7 +56,7 @@ function Navigation( {handleScroll} ){
         setTimeout (()=> {
             dispatch(viewMaps());
             dispatch(showLoader(false));
-        }, 2000);
+        }, 500);
         
     }
 
@@ -67,7 +67,7 @@ function Navigation( {handleScroll} ){
         setTimeout (()=> {
             dispatch(viewGallery());
             dispatch(showLoader(false));
-        }, 2000);
+        }, 500);
     }
 
     // VIEW GALLERY

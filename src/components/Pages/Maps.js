@@ -17,7 +17,7 @@ function Maps(){
         setTimeout (()=> {
             dispatch(viewMaps());
             dispatch(showLoader(false));
-        }, 3000);
+        }, 500);
     }
 
     return(

@@ -17,6 +17,8 @@ import { faCcPaypal, faGoogle, faBehance, faCcVisa, faApplePay, faStripe} from "
 function Footer({handleOpenPrivacy}){
     const dispatch = useDispatch();
 
+    const currentYear = new Date().getFullYear();
+
 
     // HANDLES OPENING REVIEW
     const handleReviewClick = () => {
@@ -25,7 +27,7 @@ function Footer({handleOpenPrivacy}){
         setTimeout (()=> {
             dispatch(viewReviews());
             dispatch(showLoader(false));
-        }, 3000);
+        }, 500);
         
         }
 
@@ -36,7 +38,7 @@ function Footer({handleOpenPrivacy}){
         setTimeout (()=> {
             dispatch(viewMaps());
             dispatch(showLoader(false));
-        }, 3000);
+        }, 500);
         
     }
 
@@ -47,7 +49,7 @@ function Footer({handleOpenPrivacy}){
         setTimeout (()=> {
             dispatch(viewGallery());
             dispatch(showLoader(false));
-        }, 3000);
+        }, 500);
     }
 
     const sponsors = [
@@ -206,7 +208,7 @@ function Footer({handleOpenPrivacy}){
             </div>
 
             <div className="copyright">
-            <p>&copy; 2024 Rest Hotely. All rights reserved.</p>
+            <p>&copy; {currentYear} Rest Hotely. All rights reserved.</p>
             <p>
                 Rest Hotely is committed to protecting your privacy and ensuring a secure and transparent experience on our platform.
                 By using our services, you agree to all our <span style={{color: '#1DA1F2', cursor: 'pointer'}} onClick={handleOpenPrivacy}>Privacy & Policy</span> and <span style={{color: '#1DA1F2', cursor: 'pointer'}} onClick={handleOpenPrivacy}>Terms & Conditions</span>

@@ -71,9 +71,8 @@ function Gallery(){
 
         setTimeout (()=> {
             dispatch(viewGallery());
-            window.location.reload();
             dispatch(showLoader(false));
-        }, 3000);
+        }, 500);
         
     }
 

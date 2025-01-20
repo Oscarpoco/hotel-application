@@ -39,9 +39,8 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    border: 2px solid rgba(0, 0, 0, .3);
-    padding: .7em;
-    border-radius: 7px;
+    border: 2px solid rgba(0, 0, 0, .1);
+    border-radius: 40px;
 }
 
 .room-details span
@@ -59,12 +58,15 @@
     overflow: hidden;
     transition: all .7s ease-in;
     transition: all .7s ease-out;
+    border-radius: 40px;
+    padding: 3px;
+    box-sizing: border-box;
 }
 
 .room-picture:hover
 {
     box-shadow: unset;
-    border-radius: 0;
+    border-radius: 40px;
     transition: all .7s ease-in;
     transition: all .7s ease-out;
     max-width: 300px;
@@ -79,13 +81,15 @@
     justify-content: flex-start;
     align-items: start;
     width: 100%;
+    padding: .7em;
+    box-sizing: border-box;
 }
 
 .room-content p 
 {
     margin: 0;
     padding: .3em 0;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 1.1em;
 }
 
@@ -101,7 +105,7 @@
 {
     width: 100%;
     height: 100%;
-    border-radius: 7px;
+    border-radius: 40px;
     object-fit: cover;
     cursor: pointer;
     transition: all .7s ease-in;
@@ -110,12 +114,9 @@
 
 .room-details img:hover
 {
-    transition: all .7s ease-in;
-    transition: all .7s ease-out;
-    top: 1;
-    left: 1;
-    width: 80%;
-    height: 80%;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 40px;
 }
 
 .room-rating-likes
@@ -134,25 +135,24 @@
     align-items: center;
     gap: .5em;
     width: 30%;
-    border-radius: 7px;
-    border: 1px solid rgba(0, 0, 0, .1);
-    background: rgba(0, 0, 0, .6);
+    border-radius: 40px;
+    background: rgba(0, 0, 0, .1);
 }
 
 .p-wrapper span
 {
-    font-weight: 900;
-    color: white;
+    font-weight: bold;
+    color: black;
 }
 
 .room-star
 {
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 
 .love
 {
-    font-size: 1.5em;
+    font-size: 1.2em;
     z-index: 1;
     cursor: pointer;
 }

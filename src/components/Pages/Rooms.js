@@ -5,6 +5,9 @@ import { viewRoomDetails, showLoader, setSelectedRoom, setLiked } from "../../re
 // ICONS
 import { GiRoundStar } from "react-icons/gi";
 import { FaHeart } from "react-icons/fa";
+import { GrMoney } from "react-icons/gr";
+import { MdEventAvailable } from "react-icons/md";
+import { CgUnavailable } from "react-icons/cg";
 
 // FIRESTORE
 import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc, increment, getDoc } from "firebase/firestore"; // Firestore imports
@@ -63,7 +66,7 @@ function Rooms() {
         setTimeout(() => {
             
             dispatch(showLoader(false));
-        }, 2000);
+        }, 1000);
     };
 
     // Handle Like/Unlike Functionality
@@ -164,23 +167,23 @@ function Rooms() {
                         </div>
                         <div className="room-content">
                             <p>{accommodation.location}</p>
-                            <p>Availability: <span>{accommodation.availability.charAt(0).toUpperCase() + accommodation.availability.slice(1)}</span></p>
+                            <p style={{display: 'flex', justifyContext: 'center', alignItems: 'center', gap: '7px', fontStyle: 'italic'}}>Availability: <span>{accommodation.availability.charAt(0).toUpperCase() + accommodation.availability.slice(1)}</span> {accommodation.availability? <MdEventAvailable/> : <CgUnavailable/>}</p>
                             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
-                                <p style={{color: 'red'}}>{accommodation.title.toUpperCase()}</p>
-                                <p>R{accommodation.price} /<span> 🛏️🌙</span></p>
+                                <p style={{color: 'green'}}>{accommodation.title.toUpperCase()}</p>
+                                <p style={{display: 'flex', justifyContext: 'center', alignItems: 'center', gap: '10px', fontWeight: 600}}>R{accommodation.price} - <GrMoney color="green"/></p>
                             </div>
                             <div className="room-rating-likes">
                                 <p className="p-wrapper">
-                                    <GiRoundStar className="room-star" style={{color: accommodation.averageRating < 3.0 ? 'red' : 'gold'}}/>
-                                    <span>{accommodation.averageRating.toFixed(1) || 0}</span>
+                                    <GiRoundStar className="room-star" style={{color: accommodation.averageRating < 3.0 ? 'maroon' : 'gold'}}/>
+                                    <span style={{fontWeight: 600}}>{accommodation.averageRating.toFixed(1) || 0}</span>
                                 </p>
                                 <p className="p-wrapper">
                                     <FaHeart
                                         className="love"
-                                        style={{ color: likedRooms[accommodation.id] ? 'red' : 'white'}}
+                                        style={{ color: likedRooms[accommodation.id] ? 'red' : 'purple'}}
                                         onClick={() => handleToggleLike(accommodation)}
                                     />
-                                    <span>{accommodation.likes || 0}</span>
+                                    <span style={{fontWeight: 600}}>{accommodation.likes || 0}</span>
                                 </p>
                             </div>
                         </div>

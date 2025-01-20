@@ -24,9 +24,8 @@ function Reviews() {
 
     setTimeout(() => {
       dispatch(viewReviews());
-      window.location.reload();
       dispatch(showLoader(false));
-    }, 3000);
+    }, 500);
   };
 
   // Fetch accommodations with reviews

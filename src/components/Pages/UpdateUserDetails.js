@@ -95,11 +95,7 @@ function UpdateUserDetails() {
   };
 
   const handleCloseUpdate = () => {
-    dispatch(showLoader(true));
-    setTimeout(() => {
-      dispatch(openUpdate());
-      dispatch(showLoader(false));
-    }, 3000);
+    dispatch(openUpdate());
   };
 
   const logout = () => {
@@ -108,7 +104,7 @@ function UpdateUserDetails() {
       dispatch(openUpdate(false));
       dispatch(handleOnSignOut());
       dispatch(showLoader(false));
-    }, 3000);
+    }, 500);
   };
 
   const handleOpenpersonalDetails = () => {
