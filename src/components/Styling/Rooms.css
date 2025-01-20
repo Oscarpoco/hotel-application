@@ -169,13 +169,8 @@
     gap: 2em;
     box-sizing: border-box; 
     overflow-y: auto;
-    border-radius: 7px;
     }
 
-    .room-details 
-    {
-        border-radius: 7px;
-    }
 
     .room-content
     {
@@ -193,13 +188,11 @@
 
     .room-details img 
     {
-        border-radius: .7em;
         width: 100%;
     }
 
     .room-picture
     {
-        border-radius: .7em;
         width: 100%;
     }
 }

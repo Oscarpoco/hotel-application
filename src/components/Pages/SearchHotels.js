@@ -26,16 +26,73 @@ const useStyles = makeStyles({
   },
   inputField: {
     marginBottom: "1.5em",
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "rgba(255, 255, 255, 0.5)",
+      },
+      "&:hover fieldset": {
+        borderColor: "rgba(255, 255, 255, 0.8)",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#fff",
+      },
+    },
+    "& .MuiInputLabel-root": {
+      color: "rgba(255, 255, 255, 0.7)",
+    },
+    "& .MuiInputLabel-root.Mui-focused": {
+      color: "#fff",
+    },
+    "& .MuiOutlinedInput-input": {
+      color: "#fff",
+    },
+    "& .MuiInputAdornment-root .MuiSvgIcon-root": {
+      color: "rgba(255, 255, 255, 0.7)",
+    },
+    "& .MuiSelect-icon": {
+      color: "rgba(255, 255, 255, 0.7)",
+    },
   },
   priceField: {
     width: "100%",
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "rgba(255, 255, 255, 0.5)",
+      },
+      "&:hover fieldset": {
+        borderColor: "rgba(255, 255, 255, 0.8)",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#fff",
+      },
+    },
+    "& .MuiInputLabel-root": {
+      color: "rgba(255, 255, 255, 0.7)",
+    },
+    "& .MuiInputLabel-root.Mui-focused": {
+      color: "#fff",
+    },
+    "& .MuiOutlinedInput-input": {
+      color: "#fff",
+    },
   },
   searchButton: {
-    background: "#1877f2",
+    background: "rgba(255, 255, 255, 0.2)",
     color: "#fff",
+    borderColor: "#fff",
+    border: "2px solid",
+    backdropFilter: "blur(10px)",
     "&:hover": {
-      background: "#155bb5",
+      background: "rgba(255, 255, 255, 0.3)",
+      borderColor: "#fff",
     },
+  },
+
+  title: {
+    color: "#fff",
+    marginBottom: "1.5em",
+    fontWeight: 600,
+    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
   },
 });
 
@@ -52,7 +109,7 @@ const SearchHotels = ({ onSearch }) => {
 
   return (
     <Box className={classes.searchContainer}>
-      <Typography variant="h4" component="h2" gutterBottom>
+      <Typography variant="h4" component="h2" gutterBottom className={classes.title}>
         Find Your Perfect Stay
       </Typography>
 
@@ -74,7 +131,7 @@ const SearchHotels = ({ onSearch }) => {
       />
 
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             label="Min Price (ZAR)"
             type="number"
@@ -84,7 +141,7 @@ const SearchHotels = ({ onSearch }) => {
             onChange={(e) => setMinPrice(e.target.value)}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             label="Max Price (ZAR)"
             type="number"
@@ -105,14 +162,14 @@ const SearchHotels = ({ onSearch }) => {
         onChange={(e) => setAvailability(e.target.value)}
         className={classes.inputField}
       >
-        <MenuItem value="all">All</MenuItem>
-        <MenuItem value="available">Available</MenuItem>
-        <MenuItem value="booked">Booked</MenuItem>
+        <MenuItem value="all" className={classes.menuItem}>All</MenuItem>
+        <MenuItem value="available" className={classes.menuItem}>Available</MenuItem>
+        <MenuItem value="booked" className={classes.menuItem}>Booked</MenuItem>
       </TextField>
 
       <Button
         className={classes.searchButton}
-        variant="contained"
+        variant="outlined"
         size="large"
         onClick={handleSearch}
       >

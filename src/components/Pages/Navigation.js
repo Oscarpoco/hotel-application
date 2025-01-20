@@ -147,7 +147,7 @@ function Navigation( {handleScroll} ){
                         
                         <div className="user-wrapper">
                             <button onClick={handleSignInClick} style={{padding: '.7em 1em'}}>
-                            Sign In
+                            SIGN IN
                             </button>
                         </div>
                         }

@@ -28,14 +28,14 @@ const authenticationReducer = (state = initialState, action) => {
             };
 
             // SIGN IN SUCCSSFULLY
-        case SIGN_IN_SUCCESS:
-        case SIGN_UP_SUCCESS: 
-            return {
-                ...state,
-                isAuthenticated: true,
-                user: action.payload,
-                error: null
-            };
+            case SIGN_IN_SUCCESS:
+                return {
+                    ...state,
+                    isAuthenticated: true,
+                    user: action.payload,
+                    error: null,
+                    isSignInOpen: false,
+                };
 
             // SIGN IN ERRORS
         case SIGN_IN_ERROR:
@@ -44,7 +44,8 @@ const authenticationReducer = (state = initialState, action) => {
                 ...state,
                 isAuthenticated: false,
                 user: null,
-                error: action.payload
+                error: action.payload,
+                isSignInOpen: true,
             };
 
             // SIGN OUT

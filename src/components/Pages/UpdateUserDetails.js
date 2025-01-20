@@ -147,7 +147,7 @@ function UpdateUserDetails() {
                   fullWidth
                   label="Full names"
                   name="fullnames"
-                  value={userDetails?.fullnames || ''}
+                  value={user?.displayName || userDetails?.fullnames || ''}
                   onChange={handleInputChange}
                   placeholder="Enter Full Names"
                   InputLabelProps={{ shrink: true }}
@@ -183,7 +183,7 @@ function UpdateUserDetails() {
                   type="tel"
                   label="Phone"
                   name="phone"
-                  value={userDetails?.phone || ''}
+                  value={ user?.phoneNumber || userDetails?.phone || ''}
                   onChange={handleInputChange}
                   placeholder="Enter your phone number"
                   inputProps={{ maxLength: 10 }}

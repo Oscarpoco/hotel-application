@@ -38,9 +38,9 @@ export const handleSignInWithEmail = (email, password) => async (dispatch) => {
 };
 
 // Email Sign-Up
-export const handleSignUpWithEmail = (email, password, location, fullnames) => async (dispatch) => {
+export const handleSignUpWithEmail = (email, password) => async (dispatch) => {
     try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password, location, fullnames);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         dispatch({ type: SIGN_UP_SUCCESS, payload: userCredential.user }); 
     } catch (error) {
         dispatch({ type: SIGN_UP_ERROR, payload: error.message }); 

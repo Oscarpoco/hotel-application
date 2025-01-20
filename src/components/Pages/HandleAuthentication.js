@@ -1,203 +1,261 @@
-
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import '../Styling/HandleAuthentication.css';
-import { handleOnSignIn, handleOnSignUp, showLoader} from "../../redux/actions/UserInterface";
-import { handleSignInWithGoogle, handleSignInWithEmail, handleSignUpWithEmail  } from "../../redux/actions/Authentication";
+
+// ICONS
 import { TfiEmail } from "react-icons/tfi";
 import { FcGoogle } from "react-icons/fc";
 
-function HandleAuthentication({handleOpenPrivacy}) {
-    const isSignInOpen = useSelector((state) => state.userInterface.isSignInOpen);
-    const isSignUpOpen = useSelector((state) => state.userInterface.isSignUpOpen);
-    
-    const dispatch = useDispatch();
+// REDUX
+import { 
+  handleOnSignIn, 
+  handleOnSignUp, 
+  showLoader 
+} from "../../redux/actions/UserInterface";
+import { 
+  handleSignInWithGoogle, 
+  handleSignInWithEmail, 
+  handleSignUpWithEmail 
+} from "../../redux/actions/Authentication";
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+// STYLE 
+import '../Styling/HandleAuthentication.css'
 
-    // Handle close
-    const handleClose = () => {
-        dispatch(showLoader(true));
-            
-        setTimeout (()=> {
-            dispatch(handleOnSignIn(false));
-            // window.location.reload(true);
-            dispatch(showLoader(false));
-        }, 3000);
-        
+const Notification = ({ message, type, onClose }) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onClose();
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [onClose]);
+
+  return (
+    <div className={`notification ${type}`}>
+      <p>{message}</p>
+      <button onClick={onClose} className="notification-close">×</button>
+    </div>
+  );
+};
+
+function HandleAuthentication({ handleOpenPrivacy }) {
+  const dispatch = useDispatch();
+  const isSignInOpen = useSelector((state) => state.userInterface.isSignInOpen);
+  const isSignUpOpen = useSelector((state) => state.userInterface.isSignUpOpen);
+  const error = useSelector((state) => state.authentication.error);
+  const user = useSelector((state) => state.authentication.user);
+  const isAuthenticated = useSelector((state) => state.authentication.isAuthenticated);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [notification, setNotification] = useState(null);
+
+  const showNotification = (message, type) => {
+    setNotification({ message, type });
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+        showNotification("Successfully signed in!", "success");
+        dispatch(handleOnSignIn(false));
     }
+}, [isAuthenticated]);
 
-    // Handle Google sign-in
-    const handleGoogleSignIn = () => {
-        dispatch(showLoader(true));
 
-        setTimeout (()=> {
-            dispatch(handleSignInWithGoogle());
-            dispatch(handleOnSignIn(false));
-            dispatch(showLoader(false));
-        }, 3000);
-        
+  const handleClose = () => {
+    dispatch(handleOnSignIn(false));
+  };
+
+  console.log('isAuthenticated:', isAuthenticated, 'user:', user);
+
+
+//   GOOGLE
+const handleGoogleSignIn = async () => {
+    dispatch(showLoader(true));
+    try {
+        await dispatch(handleSignInWithGoogle());
+        if (isAuthenticated) {
+            showNotification("Successfully signed in with Google!", "success");
+        }
+    } catch (error) {
+        showNotification(error, "error");
+    } finally {
+        dispatch(showLoader(false));
     }
-
-    // Handle email sign-in
-    const handleEmailSignIn = (e) => {
-        e.preventDefault();
-        dispatch(showLoader(true));
-
-        setTimeout (()=> {
-            dispatch(handleSignInWithEmail(email, password));
-            dispatch(handleOnSignIn(false));
-            dispatch(showLoader(false));
-        }, 3000);
-        
-    }
-
-    // handle open sign up
-    const handleOpenSignUp = () => {
-        dispatch(showLoader(true));
-        setTimeout (()=> {
-            dispatch(handleOnSignUp());
-            dispatch(showLoader(false));
-        }, 2000);
-        
-    }
+};
 
 
-    // handle sign up with email
-    const handleSignUpWithEmailAndPassword =(e) =>{
-        e.preventDefault();
 
-        if (password !== confirmPassword) {
-            alert("Passwords do not match!"); 
-            return;
+//   EMAIL
+const handleEmailSignIn = async (e) => {
+    e.preventDefault();
+    dispatch(showLoader(true));
+    try {
+        await dispatch(handleSignInWithEmail(email, password));
+        if (isAuthenticated) {
+            showNotification("Successfully signed in!", "success");
         }
 
-        dispatch(showLoader(true));
-        setTimeout (()=> {
-            dispatch(handleSignUpWithEmail(email, password));
-            dispatch(handleOnSignIn(false));
-            dispatch(showLoader(false));
-            }, 3000);
+        setEmail('');
+        setPassword('')
+
+    } catch (error) {
+        showNotification(error, "error");
+    } finally {
+        dispatch(showLoader(false));
+    }
+};
+
+
+  const handleOpenSignUp = () => {
+    dispatch(handleOnSignUp(true));
+  };
+
+
+//   SIGN UP
+  const handleSignUpWithEmailAndPassword = (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      showNotification("Passwords do not match!", "error");
+      return;
     }
 
-    return (
-        <>
-            {isSignInOpen && (
-                <div className="handle-authentication-overlay">
-                    <div className="handle-authentication">
-                        <div className="signup-signin">
-                            <label><p>Sign in or create an account</p></label>
-                            <button onClick={handleClose} className="close">+</button>
-                            <div className="form">
-                                {/* SIGN IN GROUP */}
-                                <div className="signIn-group">
+    dispatch(showLoader(true));
+    setTimeout(() => {
+      dispatch(handleSignUpWithEmail(email, password))
+        .then(() => {
+            dispatch(handleSignInWithEmail(email, password))
+            if (isAuthenticated){
+                showNotification("Account created successfully!", "success");
+            }
 
-                                {/* SIGN UP AND IN FORM */}
-                                   {isSignUpOpen ? (
-                                   
-                                //    SIGN UP FORM
-                                   <form className="signIn-group-child" onSubmit={handleSignUpWithEmailAndPassword}>
+            setEmail('');
+            setPassword('')
 
-                                        <label>Email address</label>
-                                        <input
-                                            type="email"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            placeholder="Enter your email address"
-                                        />
+        })
+        .catch(() => {
+          showNotification(error.message, "error");
+        })
+        .finally(() => {
+          dispatch(showLoader(false));
+        });
+    }, 500);
+  };
 
-                                        <label>Password</label>
-                                        <input
-                                            type="password"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            placeholder="Enter your password"
-                                        />
+  return (
+    <>
+      {isSignInOpen && (
+        <div className="auth-overlay">
+          <div className="auth-container">
+            <div className="auth-header">
+              <h2>{isSignUpOpen ? "Create Account" : "Sign In"}</h2>
+              <button onClick={handleClose} className="close-button">
+                ×
+              </button>
+            </div>
 
-                                        <label>Confirm Password</label>
-                                        <input
-                                            type="password"
-                                            value={confirmPassword}
-                                            onChange={(e) => setConfirmPassword(e.target.value)}
-                                            placeholder="Re-enter your password"
-                                        />
-
-                                        <button type="submit" className="signIn-form-button" style={{background: '#1877F2'}}>
-                                        <TfiEmail className="form-icons"/> Continue with Email
-                                        </button>
-                                    </form>
-                                    // SIGN UP ENDS
-                                   ):(
-                                    // SIGN IN FORM
-                                     <form className="signIn-group-child" onSubmit={handleEmailSignIn}>
-                                        <label>Email address</label>
-                                        <input
-                                            type="email"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            placeholder="Enter your email address"
-                                        />
-
-                                        <label>Password</label>
-                                        <input
-                                            type="password"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            placeholder="Enter your password"
-                                        />
-
-                                        <button type="submit" className="signIn-form-button" style={{background: '#1877F2'}}>
-                                        <TfiEmail className="form-icons"/> Continue with Email
-                                    </button>
-                                </form>
-                                    // ENDS
-                                    )}
-                                    
-
-                                    
-
-                        
-                                    <div className="signIn-group-p-tag">
-                                        <p>or</p>
-                                    </div>
-                                </div>
-                               
-                                <div className="group">
-                                <button type="button" className="signIn-form-button" onClick={handleGoogleSignIn} style={{background: '#1DA1F2'}}>
-                                    <FcGoogle className="form-icons"/> Continue with Google
-                                </button>
-
-                                <button type="button" className="signIn-form-button" onClick={handleOpenSignUp} style={{background: '#0077B5'}}>
-                                <TfiEmail className="form-icons"/>Sign Up / In with email
-                                </button>
-                                </div>
-                                 {/* ENDS */}
-
-                                {/* FORM FOOTER */}
-                                <div className="form-footer">
-                                    <p>
-                                        By creating an account, you agree with our 
-                                        <span onClick={handleOpenPrivacy}>Terms & conditions</span> and <span onClick={handleOpenPrivacy}>Privacy</span>
-                                    </p>
-
-                                    <div className="footer-rights">
-                                        All right reserved.
-                                        <br />
-                                        Copyright 2024 - resthotely.com&trade;
-                                    </div>
-                                </div>
-                                {/* ENDS */}
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {notification && (
+              <Notification
+                message={notification.message}
+                type={notification.type}
+                onClose={() => setNotification(null)}
+              />
             )}
-        </>
-    )
+
+            <div className="auth-content">
+              <form
+                onSubmit={
+                  isSignUpOpen
+                    ? handleSignUpWithEmailAndPassword
+                    : handleEmailSignIn
+                }
+                className="auth-form"
+              >
+                <div className="form-group">
+                  <label htmlFor="email">Email address</label>
+                  <input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email address"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password"
+                    required
+                  />
+                </div>
+
+                {isSignUpOpen && (
+                  <div className="form-group">
+                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <input
+                      id="confirmPassword"
+                      type="password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      placeholder="Re-enter your password"
+                      required
+                    />
+                  </div>
+                )}
+
+                <button type="submit" className="auth-button primary">
+                  <TfiEmail className="button-icon" />
+                  {isSignUpOpen ? "Sign Up with Email" : "Sign In with Email"}
+                </button>
+              </form>
+
+              <div className="divider">
+                <span>or</span>
+              </div>
+
+              <div className="social-buttons">
+                <button
+                  type="button"
+                  onClick={handleGoogleSignIn}
+                  className="auth-button google"
+                >
+                  <FcGoogle className="button-icon" />
+                  Continue with Google
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleOpenSignUp}
+                  className="auth-button switch-mode"
+                >
+                  <TfiEmail className="button-icon" />
+                  {isSignUpOpen ? "Switch to Sign In" : "Switch to Sign Up"}
+                </button>
+              </div>
+
+              <div className="auth-footer">
+                <p className="terms">
+                  By continuing, you agree to our{" "}
+                  <button onClick={handleOpenPrivacy}>Terms & Conditions</button>{" "}
+                  and{" "}
+                  <button onClick={handleOpenPrivacy}>Privacy Policy</button>
+                </p>
+                <p className="copyright">
+                  © 2024 resthotely.com™. All rights reserved.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
 
 export default HandleAuthentication;
