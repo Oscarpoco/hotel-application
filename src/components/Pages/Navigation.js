@@ -2,6 +2,7 @@ import React from "react";
 import '../Styling/Navigation.css';
 import { useDispatch, useSelector } from "react-redux";
 import { handleOnSignIn, openUpdate, viewReviews, viewMaps, viewGallery, showLoader, setHamburger } from "../../redux/actions/UserInterface";
+import { handleOnSignOut } from "../../redux/actions/Authentication";
 
 //ICONS
 import { FaRegCircleUser } from "react-icons/fa6";
@@ -79,6 +80,16 @@ function Navigation( {handleScroll} ){
             dispatch(showLoader(false));
         }, 500);
     }
+
+    // LOGOUT
+    const logout = () => {
+        dispatch(showLoader(true));
+        setTimeout(() => {
+          dispatch(openUpdate(false));
+          dispatch(handleOnSignOut());
+          dispatch(showLoader(false));
+        }, 500);
+      };
 
     return(
 
@@ -194,7 +205,7 @@ function Navigation( {handleScroll} ){
                             {isAuthenticated ? 
                                 <p onClick={handleUpdateClick}
                                 >
-                                        Profile
+                                Profile
                                 </p>
         
                                 :
@@ -203,6 +214,12 @@ function Navigation( {handleScroll} ){
                                 </p>
                             }
                         </div>
+
+                         {/* contact us */}
+                        <div className="nav-bar">
+                            <Button className = 'Logout-button-humburger' onClick={handleScroll}>Logout</Button>
+                        </div>
+
                         {/* NAVIGATION ENDS */}
                     </div>
                 </div>
