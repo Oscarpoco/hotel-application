@@ -217,7 +217,7 @@ function Navigation( {handleScroll} ){
 
                          {/* contact us */}
                         <div className="nav-bar">
-                            <Button className = 'Logout-button-humburger' onClick={handleScroll}>Logout</Button>
+                            <Button className = 'Logout-button-humburger' onClick={logout}>Logout</Button>
                         </div>
 
                         {/* NAVIGATION ENDS */}
