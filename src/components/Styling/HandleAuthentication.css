@@ -41,7 +41,9 @@
   
   .auth-header h2 {
     font-size: 24px;
-    font-weight: 600;
+    letter-spacing: 2px;
+    font-weight: 900;
+    text-transform: uppercase;
     color: #333;
     margin: 0;
   }
@@ -49,12 +51,13 @@
   .close-button {
     background: none;
     border: none;
-    font-size: 28px;
-    color: #666;
+    font-size: 48px;
+    color: red;
     cursor: pointer;
     padding: 4px;
-    transform: rotate(45deg);
+    transform: rotate(-90deg);
     transition: color 0.2s;
+    font-weight: 700;
   }
   
   .close-button:hover {
@@ -154,7 +157,7 @@
   .divider span {
     padding: 0 16px;
     color: #666;
-    font-size: 14px;
+    font-size: 18px;
   }
   
   .social-buttons {
@@ -236,4 +239,13 @@
   
   .notification-close:hover {
     opacity: 1;
+  }
+
+  @media only screen and (max-width: 740px) {
+    .auth-container {
+      border-radius: 12px;
+      width: 100%;
+      height: 100%;
+      padding-top: 100px;
+    }
   }

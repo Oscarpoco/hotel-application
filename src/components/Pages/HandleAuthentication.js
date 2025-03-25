@@ -41,7 +41,6 @@ function HandleAuthentication({ handleOpenPrivacy }) {
   const isSignInOpen = useSelector((state) => state.userInterface.isSignInOpen);
   const isSignUpOpen = useSelector((state) => state.userInterface.isSignUpOpen);
   const error = useSelector((state) => state.authentication.error);
-  const user = useSelector((state) => state.authentication.user);
   const isAuthenticated = useSelector((state) => state.authentication.isAuthenticated);
 
   const [email, setEmail] = useState("");
@@ -53,19 +52,11 @@ function HandleAuthentication({ handleOpenPrivacy }) {
     setNotification({ message, type });
   };
 
-  useEffect(() => {
-    if (isAuthenticated) {
-        showNotification("Successfully signed in!", "success");
-        dispatch(handleOnSignIn(false));
-    }
-}, [isAuthenticated]);
-
 
   const handleClose = () => {
     dispatch(handleOnSignIn(false));
   };
 
-  console.log('isAuthenticated:', isAuthenticated, 'user:', user);
 
 
 //   GOOGLE
@@ -130,7 +121,8 @@ const handleEmailSignIn = async (e) => {
             }
 
             setEmail('');
-            setPassword('')
+            setPassword('');
+            dispatch(handleOnSignUp(true));
 
         })
         .catch(() => {
@@ -247,7 +239,7 @@ const handleEmailSignIn = async (e) => {
                   <button onClick={handleOpenPrivacy}>Privacy Policy</button>
                 </p>
                 <p className="copyright">
-                  © 2024 resthotely.com™. All rights reserved.
+                  © 2025 resthotely.com™. All rights reserved.
                 </p>
               </div>
             </div>

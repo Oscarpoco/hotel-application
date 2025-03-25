@@ -45,7 +45,6 @@ const authenticationReducer = (state = initialState, action) => {
                 isAuthenticated: false,
                 user: null,
                 error: action.payload,
-                isSignInOpen: true,
             };
 
             // SIGN OUT

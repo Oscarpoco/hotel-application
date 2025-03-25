@@ -277,9 +277,9 @@ span
         border-radius: 0px;
         z-index: 1000;
         box-sizing: border-box;
-        background: rgba(0, 0, 0, 1);
-        width: 35vw;
-        height: 50vh;
+        background: rgba(0, 0, 0, .5);
+        width: 100%;
+        height: 100vh;
     }
 
     .humburger-menu
@@ -288,25 +288,26 @@ span
         gap: .3em;
         flex-direction: column;
         padding: 1em;
-        border-radius: 0px;
-        background: rgba(255, 255, 255, .1);
-        width: 100%;
-/*         height: 100%; */
+        background: rgba(255, 255, 255, 1);
+        width: 35%;
+        height: 100%;
         position: relative;
     }
 
     .Logout-button-humburger
     {
         position: absolute;
-        bottom: 3em;
-/*         width: 100%; */
-        padding: 10px 20px;
+        bottom: 10em;
+        padding: 12px 35px;
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 2px solid #000;
-        background: red;
+        border: 2px solid rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.7);
         color: white;
+        border-radius: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
     }
         
 
@@ -319,7 +320,7 @@ span
 
     .humburger-icon
     {
-        font-size: 2.7em;
+        font-size: 2.1em;
     }
 
 

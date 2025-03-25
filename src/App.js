@@ -46,7 +46,7 @@ function App() {
     setTimeout(()=>{
       setOpenPrivacy(!openPrivacy);
       dispatch(showLoader(false));
-    }, 2000)
+    }, 500)
   }
 
   return (

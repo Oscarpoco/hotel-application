@@ -205,20 +205,23 @@ function Navigation( {handleScroll} ){
                             {isAuthenticated ? 
                                 <p onClick={handleUpdateClick}
                                 >
-                                Profile
+                                PROFILE
                                 </p>
         
                                 :
-                                <p onClick={handleSignInClick} >
+                                <p onClick={handleSignInClick} style={{fontWeight: 900, color:'red'}}>
                                 SIGN IN
                                 </p>
                             }
                         </div>
 
-                         {/* contact us */}
+                         {/* LOGOUT */}
+                        {isAuthenticated &&
                         <div className="nav-bar">
-                            <Button className = 'Logout-button-humburger' onClick={logout}>Logout</Button>
+                            <button className = 'Logout-button-humburger' onClick={logout}>Logout</button>
                         </div>
+                        }
+                        {/* ENDS */}
 
                         {/* NAVIGATION ENDS */}
                     </div>
