@@ -256,10 +256,9 @@ span
     }
     
     
-    .user-wrapper-button
+    .user-wrapper
     {
-        height: 35px;
-        width: 35px;
+        display: none;
     }
 
     .humburger
