@@ -146,7 +146,7 @@ function Navigation( {handleScroll} ){
                         :
                         
                         <div className="user-wrapper">
-                            <button onClick={handleSignInClick} style={{padding: '.7em 1em'}}>
+                            <button onClick={handleSignInClick} style={{padding: '.6em 1em'}}>
                             SIGN IN
                             </button>
                         </div>
@@ -187,6 +187,21 @@ function Navigation( {handleScroll} ){
                             {/* contact us */}
                         <div className="nav-bar" onClick={handleScroll}>
                             <p>Contact</p>
+                        </div>
+             
+                            {/* Profile */}
+                        <div className="nav-bar">
+                            {isAuthenticated ? 
+                                <p onClick={handleUpdateClick}
+                                >
+                                        Profile
+                                </p>
+        
+                                :
+                                <p onClick={handleSignInClick} >
+                                SIGN IN
+                                </p>
+                            }
                         </div>
                         {/* NAVIGATION ENDS */}
                     </div>
