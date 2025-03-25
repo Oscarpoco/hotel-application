@@ -279,7 +279,8 @@ span
         z-index: 1000;
         box-sizing: border-box;
         background: rgba(0, 0, 0, .3);
-        width: 15%;
+        width: auto;
+        padding-right: 20px;
         height: 100vh;
     }
 
