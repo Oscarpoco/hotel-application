@@ -110,12 +110,12 @@ function Footer({handleOpenPrivacy}){
                 <div className="footer-navigation-bar">
 
                         {/* Gallery */}
-                        <div className="nav-bar-footer" style={{color: 'rgba(0, 0, 0, .5)', cursor: 'unset', fontSize: '1.3em'}}>
-                            <p>Quick links</p>
+                        <div className="nav-bar-footer" style={{color: 'rgba(5, 170, 247, 0.74)', cursor: 'unset', fontSize: '1.3em', fontWeight: 600}}>
+                            <p className='tags-footer'>Quick links</p>
                         </div>
 
                         <div className="nav-bar-footer" onClick={handleGalleryClick}>
-                            <p>Gallery</p>
+                            <p >Gallery</p>
                         </div>
 
                             {/* reviews */}
@@ -144,7 +144,7 @@ function Footer({handleOpenPrivacy}){
                 <div className="footer-navigation-bar">
 
                         {/* Gallery */}
-                        <div className="nav-bar-footer" style={{color: 'rgba(0, 0, 0, .5)', cursor: 'unset', fontSize: '1.3em'}}>
+                        <div className="nav-bar-footer" style={{color: 'rgba(5, 170, 247, 0.74)', cursor: 'unset', fontSize: '1.3em', fontWeight: 600}}>
                             <p>Contact</p>
                         </div>
 

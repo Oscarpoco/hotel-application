@@ -140,6 +140,7 @@
   @media screen and (max-width: 768px) {
     .about {
       padding: 3rem 1.5rem;
+      border-radius: 0;
     }
   
     .about__container {
@@ -172,6 +173,7 @@
   @media screen and (max-width: 480px) {
     .about {
       padding: 2rem 1rem;
+      border-radius: 0;
     }
   
     .about__container {

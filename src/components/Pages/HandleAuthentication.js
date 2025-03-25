@@ -71,6 +71,7 @@ const handleGoogleSignIn = async () => {
         showNotification(error, "error");
     } finally {
         dispatch(showLoader(false));
+        handleClose();
     }
 };
 
@@ -87,7 +88,8 @@ const handleEmailSignIn = async (e) => {
         }
 
         setEmail('');
-        setPassword('')
+        setPassword('');
+        handleClose();
 
     } catch (error) {
         showNotification(error, "error");
@@ -122,7 +124,7 @@ const handleEmailSignIn = async (e) => {
 
             setEmail('');
             setPassword('');
-            dispatch(handleOnSignUp(true));
+            handleClose();
 
         })
         .catch(() => {

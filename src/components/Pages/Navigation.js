@@ -1,7 +1,7 @@
 import React from "react";
 import '../Styling/Navigation.css';
 import { useDispatch, useSelector } from "react-redux";
-import { handleOnSignIn, openUpdate, viewReviews, viewMaps, viewGallery, showLoader, setHamburger } from "../../redux/actions/UserInterface";
+import { handleOnSignIn, openUpdate, viewReviews, viewMaps, viewGallery, showLoader, setHamburger, handleOnSignUp } from "../../redux/actions/UserInterface";
 import { handleOnSignOut } from "../../redux/actions/Authentication";
 
 //ICONS
@@ -23,6 +23,7 @@ function Navigation( {handleScroll} ){
 
         setTimeout (()=> {
             dispatch(handleOnSignIn());
+            dispatch(handleOnSignUp(false));
             dispatch(showLoader(false));
         }, 500);
         
