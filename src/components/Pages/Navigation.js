@@ -85,7 +85,7 @@ function Navigation( {handleScroll} ){
     const logout = () => {
         dispatch(showLoader(true));
         setTimeout(() => {
-          dispatch(openUpdate(false));
+            dispatch(setHamburger());
           dispatch(handleOnSignOut());
           dispatch(showLoader(false));
         }, 500);
