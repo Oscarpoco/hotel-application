@@ -79,8 +79,9 @@ const useStyles = makeStyles({
   searchButton: {
     background: "rgba(255, 255, 255, 0.2)",
     color: "#fff",
+    borderRadius: "12px",
     borderColor: "#fff",
-    border: "2px solid",
+    border: "1px solid",
     backdropFilter: "blur(10px)",
     "&:hover": {
       background: "rgba(255, 255, 255, 0.3)",

@@ -18,122 +18,225 @@ import {
 } from "../../redux/actions/Authentication";
 
 // STYLE 
-import '../Styling/HandleAuthentication.css'
-
-const Notification = ({ message, type, onClose }) => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      onClose();
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, [onClose]);
-
-  return (
-    <div className={`notification ${type}`}>
-      <p>{message}</p>
-      <button onClick={onClose} className="notification-close">×</button>
-    </div>
-  );
-};
+import '../Styling/HandleAuthentication.css';
+import Notification from './Notification.js';
 
 function HandleAuthentication({ handleOpenPrivacy }) {
   const dispatch = useDispatch();
   const isSignInOpen = useSelector((state) => state.userInterface.isSignInOpen);
   const isSignUpOpen = useSelector((state) => state.userInterface.isSignUpOpen);
   const error = useSelector((state) => state.authentication.error);
-  const isAuthenticated = useSelector((state) => state.authentication.isAuthenticated);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [notification, setNotification] = useState(null);
+  
+  // Real-time validation states
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
+  
+  // Form touched states to show errors only after interaction
+  const [touched, setTouched] = useState({
+    email: false,
+    password: false,
+    confirmPassword: false
+  });
+
+  // Clear form when closing modal
+  useEffect(() => {
+    if (!isSignInOpen) {
+      resetForm();
+    }
+  }, [isSignInOpen]);
+
+  // Watch for global authentication errors
+  useEffect(() => {
+    if (error) {
+      showNotification(error.message || "Authentication failed", "error");
+    }
+  }, [error]);
+
+  const resetForm = () => {
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setErrors({
+      email: "",
+      password: "",
+      confirmPassword: ""
+    });
+    setTouched({
+      email: false,
+      password: false,
+      confirmPassword: false
+    });
+    setNotification(null);
+  };
 
   const showNotification = (message, type) => {
     setNotification({ message, type });
+    
+    // Auto-dismiss notification after 5 seconds
+    setTimeout(() => {
+      setNotification(null);
+    }, 5000);
   };
-
 
   const handleClose = () => {
     dispatch(handleOnSignIn(false));
+    resetForm();
   };
 
-
-
-//   GOOGLE
-const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async () => {
     dispatch(showLoader(true));
     try {
-        await dispatch(handleSignInWithGoogle());
-        if (isAuthenticated) {
-            showNotification("Successfully signed in with Google!", "success");
-        }
+      await dispatch(handleSignInWithGoogle());
+      handleClose();
     } catch (error) {
-        showNotification(error, "error");
+      showNotification(error.message || "Google sign-in failed", "error");
     } finally {
-        dispatch(showLoader(false));
-        handleClose();
+      dispatch(showLoader(false));
     }
-};
+  };
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) return "Email is required";
+    if (!emailRegex.test(email)) return "Please enter a valid email address";
+    return "";
+  };
 
+  const validatePassword = (password) => {
+    if (!password) return "Password is required";
+    if (password.length < 8) return "Password must be at least 8 characters";
+    return "";
+  };
 
-//   EMAIL
-const handleEmailSignIn = async (e) => {
+  const validateConfirmPassword = (confirmPassword, password) => {
+    if (!confirmPassword) return "Please confirm your password";
+    if (confirmPassword !== password) return "Passwords do not match";
+    return "";
+  };
+
+  const handleBlur = (field) => {
+    setTouched({ ...touched, [field]: true });
+    
+    if (field === 'email') {
+      setErrors({ ...errors, email: validateEmail(email) });
+    } else if (field === 'password') {
+      setErrors({ ...errors, password: validatePassword(password) });
+    } else if (field === 'confirmPassword') {
+      setErrors({ ...errors, confirmPassword: validateConfirmPassword(confirmPassword, password) });
+    }
+  };
+
+  const handleChange = (field, value) => {
+    if (field === 'email') {
+      setEmail(value);
+      if (touched.email) {
+        setErrors({ ...errors, email: validateEmail(value) });
+      }
+    } else if (field === 'password') {
+      setPassword(value);
+      if (touched.password) {
+        setErrors({ ...errors, password: validatePassword(value) });
+      }
+      // Also update confirmPassword validation if it's been touched
+      if (touched.confirmPassword) {
+        setErrors(prev => ({
+          ...prev, 
+          confirmPassword: validateConfirmPassword(confirmPassword, value)
+        }));
+      }
+    } else if (field === 'confirmPassword') {
+      setConfirmPassword(value);
+      if (touched.confirmPassword) {
+        setErrors({ ...errors, confirmPassword: validateConfirmPassword(value, password) });
+      }
+    }
+  };
+
+  const handleEmailSignIn = async (e) => {
     e.preventDefault();
+    
+    // Validate before submission
+    const emailError = validateEmail(email);
+    const passwordError = validatePassword(password);
+    
+    setErrors({
+      email: emailError,
+      password: passwordError,
+      confirmPassword: ""
+    });
+    
+    setTouched({
+      email: true,
+      password: true,
+      confirmPassword: false
+    });
+    
+    if (emailError || passwordError) {
+      return;
+    }
+    
     dispatch(showLoader(true));
     try {
-        await dispatch(handleSignInWithEmail(email, password));
-        if (isAuthenticated) {
-            showNotification("Successfully signed in!", "success");
-        }
-
-        setEmail('');
-        setPassword('');
-        handleClose();
-
+      await dispatch(handleSignInWithEmail(email, password));
+      resetForm();
+      handleClose();
     } catch (error) {
-        showNotification(error, "error");
+      showNotification(error.message || "Sign-in failed", "error");
     } finally {
-        dispatch(showLoader(false));
+      dispatch(showLoader(false));
     }
-};
-
+  };
 
   const handleOpenSignUp = () => {
+    resetForm();
     dispatch(handleOnSignUp(true));
   };
 
-
-//   SIGN UP
-  const handleSignUpWithEmailAndPassword = (e) => {
+  const handleSignUpWithEmailAndPassword = async (e) => {
     e.preventDefault();
-
-    if (password !== confirmPassword) {
-      showNotification("Passwords do not match!", "error");
+    
+    // Validate all fields before submission
+    const emailError = validateEmail(email);
+    const passwordError = validatePassword(password);
+    const confirmPasswordError = validateConfirmPassword(confirmPassword, password);
+    
+    setErrors({
+      email: emailError,
+      password: passwordError,
+      confirmPassword: confirmPasswordError
+    });
+    
+    setTouched({
+      email: true,
+      password: true,
+      confirmPassword: true
+    });
+    
+    if (emailError || passwordError || confirmPasswordError) {
       return;
     }
-
+    
     dispatch(showLoader(true));
-    setTimeout(() => {
-      dispatch(handleSignUpWithEmail(email, password))
-        .then(() => {
-            dispatch(handleSignInWithEmail(email, password))
-            if (isAuthenticated){
-                showNotification("Account created successfully!", "success");
-            }
-
-            setEmail('');
-            setPassword('');
-            handleClose();
-
-        })
-        .catch(() => {
-          showNotification(error.message, "error");
-        })
-        .finally(() => {
-          dispatch(showLoader(false));
-        });
-    }, 500);
+    try {
+      await dispatch(handleSignUpWithEmail(email, password));
+      // Sign in automatically after successful sign up
+      await dispatch(handleSignInWithEmail(email, password));
+      resetForm();
+      handleClose();
+      showNotification("Account created successfully!", "success");
+    } catch (error) {
+      showNotification(error.message || "Sign-up failed", "error");
+    } finally {
+      dispatch(showLoader(false));
+    }
   };
 
   return (
@@ -171,10 +274,15 @@ const handleEmailSignIn = async (e) => {
                     id="email"
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => handleChange('email', e.target.value)}
+                    onBlur={() => handleBlur('email')}
+                    className={touched.email && errors.email ? "input-error" : ""}
                     placeholder="Enter your email address"
                     required
                   />
+                  {touched.email && errors.email && (
+                    <div className="error-message">{errors.email}</div>
+                  )}
                 </div>
 
                 <div className="form-group">
@@ -183,10 +291,15 @@ const handleEmailSignIn = async (e) => {
                     id="password"
                     type="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => handleChange('password', e.target.value)}
+                    onBlur={() => handleBlur('password')}
+                    className={touched.password && errors.password ? "input-error" : ""}
                     placeholder="Enter your password"
                     required
                   />
+                  {touched.password && errors.password && (
+                    <div className="error-message">{errors.password}</div>
+                  )}
                 </div>
 
                 {isSignUpOpen && (
@@ -196,14 +309,25 @@ const handleEmailSignIn = async (e) => {
                       id="confirmPassword"
                       type="password"
                       value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      onChange={(e) => handleChange('confirmPassword', e.target.value)}
+                      onBlur={() => handleBlur('confirmPassword')}
+                      className={touched.confirmPassword && errors.confirmPassword ? "input-error" : ""}
                       placeholder="Re-enter your password"
                       required
                     />
+                    {touched.confirmPassword && errors.confirmPassword && (
+                      <div className="error-message">{errors.confirmPassword}</div>
+                    )}
                   </div>
                 )}
 
-                <button type="submit" className="auth-button primary">
+                <button 
+                  type="submit" 
+                  className="auth-button primary"
+                  disabled={isSignUpOpen ? 
+                    (errors.email || errors.password || errors.confirmPassword) : 
+                    (errors.email || errors.password)}
+                >
                   <TfiEmail className="button-icon" />
                   {isSignUpOpen ? "Sign Up with Email" : "Sign In with Email"}
                 </button>
@@ -236,9 +360,9 @@ const handleEmailSignIn = async (e) => {
               <div className="auth-footer">
                 <p className="terms">
                   By continuing, you agree to our{" "}
-                  <button onClick={handleOpenPrivacy}>Terms & Conditions</button>{" "}
+                  <button type="button" onClick={handleOpenPrivacy}>Terms & Conditions</button>{" "}
                   and{" "}
-                  <button onClick={handleOpenPrivacy}>Privacy Policy</button>
+                  <button type="button" onClick={handleOpenPrivacy}>Privacy Policy</button>
                 </p>
                 <p className="copyright">
                   © 2025 resthotely.com™. All rights reserved.

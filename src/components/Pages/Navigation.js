@@ -10,76 +10,81 @@ import { IoMdMenu } from "react-icons/io";
 import { RiCloseFill } from "react-icons/ri";
 
 
-function Navigation( {handleScroll} ){
+function Navigation({ handleScroll }) {
 
     const dispatch = useDispatch();
-    const isAuthenticated = useSelector((state)=> state.authentication.isAuthenticated);
-    const isHumburger = useSelector((state)=> state.userInterface.isHumburger);
+    const isAuthenticated = useSelector((state) => state.authentication.isAuthenticated);
+    const isHumburger = useSelector((state) => state.userInterface.isHumburger);
+    const isSignUpOpen = useSelector((state) => state.userInterface.isSignUpOpen);
 
 
-     // Function to handle the button click
-     const handleSignInClick = () => {
+    // Function to handle the button click
+    const handleSignInClick = () => {
         dispatch(showLoader(true));
 
-        setTimeout (()=> {
+        setTimeout(() => {
+            if (isSignUpOpen === true) {
+                dispatch(handleOnSignUp(false));
+            }
+
+            // Open the signin form
             dispatch(handleOnSignIn());
-            dispatch(handleOnSignUp(false));
             dispatch(showLoader(false));
-        }, 500);
-        
+        }, 100);
+
     };
 
     // HANDLES OPENING UPDATE PAGE
     const handleUpdateClick = () => {
         dispatch(showLoader(true));
 
-        setTimeout (()=> {
+        setTimeout(() => {
             dispatch(openUpdate());
             dispatch(showLoader(false));
-        }, 500);
-        
+        }, 100);
+
     }
 
     // HANDLES OPENING REVIEW
     const handleReviewClick = () => {
         dispatch(showLoader(true));
 
-        setTimeout (()=> {
+        setTimeout(() => {
             dispatch(viewReviews());
             dispatch(showLoader(false));
-        }, 500);
-        
-        }
+        }, 100);
+
+    }
 
     // HANDLE VIEWING MAPS
     const handleOpenMapsClick = () => {
         dispatch(showLoader(true));
 
-        setTimeout (()=> {
+        setTimeout(() => {
             dispatch(viewMaps());
             dispatch(showLoader(false));
-        }, 500);
-        
+        }, 100);
+
     }
 
     // VIEW GALLERY
     const handleGalleryClick = () => {
         dispatch(showLoader(true));
 
-        setTimeout (()=> {
+        setTimeout(() => {
             dispatch(viewGallery());
             dispatch(showLoader(false));
-        }, 500);
+        }, 100);
     }
 
     // VIEW GALLERY
     const handleToggleHumburger = () => {
         dispatch(showLoader(true));
 
-        setTimeout (()=> {
+        setTimeout(() => {
             dispatch(setHamburger());
             dispatch(showLoader(false));
-        }, 500);
+        }, 100);
     }
 
     // LOGOUT
@@ -87,12 +92,12 @@ function Navigation( {handleScroll} ){
         dispatch(showLoader(true));
         setTimeout(() => {
             dispatch(setHamburger());
-          dispatch(handleOnSignOut());
-          dispatch(showLoader(false));
-        }, 500);
-      };
+            dispatch(handleOnSignOut());
+            dispatch(showLoader(false));
+        }, 100);
+    };
 
-    return(
+    return (
 
         // PARENT COMPONENT
         <div className="Navigation-layout">
@@ -109,7 +114,7 @@ function Navigation( {handleScroll} ){
 
                     {/* MENU LOGO */}
                     <div className="menu-logo">
-                        <div className="logo-abbreviation"><h3 style={{color: 'rgba(0, 0, 0, .7)'}}>R<span>H</span></h3></div>
+                        <div className="logo-abbreviation"><h3 style={{ color: 'rgba(0, 0, 0, .7)' }}>R<span>H</span></h3></div>
                         <div><h3>Rest Hotel<span>y</span></h3></div>
                     </div>
                     {/* MENU LOGO ENDS */}
@@ -123,17 +128,17 @@ function Navigation( {handleScroll} ){
                             <p>Gallery</p>
                         </div>
 
-                            {/* reviews */}
+                        {/* reviews */}
                         <div className="nav-bar" onClick={handleReviewClick}>
                             <p>Reviews</p>
                         </div>
-                            
-                            {/* maps */}
+
+                        {/* maps */}
                         <div className="nav-bar" onClick={handleOpenMapsClick}>
                             <p>Maps</p>
                         </div>
 
-                            {/* contact us */}
+                        {/* contact us */}
                         <div className="nav-bar" onClick={handleScroll}>
                             <p>Contact</p>
                         </div>
@@ -146,33 +151,33 @@ function Navigation( {handleScroll} ){
                     <div className="menu-account">
                         <div className="slogan"><p>Rest Hotel<span>y your home</span></p></div>
 
-                        {isAuthenticated ? 
-                        <div className="user-wrapper">
-                            <button className="user-wrapper-button" style={{background: 'white'}}
-                            onClick={handleUpdateClick}
-                            >
-                                <FaRegCircleUser className="user-icon" style={{color: 'rgba(0, 0, 0, .7)'}}/>
-                            </button>
-                        </div>
+                        {isAuthenticated ?
+                            <div className="user-wrapper">
+                                <button className="user-wrapper-button" style={{ background: 'white' }}
+                                    onClick={handleUpdateClick}
+                                >
+                                    <FaRegCircleUser className="user-icon" style={{ color: 'rgba(0, 0, 0, .7)' }} />
+                                </button>
+                            </div>
 
-                        :
-                        
-                        <div className="user-wrapper">
-                            <button onClick={handleSignInClick} style={{padding: '.6em 1em'}}>
-                            SIGN IN
-                            </button>
-                        </div>
+                            :
+
+                            <div className="user-wrapper">
+                                <button onClick={handleSignInClick} style={{ padding: '.6em 1em' }}>
+                                    SIGN IN
+                                </button>
+                            </div>
                         }
 
                         <div className="humburger" onClick={handleToggleHumburger}>
-                            {isHumburger ? <RiCloseFill className="humburger-icon"/> : <IoMdMenu className="humburger-icon"/>}
+                            {isHumburger ? <RiCloseFill className="humburger-icon" /> : <IoMdMenu className="humburger-icon" />}
                         </div>
 
                     </div>
                     {/* MENU ACCOUNT */}
 
                 </div>
-                {/* MENU ENDS */}  
+                {/* MENU ENDS */}
 
             </div>
 
@@ -186,41 +191,41 @@ function Navigation( {handleScroll} ){
                             <p>Gallery</p>
                         </div>
 
-                            {/* reviews */}
+                        {/* reviews */}
                         <div className="nav-bar" onClick={handleReviewClick}>
                             <p>Reviews</p>
                         </div>
-                            
-                            {/* maps */}
+
+                        {/* maps */}
                         <div className="nav-bar" onClick={handleOpenMapsClick}>
                             <p>Maps</p>
                         </div>
 
-                            {/* contact us */}
+                        {/* contact us */}
                         <div className="nav-bar" onClick={handleScroll}>
                             <p>Contact</p>
                         </div>
-             
-                            {/* Profile */}
+
+                        {/* Profile */}
                         <div className="nav-bar">
-                            {isAuthenticated ? 
+                            {isAuthenticated ?
                                 <p onClick={handleUpdateClick}
                                 >
-                                PROFILE
+                                    PROFILE
                                 </p>
-        
+
                                 :
-                                <p onClick={handleSignInClick} style={{fontWeight: 900, color:'red'}}>
-                                SIGN IN
+                                <p onClick={handleSignInClick} style={{ fontWeight: 900, color: 'red' }}>
+                                    SIGN IN
                                 </p>
                             }
                         </div>
 
-                         {/* LOGOUT */}
+                        {/* LOGOUT */}
                         {isAuthenticated &&
-                        <div className="nav-bar">
-                            <button className = 'Logout-button-humburger' onClick={logout}>Logout</button>
-                        </div>
+                            <div className="nav-bar">
+                                <button className='Logout-button-humburger' onClick={logout}>Logout</button>
+                            </div>
                         }
                         {/* ENDS */}
 

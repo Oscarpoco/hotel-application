@@ -34,7 +34,6 @@ const authenticationReducer = (state = initialState, action) => {
                     isAuthenticated: true,
                     user: action.payload,
                     error: null,
-                    isSignInOpen: false,
                 };
 
             // SIGN IN ERRORS

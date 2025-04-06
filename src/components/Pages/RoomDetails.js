@@ -13,7 +13,6 @@ import { getFirestore, doc, getDoc} from "firebase/firestore";
 import { CiShare2 } from "react-icons/ci";
 import { IoIosArrowBack } from "react-icons/io";
 
-import { FaKitchenSet } from "react-icons/fa6";
 import { MdOutlineLocalActivity } from "react-icons/md";
 import { PiOfficeChairLight } from "react-icons/pi";
 import { IoTvSharp } from "react-icons/io5";
@@ -100,13 +99,9 @@ function RoomDetails(){
         dispatch(showLoader(true));
 
         setTimeout (()=> {
-
             dispatch(isRoomReserved(true));
-            if (!isAuthenticated){
-                dispatch(handleOnSignIn(true));
-            }
             dispatch(showLoader(false));
-        }, 500);
+        }, 300);
         
     }
 
@@ -118,7 +113,7 @@ function RoomDetails(){
             dispatch(viewRoomDetails(false));
             window.location.reload();
             dispatch(showLoader(false));
-        }, 500)
+        }, 300)
     }
 
 

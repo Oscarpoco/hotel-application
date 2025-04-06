@@ -11,7 +11,7 @@ function Reserved({ HandleCloseReservation, accommodation }) {
     const user = useSelector((state) => state.authentication.user); 
     const db = getFirestore();
 
-    const [userData, setUserData] = useState('')
+    const [userData, setUserData] = useState('');
     const userId = user.id || user.uid; 
 
     useEffect(() => {
@@ -67,9 +67,9 @@ function Reserved({ HandleCloseReservation, accommodation }) {
     };
 
     const customButtonStyles = {
-        background: '#1877F2',
+        background: '#fff',
         border: 'none',
-        padding: '10px 20px',
+        padding: '10px 5px',
         color: 'white',
         borderRadius: '5px',
         fontSize: '16px',
