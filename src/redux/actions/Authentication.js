@@ -30,12 +30,14 @@ export const handleSignInWithGoogle = () => async (dispatch) => {
 // Email Sign-In
 export const handleSignInWithEmail = (email, password) => async (dispatch) => {
     try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        dispatch({ type: SIGN_IN_SUCCESS, payload: userCredential.user });
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      dispatch({ type: SIGN_IN_SUCCESS, payload: userCredential.user });
+      return { success: true }; 
     } catch (error) {
-        dispatch({ type: SIGN_IN_ERROR, payload: error.message });
+      dispatch({ type: SIGN_IN_ERROR, payload: error });
+      return { error }; 
     }
-};
+  };
 
 // Email Sign-Up
 export const handleSignUpWithEmail = (email, password) => async (dispatch) => {

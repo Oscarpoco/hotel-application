@@ -1,4 +1,4 @@
-// src/redux/reducers/authenticationReducer.js
+
 
 import { SET_RESERVATION, SIGN_IN_SUCCESS, SIGN_IN_ERROR, SIGN_OUT, IS_SIGN_IN, SIGN_UP_SUCCESS, SIGN_UP_ERROR } from '../actions/Authentication';
 
@@ -14,7 +14,7 @@ const initialState = {
         guests: '',
         nights: 0,
         totalPrice: 0,
-      },
+    },
 };
 
 const authenticationReducer = (state = initialState, action) => {
@@ -27,18 +27,18 @@ const authenticationReducer = (state = initialState, action) => {
                 isSignInOpen: !state.isSignInOpen
             };
 
-            // SIGN IN SUCCSSFULLY
-            case SIGN_IN_SUCCESS:
-                return {
-                    ...state,
-                    isAuthenticated: true,
-                    user: action.payload,
-                    error: null,
-                };
+        // SIGN IN SUCCSSFULLY
+        case SIGN_IN_SUCCESS:
+            return {
+                ...state,
+                isAuthenticated: true,
+                user: action.payload,
+                error: null,
+            };
 
-            // SIGN IN ERRORS
+        // SIGN IN ERRORS
         case SIGN_IN_ERROR:
-        case SIGN_UP_ERROR: 
+        case SIGN_UP_ERROR:
             return {
                 ...state,
                 isAuthenticated: false,
@@ -46,7 +46,7 @@ const authenticationReducer = (state = initialState, action) => {
                 error: action.payload,
             };
 
-            // SIGN OUT
+        // SIGN OUT
         case SIGN_OUT:
             return {
                 ...state,
@@ -55,14 +55,22 @@ const authenticationReducer = (state = initialState, action) => {
                 error: null
             };
 
+        case SIGN_UP_SUCCESS:
+            return {
+                ...state,
+                isAuthenticated: true,
+                user: action.payload,
+                error: null,
+            };
+
         // RESERVATION
         case SET_RESERVATION:
             return {
-            ...state,
-            reservation: action.payload,
-        }
+                ...state,
+                reservation: action.payload,
+            }
 
-            // DEFAULT
+        // DEFAULT
         default:
             return state;
     }

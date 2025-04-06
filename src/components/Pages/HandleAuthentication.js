@@ -6,15 +6,15 @@ import { TfiEmail } from "react-icons/tfi";
 import { FcGoogle } from "react-icons/fc";
 
 // REDUX
-import { 
-  handleOnSignIn, 
-  handleOnSignUp, 
-  showLoader 
+import {
+  handleOnSignIn,
+  handleOnSignUp,
+  showLoader
 } from "../../redux/actions/UserInterface";
-import { 
-  handleSignInWithGoogle, 
-  handleSignInWithEmail, 
-  handleSignUpWithEmail 
+import {
+  handleSignInWithGoogle,
+  handleSignInWithEmail,
+  handleSignUpWithEmail
 } from "../../redux/actions/Authentication";
 
 // STYLE 
@@ -31,14 +31,14 @@ function HandleAuthentication({ handleOpenPrivacy }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [notification, setNotification] = useState(null);
-  
+
   // Real-time validation states
   const [errors, setErrors] = useState({
     email: "",
     password: "",
     confirmPassword: ""
   });
-  
+
   // Form touched states to show errors only after interaction
   const [touched, setTouched] = useState({
     email: false,
@@ -56,7 +56,18 @@ function HandleAuthentication({ handleOpenPrivacy }) {
   // Watch for global authentication errors
   useEffect(() => {
     if (error) {
-      showNotification(error.message || "Authentication failed", "error");
+
+      let errorMessage = "Authentication failed";
+
+      if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+        errorMessage = "Incorrect email or password";
+      } else if (error.code === 'auth/email-already-in-use') {
+        errorMessage = "Email is already in use";
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
+      showNotification(errorMessage, "error");
     }
   }, [error]);
 
@@ -78,9 +89,12 @@ function HandleAuthentication({ handleOpenPrivacy }) {
   };
 
   const showNotification = (message, type) => {
-    setNotification({ message, type });
-    
-    // Auto-dismiss notification after 5 seconds
+    setNotification({
+      message,
+      type,
+      visible: true
+    });
+
     setTimeout(() => {
       setNotification(null);
     }, 5000);
@@ -94,8 +108,11 @@ function HandleAuthentication({ handleOpenPrivacy }) {
   const handleGoogleSignIn = async () => {
     dispatch(showLoader(true));
     try {
-      await dispatch(handleSignInWithGoogle());
-      handleClose();
+      const result = await dispatch(handleSignInWithGoogle());
+      // Only close if successful (no error thrown)
+      if (!result.error) {
+        handleClose();
+      }
     } catch (error) {
       showNotification(error.message || "Google sign-in failed", "error");
     } finally {
@@ -124,7 +141,7 @@ function HandleAuthentication({ handleOpenPrivacy }) {
 
   const handleBlur = (field) => {
     setTouched({ ...touched, [field]: true });
-    
+
     if (field === 'email') {
       setErrors({ ...errors, email: validateEmail(email) });
     } else if (field === 'password') {
@@ -148,7 +165,7 @@ function HandleAuthentication({ handleOpenPrivacy }) {
       // Also update confirmPassword validation if it's been touched
       if (touched.confirmPassword) {
         setErrors(prev => ({
-          ...prev, 
+          ...prev,
           confirmPassword: validateConfirmPassword(confirmPassword, value)
         }));
       }
@@ -162,32 +179,39 @@ function HandleAuthentication({ handleOpenPrivacy }) {
 
   const handleEmailSignIn = async (e) => {
     e.preventDefault();
-    
+
     // Validate before submission
     const emailError = validateEmail(email);
     const passwordError = validatePassword(password);
-    
+
     setErrors({
       email: emailError,
       password: passwordError,
       confirmPassword: ""
     });
-    
+
     setTouched({
       email: true,
       password: true,
       confirmPassword: false
     });
-    
+
     if (emailError || passwordError) {
       return;
     }
-    
+
     dispatch(showLoader(true));
     try {
-      await dispatch(handleSignInWithEmail(email, password));
-      resetForm();
-      handleClose();
+      const result = await dispatch(handleSignInWithEmail(email, password));
+      // Only close the modal if authentication was successful
+      if (!result.error) {
+        resetForm();
+        handleClose();
+      } else {
+        // Show Firebase error in the notification
+        showNotification(result.error.message || "Incorrect email or password", "error");
+        console.log('My Biggest Error', result.error.message)
+      }
     } catch (error) {
       showNotification(error.message || "Sign-in failed", "error");
     } finally {
@@ -202,42 +226,56 @@ function HandleAuthentication({ handleOpenPrivacy }) {
 
   const handleSignUpWithEmailAndPassword = async (e) => {
     e.preventDefault();
-    
+
     // Validate all fields before submission
     const emailError = validateEmail(email);
     const passwordError = validatePassword(password);
     const confirmPasswordError = validateConfirmPassword(confirmPassword, password);
-    
+
     setErrors({
       email: emailError,
       password: passwordError,
       confirmPassword: confirmPasswordError
     });
-    
+
     setTouched({
       email: true,
       password: true,
       confirmPassword: true
     });
-    
+
     if (emailError || passwordError || confirmPasswordError) {
       return;
     }
-    
+
     dispatch(showLoader(true));
     try {
-      await dispatch(handleSignUpWithEmail(email, password));
-      // Sign in automatically after successful sign up
-      await dispatch(handleSignInWithEmail(email, password));
-      resetForm();
-      handleClose();
-      showNotification("Account created successfully!", "success");
+      const signupResult = await dispatch(handleSignUpWithEmail(email, password));
+
+      // Check if signup was successful
+      if (signupResult.error) {
+        showNotification(signupResult.error.message || "Sign-up failed", "error");
+      } else {
+        // Try to sign in only if signup was successful
+        const signinResult = await dispatch(handleSignInWithEmail(email, password));
+
+        // Only close if both operations were successful
+        if (!signinResult.error) {
+          resetForm();
+          handleClose();
+          showNotification("Account created successfully!", "success");
+        } else {
+          showNotification("Account created, but sign-in failed: " +
+            (signinResult.error.message || "Please try signing in manually"), "warning");
+        }
+      }
     } catch (error) {
       showNotification(error.message || "Sign-up failed", "error");
     } finally {
       dispatch(showLoader(false));
     }
   };
+
 
   return (
     <>
@@ -321,11 +359,11 @@ function HandleAuthentication({ handleOpenPrivacy }) {
                   </div>
                 )}
 
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="auth-button primary"
-                  disabled={isSignUpOpen ? 
-                    (errors.email || errors.password || errors.confirmPassword) : 
+                  disabled={isSignUpOpen ?
+                    (errors.email || errors.password || errors.confirmPassword) :
                     (errors.email || errors.password)}
                 >
                   <TfiEmail className="button-icon" />
@@ -356,6 +394,15 @@ function HandleAuthentication({ handleOpenPrivacy }) {
                   {isSignUpOpen ? "Switch to Sign In" : "Switch to Sign Up"}
                 </button>
               </div>
+
+              {notification && (
+                <Notification
+                  message={notification.message}
+                  severity={notification.type}
+                  onClose={() => setNotification(null)}
+                  notificationArletVisible={true}
+                />
+              )}
 
               <div className="auth-footer">
                 <p className="terms">
