@@ -182,11 +182,10 @@ function HandleAuthentication({ handleOpenPrivacy }) {
 
     // Validate before submission
     const emailError = validateEmail(email);
-    const passwordError = validatePassword(password);
 
     setErrors({
       email: emailError,
-      password: passwordError,
+      password: "",
       confirmPassword: ""
     });
 
@@ -196,21 +195,21 @@ function HandleAuthentication({ handleOpenPrivacy }) {
       confirmPassword: false
     });
 
-    if (emailError || passwordError) {
+    if (emailError) {
       return;
     }
 
     dispatch(showLoader(true));
     try {
       const result = await dispatch(handleSignInWithEmail(email, password));
-      // Only close the modal if authentication was successful
+     
       if (!result.error) {
         resetForm();
         handleClose();
       } else {
-        // Show Firebase error in the notification
+       
         showNotification(result.error.message || "Incorrect email or password", "error");
-        console.log('My Biggest Error', result.error.message)
+  
       }
     } catch (error) {
       showNotification(error.message || "Sign-in failed", "error");
@@ -227,7 +226,6 @@ function HandleAuthentication({ handleOpenPrivacy }) {
   const handleSignUpWithEmailAndPassword = async (e) => {
     e.preventDefault();
 
-    // Validate all fields before submission
     const emailError = validateEmail(email);
     const passwordError = validatePassword(password);
     const confirmPasswordError = validateConfirmPassword(confirmPassword, password);
@@ -249,32 +247,33 @@ function HandleAuthentication({ handleOpenPrivacy }) {
     }
 
     dispatch(showLoader(true));
-    try {
-      const signupResult = await dispatch(handleSignUpWithEmail(email, password));
-
-      // Check if signup was successful
-      if (signupResult.error) {
-        showNotification(signupResult.error.message || "Sign-up failed", "error");
+  try {
+    // The issue is here
+    const signupResult = await dispatch(handleSignUpWithEmail(email, password));
+    
+    // Check if signupResult exists and has an error property before accessing it
+    if (signupResult && signupResult.error) {
+      showNotification(signupResult.error.message || "Sign-up failed", "error");
+    } else {
+      // Try to sign in only if signup was successful
+      const signinResult = await dispatch(handleSignInWithEmail(email, password));
+      
+      // Similarly, check if signinResult exists and has an error property
+      if (!signinResult || !signinResult.error) {
+        resetForm();
+        handleClose();
+        showNotification("Account created successfully!", "success");
       } else {
-        // Try to sign in only if signup was successful
-        const signinResult = await dispatch(handleSignInWithEmail(email, password));
-
-        // Only close if both operations were successful
-        if (!signinResult.error) {
-          resetForm();
-          handleClose();
-          showNotification("Account created successfully!", "success");
-        } else {
-          showNotification("Account created, but sign-in failed: " +
-            (signinResult.error.message || "Please try signing in manually"), "warning");
-        }
+        showNotification("Account created, but sign-in failed: " +
+          (signinResult.error.message || "Please try signing in manually"), "warning");
       }
-    } catch (error) {
-      showNotification(error.message || "Sign-up failed", "error");
-    } finally {
-      dispatch(showLoader(false));
     }
-  };
+  } catch (error) {
+    showNotification(error.message || "Sign-up failed", "error");
+  } finally {
+    dispatch(showLoader(false));
+  }
+};
 
 
   return (
